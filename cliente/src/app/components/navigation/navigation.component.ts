@@ -22,6 +22,8 @@ declare var $:any;
 export class NavigationComponent implements OnInit{
   categorias: Categoria []= [];
   productos: Producto[] = [];
+  buscar: string = '';
+  campoEnfocado: boolean = false;
   idioma = localStorage.getItem('idioma') ?? 'es';
 constructor(private router:Router,private categoriaService:CategoriaService,
   private idiomaService:IdiomaService,private inventarioService:InventarioService,private location: Location,private translate: TranslateService) {
@@ -160,4 +162,47 @@ constructor(private router:Router,private categoriaService:CategoriaService,
       err => console.log(err)
     );
   }    
+
+
+
+  establecer() {
+    this.buscar = '';
+    this.inventarioService.list().subscribe(
+      (res: any) => {
+        this.productos = res;
+      },
+      err => console.log(err)
+    );
+  }
+
+  quitarTexto(){
+    this.campoEnfocado = true;
+  }
+
+  restaurarTexto(){
+    if (this.buscar === '') {
+      this.campoEnfocado = false;
+    }
+  }
+  Buscar() {
+    if( this.buscar == ''){
+      this.inventarioService.list().subscribe(
+        (res: any) => {
+          this.productos = res;
+        },
+        err => console.log(err)
+      );
+    } else {
+      this.inventarioService.BuscarProducto(this.buscar, this.idioma).subscribe((res: any) => {
+        if (res.id_producto == -1) {
+          this.productos = [];
+        }
+        else {
+          this.productos = res;
+        }
+      },
+        err => console.log(err)
+      );
+    }
+  }
 }

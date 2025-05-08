@@ -33,13 +33,27 @@
 </ul>
 <div class="navbar-fixed">
   <nav class="nav-extended">
-    <div class="nav-wrapper">
+    <div class="nav-wrapper custom-navbar">
+      <!-- Logo -->
+      <div class="nav-section left-section">
+        <a class="brand-logo" href="home">
+          <img src="../../../assets/images/logoD.png" alt="Logo de la página">
+          DIAMOND
+        </a>
+      </div>
 
-      <a class="brand-logo" href="home">
-        <img src="../../../assets/images/logoD.png" alt="Logo de la página">
-        DIAMOND
-      </a>
-      <div class="lateral">
+      <!-- Barra de búsqueda centrada -->
+      <div class="nav-section center-section">
+        <div class="input-field search-bar">
+          <input [(ngModel)]="buscar" type="search" id="search" class="validate" 
+                 (input)="Buscar()" (focus)="quitarTexto()" (blur)="restaurarTexto()" required>
+          <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+          <span *ngIf="!buscar && !campoEnfocado" class="buscar-texto">{{"Buscar" | translate}}</span>
+        </div>
+      </div>
+
+      <!-- Opciones de menú a la derecha -->
+      <div class="nav-section right-section">
         <ul class="right hide-on-med-and-down">
           <li><a class="dropdown-trigger" href="#!" data-target="dropdown2"><i class="material-icons left">drag_handle</i>{{"Categorias" | translate}}</a></li>
           <li><a class="dropdown-trigger" data-target="dropdown3">{{"Idioma" | translate}}<i class="material-icons right">arrow_drop_down</i></a></li>

@@ -24,3 +24,59 @@
 .nav-content{
     padding-left: 20px;
 }
+
+.buscar-texto {
+    position: absolute;
+    top: 50%;
+    left: 16px; /* Ajusta este valor según tu diseño */
+    transform: translateY(-50%);
+    pointer-events: none; /* Evita que el texto "Buscar" sea clickeable */
+    color: rgba(0, 0, 0, 0.5); /* Color tenue */
+    transition: opacity 0.2s; /* Agrega transición suave */
+  }
+    
+  .input-field {
+    position: relative; /* Asegura que el texto "Buscar" se posicione correctamente */
+    width: 400px;
+    height: 50px;
+    background-color: #ffffff;
+    border-radius: 30px;
+  }
+    .input-field input[type=search] {
+    padding-left: 40px; /* Ajusta el espacio para el icono de búsqueda */
+  }
+  
+  .input-field input[type=search]:focus + .buscar-texto,
+  .input-field input[type=search]:focus ~ .buscar-texto {
+    opacity: 0; /* Oculta el texto "Buscar" cuando el campo está enfocado */
+  }
+
+  .custom-navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+}
+
+.nav-section {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.center-section {
+  justify-content: center;
+}
+
+.left-section {
+  justify-content: flex-start;
+}
+
+.right-section {
+  justify-content: flex-end;
+}
+
+.search-bar {
+  width: 100%;
+  max-width: 400px; /* o lo que desees */
+}
