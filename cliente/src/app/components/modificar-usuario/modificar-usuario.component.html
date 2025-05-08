@@ -1,0 +1,94 @@
+<div class="contenedor">
+
+  <div><h5 class="center">{{"Modificar usuarios"|translate}}</h5><br></div>
+  <table class="default" *ngIf="usuarios != undefined">
+      <tr>
+          <th class="center">{{"Foto de perfil"|translate}}</th>
+          <th class="center">{{"Nombre"|translate}}</th>
+          <th class="center">{{"Usuario"|translate}}</th>
+          <th class="center">{{"Correo"|translate}}</th>
+          <th class="center">{{"Editar información"|translate}}</th>
+          <th class="center">{{"Nueva imagen"|translate}}</th>
+
+  <!-- <div>{{"Modificar usuarios"|translate}}</div>
+  <table class="default" *ngIf="usuarios != undefined">
+      <tr>
+          <th>{{"Nombre"|translate}}</th>
+          <th>{{"Modificar datos"|translate}}</th>
+          <th>{{"Eliminar"|translate}}</th> -->
+      </tr>
+      <tr *ngFor="let usuario of usuarios | paginate: { itemsPerPage: pageSize, currentPage: p }; let i=index">
+        <td class="center" [width]="150">
+          <img *ngIf="usuario.foto == 0" src="../../../assets/images/profile.png" style="width: 100px;">
+          <img *ngIf="usuario.foto == 1" src="{{liga}}/{{usuario.idUsuario}}.jpg" [alt]="liga" style="width: 100px;">
+        </td>
+        <td class="center">{{ usuario.nombre }}</td>
+        <td class="center">{{ usuario.username }}</td>
+        <td class="center">{{ usuario.correo }}</td>
+        <td class="center">
+            <a href="javascript:void(0)" class="modal-trigger" data-target="modalModificarusuario" (click)="modificarUsuario(usuario.idUsuario)">
+                <i class="material-icons">edit</i>
+            </a>
+        </td>
+        <td>
+          <input type="file" (change)="cargandoImagen($event, usuario.idUsuario)">
+        </td>
+      </tr>
+  </table>
+  <div class="row center-align">
+      <pagination-controls class="my-pagination" (pageChange)="p = ($event)" previousLabel={{Anterior}} nextLabel={{Siguiente}}>
+      </pagination-controls>
+  </div>
+</div>
+
+  <div  id="modalModificarusuario" class="modal" >
+    <div class="modal-content">
+      <h4>{{"Modificar usuario"|translate}}</h4>
+      <div class="row">
+        <div class="input-field col s12">
+          <label class="active">{{"Nombre"|translate}} </label>
+          <input   [(ngModel)]="usuario.nombre"  type="text" class="validate">
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+              <label class="active">{{"Correo"|translate}} </label>
+              <input   [(ngModel)]="usuario.correo"  type="text" class="validate">
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+              <label class="active">{{"Nombre de usuario"|translate}} </label>
+              <input   [(ngModel)]="usuario.username"  type="text" class="validate">
+        </div>        
+        <!-- <div class="row">
+            <div class="input-field col s12">
+              <label class="active">Contraseña </label>
+              <input   [(ngModel)]="usuario.password"  type="text" class="validate">
+        </div> -->
+            <a class='dropdown-trigger btn' href='#' data-target='dropdown1' *ngIf="roles!=undefined && idioma == 'es'">{{rol.nombreRol}}</a>
+            <ul id='dropdown1' class='dropdown-content' *ngIf="idioma=='es'" >
+                <li *ngFor="let rol of roles">
+                    <a  (click)=" modificarRol(rol,usuario)">{{rol.nombreRol}}</a>
+
+                </li>
+            </ul>
+            <a class='dropdown-trigger btn' href='#' data-target='dropdown1' *ngIf="roles!=undefined && idioma == 'en'">{{rol.nameRol}}</a>
+            <ul id='dropdown1' class='dropdown-content' *ngIf="idioma=='en'" >
+              <li *ngFor="let rol of roles">
+                  <a (click)="modificarRol(rol,usuario)">{{rol.nameRol}}</a>
+              </li>
+          </ul>
+
+      </div>
+      <div class="row">
+    </div>
+  </div>
+    <div class="modal-footer">
+        <a class="modal-close btn-flat" (click)="cancelar()">{{"Cancelar"|translate}}</a>
+        <a class="btn red darken-2" (click)="eliminarUsuario(usuario.idUsuario)" >{{"Eliminar"|translate}}</a>
+        <a class="btn" (click)="guardar()" >{{"Modificar"|translate}}</a>
+
+        <!--Agregar el color justo despues del boton-->
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,313 @@
+{
+    "Lista de usuarios": "User list",
+    "Idioma": "Language",
+    "Categorias": "Categories",
+    "Carrito": "shopping cart",
+    "Ofertas": "Offers",
+    "Menú": "Menu",
+    "Oferta": "Offer",
+    "Buscar": "Search",
+    "Descuento disponible": "Discount available",
+    "Por tan solo":"For only",
+    "Agregar al carrito": "Add to cart",
+    "Agotado": "Sold out",
+    "Cantidad":"Quantity",
+    "Precio Unitario": "Unit price",
+    "Acciones": "Actions",
+    "Limpiar Carrito":"Clear Cart",
+    "Confirmar Compra": "Confirm Purchase",
+    "No hay productos para mostrar": "There are no products to show",
+    "Carrito de Compras": "Shopping Cart",
+    "Mi cuenta":"My account",
+    "Mis compras":"My shopping",
+    "Salir":"Log out",
+    "Lista de compras": "Shopping list",
+    "Fecha de compra": "Purchase date",
+    "Estado de compra": "Purchase status",
+    "Fecha de realizacion":"Date of realization",
+    "Monto": "Amount",
+    "Enviado a":"Send to",
+    "Productos": "Products",
+    "Nombre":"Name",
+    "Total": "Total amount",
+    "Cerrar": "Close",
+    "Datos del cliente": "Customer data",
+    "Nombre de usuario":"User name",
+    "Correo":"Email",
+    "Tipo de usuario":"User type",
+    "Direcciones":"Addresses",
+    "Codigo postal":"Postal code",
+    "Calle":"Street",
+    "Numero":"Number",
+    "Colonia":"Colony",
+    "Ciudad":"City",
+    "Estado":"State",
+    "Editar":"Edit",
+    "Eliminar":"Delete",
+    "No hay direcciones disponibles":"There are no addresses available",
+    "Agregar nueva direccion":"Add new address",
+    "Agregar direccion":"Add address",
+    "CANCELAR":"CANCEL",
+    "ACTUALIZAR DIRECCION":"UPDATE ADDRESS",
+    "EDITAR USUARIO":"EDIT USER",
+    "Editar Nombre":"Edit Name",
+    "AGREGAR DIRECCION":"ADD ADDRESS",
+    "Usuarios":"Users",
+    "Reportes":"Reports",
+    "Inventario":"Inventory",
+    "Bienvenido":"Welcome",
+    "Modificar datos":"Modify data",
+    "Modificar usuario":"Modify user",
+    "Modificar usuarios":"Modify users",
+    "Modificar":"Modify",
+    "Cancelar":"Cancel",
+    "Buscar por nombre":"Search by name",
+    "Nuevo producto":"New product",
+    "Modificar productos":"Modify products",
+    "Código":"Code",
+    "Precio":"Price",
+    "Modificar datos del producto":"Modify product data",
+    "Nombre del producto":"Product name",
+    "Descuento":"Discount",
+    "Inicio descuento":"Start of discount",
+    "Fin descuento":"End of discount",
+    "Guardar Datos":"Save data",
+    "Fecha de inicio":"Start date",
+    "Fecha de fin":"End date",
+    "Enviar a Usuarios":"Send to users",
+    "Reporte de ventas":"Sales report",
+    "ID Compra":"Purchase ID",
+    "Detalles":"Details",
+    "Datos de la compra":"Purchase data",
+    "Subtotal":"Subtotal",
+    "Cliente":"Customer",
+    "Agregar producto":"Add product",
+    "Imagen":"Image",
+    "Nueva imagen":"New image",
+    "Usuario":"User",
+    "Editar información":"Edit information",
+    "Foto de perfil":"Profile picture",
+    "Selecciona una direccion de envio":"Select a shipping address",
+    "Confirmar": "Confirm",
+    "Editar nombre de usuario": "Edit username",
+    "Español": "Spanish",
+    "Inglés": "English",
+    "imgActu":
+    {
+        "title":"Image updated successfully",
+        "confirm":"ok"
+    },
+
+    "AgregarImg":
+    {
+        "title":"Are you sure to add the image?",
+        "confirm":"ok"
+    },
+
+
+    "ProductoNoEncontrado":{
+        "title":"Product not found",
+        "confirm":"ok"
+    },
+
+    "carrito":{
+        "title":"Product added",
+        "text":"The product has been added successfully",
+        "confirm":"ok"
+    },
+
+    "noStock":{
+        "title":"Error",
+        "text":"There is not enough stock",
+        "confirm":"ok"
+    },
+
+    "CarritoUsu":
+    {
+        "title":"Are you sure you want to remove the product from the cart?",
+        "text":"This action cannot be reversed",
+        "confirm":"ok"
+    },
+
+    "eliminaArti":
+    {
+        "title":"Product removed",
+        "text":"The product has been successfully removed",
+        "confirm":"ok"
+    },
+
+    "Ofertass":
+    {
+        "title":"Error",
+        "text":"No offers available",
+        "confirm":"ok"
+    },
+
+    "escribeNombre":{
+        "title":"Write a name",
+        "text":"You must write a name to search",
+        "confirm":"ok"
+    },
+    "ProductoActualizado":{
+        "title":"Product updated",
+        "confirm":"ok"
+    },
+    "ProductoEliminado":{
+        "title":"Product deleted",
+        "confirm":"ok"
+    },
+    "eliminarProducto":{
+        "title":"Are you sure",
+        "text":"you won´t be able to revert this",
+        "confirm":"ok,delete it",
+        "cancel":"Cancel"
+    },
+    "errorAlActualizar":{
+        "title":"Error updating",
+        "confirm":"ok"
+    },
+    "crearProducto":{
+        "title":"Product created successfully", 
+        "confirm":"ok"
+    },
+
+    "sinProducto":
+    {
+        "title":"There are no products",
+        "confirm":"ok"
+    },
+
+    "CarritoLim":
+    {
+        "title":"Cleaned cart",
+        "text": "The cart has been successfully cleaned",
+        "confirm":"ok"
+    },
+
+    "Domicilio":
+    {
+        "title":"error",
+        "text": "You must select an address",
+        "confirm":"ok"
+    },
+
+    "Compra":
+    {
+        "title":"Purchase made",
+        "text": "The purchase has been made successfully",
+        "confirm":"ok"
+    },
+
+    "LimpiarCarro":
+    {
+        "title":"Are you sure you want to clean the cart?",
+        "text": "This action cannot be reversed",
+        "confirm":"ok"
+    },
+
+    "noHayProductos":{
+        "title":"There are no products",
+        "text": "There are no products to show in this category",
+        "confirm":"ok"
+    },
+    "sinUsuarios":{
+        "title":"There are no users",
+        "confirm":"ok"
+    },
+    "modificarUsuario":{
+        "title":"User modified successfully",
+        "confirm":"ok"
+    },
+    "eliminarUsuario":{
+        "title":"Are you sure",
+        "text":"you won´t be able to revert this",
+        "confirm":"ok",
+        "cancel":"Cancel"
+    },
+    "usuarioEliminado":{
+        "title":"User deleted successfully",
+        "confirm":"ok"
+    },
+    "sinReportes":{
+        "title":"Ooops :(",
+        "text":"There are no reports available",
+        "confirm":"ok"
+    },
+    "ponerFechas":
+    {
+        "title":"Select dates",
+        "text":"You must select a  start and end date",
+        "confirm":"ok"
+    },
+    "contraVacia":
+    {
+        "title":"Error",
+        "text":"Please make sure you have filled out all fields",
+        "confirm":"Accept"
+    },
+    "contraNoCoincide":
+    {
+        "title":"Error",
+        "text":"Passwords do not match",
+        "confirm":"Accept"
+    },
+    "contraExito":{
+        "title":"Password updated successfully",
+        "text": "The passweord has been updated successfully",
+        "confirm":"Accept"
+    },
+    "agregarImg":{
+        "title":"Are you sure to add the image?",
+        "confirm":"Save image"
+    },
+    "ImgActualizar":{
+        "title":"Image updated successfully"
+    },
+    "ImgError":{
+        "title":"Error updating image"
+    },
+    "DirExito":{
+        "title":"Successfully",
+        "text":"The address has been added successfully"
+    },
+    "DirActualizar":{
+        "title":"Successfully",
+        "text":"The address has been updated successfully"
+    },
+    "DirEliminar":{
+        "title":"Are you sure you want to delete the address?",
+        "text": "This action cannot be reversed!",
+        "confirm":"Delete address!"
+    },
+    "DirEliminada":{
+        "title":"Deleted!",
+        "text": "The address has been deleted successfully"
+    },
+    "EditarPerfil":{
+        "title":"Are you sure you want to update the profile?",
+        "confirm":"Update!"
+    },
+    "PerfilActualizado":{
+        "title":"Update!",
+        "text": "User update successfully"
+    },
+    "sinCompras":{
+        "title":"There are no purchases",
+        "confirm":"ok"
+    },
+    "datosIncompletos":{
+        "title":"Error",
+        "text":"Please make sure you have filled out all fields",
+        "confirm":"ok"
+    },
+    "registroExitoso":{
+        "title":"User registered successfully",
+        "confirm":"ok"
+    },
+    "sinDomicilios":{
+        "title":"There are no addresses",
+        "text":"Please add an address before making a purchase",
+        "confirm":"ok"
+    }
+    
+}

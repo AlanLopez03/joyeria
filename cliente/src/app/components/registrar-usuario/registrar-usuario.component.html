@@ -1,0 +1,50 @@
+<div class="container">
+    <div class="row">
+      <div class="titulo">
+        <span>Crear una cuenta</span>
+      </div>
+        <form class="col s12">
+          <div class="row">
+            <div class="input-field col s12">
+              <i class="material-icons prefix">account_circle</i>
+              <input  id="first_name" type="text" class="validate" [(ngModel)]="usuario.nombre" name="name">
+              <label for="first_name">Nombre</label>
+            </div>
+           <!-- 
+            <div class="input-field col s6">
+              <input id="last_name" type="text" class="validate">
+              <label for="last_name">Apellidos</label>
+            </div>-->
+
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+              <i class="material-icons prefix">mail</i>
+              <input id="correo" type="text" class="validate" [(ngModel)]="usuario.correo" name="correo">
+              <label for="correo">Email</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <i class="material-icons prefix">perm_identity</i>
+              <input id="Nombre de usuario" type="text" class="validate" [(ngModel)]="usuario.username" name="username">
+              <label for="Nombre de Usuario">Nombre de usuario</label>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="input-field col s12">
+              <i class="material-icons prefix">vpn_key</i>
+              <input id="password" type="password" class="validate" [(ngModel)]="usuario.password" name="password">
+              <label for="password">Contraseña</label>
+            </div>
+          </div>
+          <button class="btn waves-effect waves-light" (click)="registrarUsuario()" type="submit" name="action">Enviar
+            <i class="material-icons left">send</i>
+          </button>
+        </form>
+      </div>
+            
+
+
+</div>

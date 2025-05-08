@@ -1,0 +1,23 @@
+<div class="contenedor">
+    <h1>Gestionar pedidos</h1>
+</div>
+
+<div class="container">
+    <table class="default" *ngIf="pedidos != undefined ">
+    <tr>
+        <td>IdPedido</td>
+        <td>Fecha</td>
+        <td>Estado</td>
+        <td>Cliente</td>
+
+    </tr>
+    <tr *ngFor="let pedido of pedidos">
+        <td><a>{{pedido.idPedido}}</a></td>
+        <td><a>{{pedido.fecha |date:'yyyy-MM-dd'}}</a> </td>
+        <td><a>{{pedido.estado}}</a> </td>
+        <td><a>{{pedido.idCliente}}</a> </td>
+
+    
+    
+    </table>
+</div>

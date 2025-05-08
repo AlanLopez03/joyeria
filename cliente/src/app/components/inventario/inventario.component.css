@@ -1,0 +1,37 @@
+
+.contenedor{
+    width: 1150px;
+    height: 800px;
+    padding: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    border: 1px solid #e3e3e3;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+    position: relative;
+    top:10%;
+    left: 10%;
+}
+.titulo{
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    color: #000;
+}
+
+.flex {
+    display: flex;
+    justify-content: space-between; /* Ajusta esto según tus necesidades */
+    align-items: center; /* Ajusta esto según tus necesidades */
+}
+.Buscar{
+    width: 500px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    position: relative;
+    top: 10%;
+    left: 25%;
+}

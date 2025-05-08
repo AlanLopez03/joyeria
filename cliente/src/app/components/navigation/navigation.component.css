@@ -1,0 +1,26 @@
+
+.lateral{
+    width: 700px;
+    position: absolute;
+    right: 0% ;
+    top: 0%;
+}
+
+.nav-extended{
+    background: #96c4c4;
+}
+
+.input-field {
+    width: 500px; /* Reduce el ancho de la barra de búsqueda */
+    height: 60px; /* Reduce la altura de la barra de búsqueda */
+    background-color: #e4fbfb;
+    border-radius: 30px;
+}
+
+.brand-logo{
+    padding-left: 150px;
+}
+
+.nav-content{
+    padding-left: 20px;
+}

@@ -1,0 +1,11 @@
+
+.cajita{
+    width: 300px;
+    float: left;
+    margin: 10px;
+}   
+
+.contenedor{
+    width: 80%;
+    margin: 0 auto;
+}

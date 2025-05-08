@@ -1,0 +1,311 @@
+{
+    "Lista de usuarios": "Lista de usuarios",
+    "Idioma": "Idioma",
+    "Categorias": "Categorias",
+    "Carrito" :"Carrito",
+    "Ofertas": "Ofertas",
+    "Menú": "Menú",
+    "Buscar": "Buscar",
+    "Oferta": "Oferta",
+    "Descuento disponible":"Descuento disponible",
+    "Por tan solo": "Por tan solo",
+    "Agregar al carrito":"Agregar al carrito",
+    "Agotado":"Agotado",
+    "Cantidad":"Cantidad",
+    "Precio Unitario":"Precio Unitario",
+    "Acciones":"Acciones",
+    "Limpiar Carrito":"Limpiar Carrito",
+    "Confirmar Compra":"Confirmar Compra",
+    "No hay productos para mostrar":"No hay productos para mostrar",
+    "Carrito de Compras":"Carrito de Compras",
+    "Mi cuenta":"Mi cuenta",
+    "Mis compras":"Mis compras",
+    "Salir":"Salir",
+    "Lista de compras":"Lista de compras",
+    "Fecha de compra":"Fecha de compra",
+    "Fecha de realizacion":"Fecha de realizacion",
+    "Monto":"Monto",
+    "Estado de compra":"Estado de compra",
+    "Productos":"Productos",
+    "Nombre":"Nombre",
+    "Total":"Total",
+    "Cerrar": "Cerrar",
+    "Datos del cliente":"Datos del cliente",
+    "Nombre de usuario":"Nombre de usuario",
+    "Correo":"Correo",
+    "Tipo de usuario":"Tipo de usuario",
+    "Direcciones":"Direcciones",
+    "Codigo postal":"Codigo postal",
+    "Calle":"Calle",
+    "Numero":"Numero",
+    "Colonia":"Colonia",
+    "Ciudad":"Ciudad",
+    "Estado":"Estado",
+    "Editar":"Editar",
+    "Eliminar":"Eliminar",
+    "No hay direcciones disponibles":"No hay direcciones disponibles",
+    "Agregar nueva direccion":"Agregar nueva direccion",
+    "Agregar direccion":"Agregar direccion",
+    "CANCELAR":"CANCELAR",
+    "ACTUALIZAR DIRECCION":"ACTUALIZAR DIRECCION",
+    "EDITAR USUARIO": "EDITAR USUARIO",
+    "Editar Nombre":"Editar Nombre",
+    "AGREGAR DIRECCION":"AGREGAR DIRECCION",
+    "Usuarios":"Usuarios",
+    "Reportes":"Reportes",
+    "Inventario":"Inventario",
+    "Bienvenido":"Bienvenido",
+    "Modificar datos":"Modificar datos",
+    "Modificar usuario":"Modificar usuario",
+    "Modificar usuarios":"Modificar usuarios",
+    "Modificar":"Modificar",
+    "Cancelar":"Cancelar",
+    "Buscar por nombre":"Buscar por nombre",
+    "Nuevo producto":"Nuevo producto",
+    "Modificar productos":"Modificar productos",
+    "Código":"Code",
+    "Precio":"Price",
+    "Modificar datos del producto":"Modificar datos del producto",
+    "Nombre del producto":"Nombre del producto",
+    "Descuento":"Descuento",
+    "Inicio descuento":"Inicio del descuento",
+    "Fin descuento":"Fin del descuento",
+    "Guardar Datos":"Guardar datos",
+    "Fecha de inicio":"Fecha de inicio",
+    "Fecha de fin":"Fecha de fin",
+    "Enviar a Usuarios":"Enviar a Usuarios",
+    "Reporte de ventas":"Reporte de ventas",
+    "ID Compra":"ID compra",
+    "Detalles":"Detalles",
+    "Datos de la compra":"Datos de la compra",
+    "Subtotal":"Subtotal",
+    "Cliente":"Cliente",
+    "Agregar producto":"Agregar producto",
+    "Imagen":"Imagen",
+    "Nueva imagen":"Nueva imagen",
+    "Usuario":"Usuario",
+    "Editar información":"Editar información",
+    "Foto de perfil":"Foto de perfil",
+    "Selecciona una direccion de envio":"Selecciona una direccion de envio",
+    "Confirmar": "Confirmar",
+    "Editar nombre de usuario":"Editar nombre de usuario",
+    "Español":"Español",
+    "Inglés":"Inglés",
+    "imgActu":
+    {
+        "title":"Imagen actualizada correctamente",
+        "confirm":"ok"
+    },
+
+    "AgregarImg":
+    {
+        "title":"¿Estas seguro de agregar la imagen?",
+        "confirm":"ok"
+    },
+
+    "ProductoNoEncontrado":{
+        "title":"Producto no encontrado",
+        "confirm":"Aceptar"
+    },
+    "escribeNombre":{
+        "title":"Debes escribir un nombre",
+        "text":"Por favor, escribe un nombre para la busqueda",
+        "confirm":"Aceptar"
+    },
+    "ProductoActualizado":{
+        "title":"Producto actualizado",
+        "confirm":"Aceptar"
+    },
+    "ProductoEliminado":{
+        "title":"Producto eliminado",
+        "confirm":"Aceptar"
+    },
+    "eliminarProducto":{
+        "title":"¿Estás seguro de que deseas eliminar este producto?",
+        "text":"No podrás recuperar la información una vez eliminada",
+        "confirm":"Eliminar",
+        "cancel":"Cancelar"
+    },
+    "errorAlActualizar":{
+        "title":"Error al actualizar",
+        "confirm":"Aceptar"
+    },
+    "crearProducto":{
+        "title":"Producto creado", 
+        "confirm":"ok"
+    },
+
+    "carrito":{
+        "title":"Producto agregado",
+        "text":"El producto se ha agregado con éxito",
+        "confirm":"ok"
+    },
+
+    "noStock":{
+        "title":"Error",
+        "text":"No hay stock suficiente",
+        "confirm":"ok"
+    },
+
+    "Ofertass":
+    {
+        "title":"Error",
+        "text":"No hay ofertas disponibles",
+        "confirm":"ok"
+    },
+
+    "CarritoLim":
+    {
+        "title":"Carrito limpiado",
+        "text": "El carrito se ha limpiado con éxito",
+        "confirm":"ok"
+    },
+
+    "Compra":
+    {
+        "title":"Compra realizada",
+        "text": "La compra se ha realizado con éxito",
+        "confirm":"ok"
+    },
+
+    "Domicilio":
+    {
+        "title":"error",
+        "text": "Debe seleccionar un domicilio",
+        "confirm":"ok"
+    },
+
+    "CarritoUsu":
+    {
+        "title":"¿Está seguro que desea eliminar el producto del carrito?",
+        "text":"Esta acción no se puede revertir",
+        "confirm":"ok"
+    },
+
+    "eliminaArti":
+    {
+        "title":"Producto eliminado",
+        "text":"El producto se ha eliminado con éxito",
+        "confirm":"ok"
+    },
+
+    "LimpiarCarro":
+    {
+        "title":"¿Está seguro que desea limpiar el carrito?",
+        "text": "Esta acción no se puede revertir",
+        "confirm":"ok"
+    },
+
+
+    "sinProducto":{
+        "title":"No hay productos",
+        "confirm":"Aceptar"
+    },
+
+    "noHayProductos":{
+        "title":"No hay productos",
+        "text": "No hay productos por mostrar en esta categoria",
+        "confirm":"Aceptar"
+    },
+
+    "sinUsuarios":{
+        "title":"No hay usuarios",
+        "confirm":"Aceptar"
+    },
+    "modificarUsuario":{
+        "title":"Usuario modificado correctamente",
+        "confirm":"Aceptar"
+    },
+    "eliminarUsuario":{
+        "title":"¿Estás seguro?",
+        "text":"No podrás revertir esta acción",
+        "confirm":"Eliminar",
+        "cancel":"Cancelar"
+    },
+    "usuarioEliminado":{
+        "title":"Usuario eliminado correctamente",
+        "confirm":"Aceptar"
+    },
+    "sinReportes":{
+        "title":"Ooops :(",
+        "text":"No se encontraron reportes",
+        "confirm":"Aceptar"
+    },
+    "ponerFechas":
+    {
+        "title":"Seleccionar fechas",
+        "text":"Debes seleccionar una fecha de inicio y una fecha de fin",
+        "confirm":"Aceptar"
+    },
+    "contraVacia":
+    {
+        "title":"Error",
+        "text":"Por favor, asegurese de haber llenado todos los campos",
+        "confirm":"Aceptar"
+    },
+    "contraNoCoincide":
+    {
+        "title":"Error",
+        "text":"Las contraseñas no coinciden",
+        "confirm":"Aceptar"
+    },
+    "contraExito":{
+        "title":"Contraseña actualizada",
+        "text": "Se ha actualizado la contraseña con éxito",
+        "confirm":"Aceptar"
+    },
+    "agregarImg":{
+        "title":"¿Estás seguro de agregar la imagen?",
+        "confirm":"Guardar imagen"
+    },
+    "ImgActualizar":{
+        "title":"Imagen actualizada correctamente"
+    },
+    "ImgError":{
+        "title":"Error al actualizar la imagen"
+    },
+    "DirExito":{
+        "title":"Exito",
+        "text":"Dirección agregada con éxito"
+    },
+    "DirActualizar":{
+        "title":"Exito",
+        "text":"Dirección actualizada con éxito"
+    },
+    "DirEliminar":{
+        "title":"¿Estas seguro de eliminar esta direccion?",
+        "text": "¡No será posible revertir este cambio!",
+        "confirm":"¡Eliminar direccion!"
+    },
+    "DirEliminada":{
+        "title":"¡Eliminado!",
+        "text": "¡Direccion eliminada!."
+    },
+    "EditarPerfil":{
+        "title":"¿Estas seguro de editar el perfil?",
+        "confirm":"¡Actualizar!"
+    },
+    "PerfilActualizado":{
+        "title":"Actualizado!",
+        "text": "Usuario actualizado!."
+    },
+    "sinCompras":{
+        "title":"No hay compras",
+        "confirm":"Aceptar"
+    },
+    "datosIncompletos":{
+        "title":"Error",
+        "text":"Por favor, asegurese de haber llenado todos los campos",
+        "confirm":"Aceptar"
+    },
+    "registroExitoso":{
+        "title":"Registro exitoso",
+        "text":"Usuario registrado con éxito",
+        "confirm":"Aceptar"
+    },
+    "sinDomicilios":{
+        "title":"No hay direcciones",
+        "text":"Por favor agregue un domicilio para poder realizar compras",
+        "confirm":"Aceptar"
+    }
+}

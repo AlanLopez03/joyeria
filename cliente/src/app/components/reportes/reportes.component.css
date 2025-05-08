@@ -1,0 +1,13 @@
+.calendario{
+    width: 150px;
+    float: left;
+    margin: 10px;
+}
+.contenedor{
+
+    margin: 20px;
+    width: 600px;
+    position: relative;
+    left: 40%;
+    top: 10%;
+}

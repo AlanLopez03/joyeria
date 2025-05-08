@@ -1,0 +1,79 @@
+<div class="contenedor">
+<div class="container">
+    <table>
+        <thead>
+            <th>{{"Lista de compras"|translate}}</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let compra of compras">
+                <td>{{"Fecha de compra"|translate}}:</td>
+                <td>{{compra.fecha |date:'yyyy-MM-dd'}}</td>
+                <td><a class="modal-trigger waves-effect waves-light btn pink darken-4 " data-target="modalAct" (click)="abrirAct(compra.idCompra)"><i
+                    class="material-icons">edit</i></a></td>
+                
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div id="modalAct" class="modal">
+    <div class="modal-content">
+        <H4>{{"Estado de compra"|translate}}</H4>
+            <div class="row">
+                <table >
+                    <tbody>
+
+                        <tr>
+                            <th>{{"Fecha de realizacion"|translate}}:</th>
+                            <td>{{compraUsuario.fecha|date:'yyyy-MM-dd'}}</td>
+                        </tr>
+                        <tr>
+                            <th>{{"Monto"|translate}}:</th>
+                            <td>{{compraUsuario.monto | number:'1.2-2'}}</td>
+                        </tr>
+                        <tr>
+                            <th>{{"Estado de compra"|translate}}:</th>
+                            <td *ngIf="idioma == 'es'">{{estado.nombre}}</td>
+                            <td *ngIf="idioma == 'en'">{{estado.Name}}</td>
+                        </tr>
+                        <tr>
+                            <th>{{"Enviado a"|translate}}:</th>
+                            <td>{{datos.calle}} #{{datos.numero}}</td>
+                            <td>{{"Colonia"|translate}} {{datos.colonia}},{{datos.ciudad}} {{datos.estado}}</td>
+                        </tr>
+                        <tr>
+                            <th>{{"Productos"|translate}}:</th>
+                            <th>{{"Nombre"|translate}}</th>
+                            <th>{{"Cantidad"|translate}}</th>
+                            <th>{{"Total"|translate}}</th>
+                        </tr>
+                        <tr *ngFor="let producto of productos,let i=index">
+                            <th> </th>
+                            <td *ngIf="idioma == 'es'">
+                                {{producto.nombre}}
+                            </td>
+                            <td *ngIf="idioma == 'en'">
+                                {{producto.name}}
+                            </td>
+                            <td >
+                                {{pedidos[i].cantidadProducto}}
+                            </td>
+                            <td >
+                                {{pedidos[i].subtotal| number:'1.2-2'}}
+                            </td>
+                        </tr>
+                            <tr>
+                                <th>{{"Total"|translate}}:</th>
+                                <td>{{compraUsuario.monto | number:'1.2-2'}}</td>
+                            </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+    </div>
+    <div class="modal-footer">
+        <a (click)="cerrarAct()" class="waves-effect waves-light btn pink darken-3">{{"Cerrar"|translate}}</a>
+    </div>
+</div>
+</div>

@@ -1,0 +1,16 @@
+body > app-root > app-inicio{
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+body > app-root > app-control{
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}
+

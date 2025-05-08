@@ -1,0 +1,25 @@
+
+
+  footer {
+    margin: 0;
+    padding: 0;
+    background: #aedddd;
+    height: 100%;
+    position: relative;
+  }
+
+  .content{
+    min-height: calc(100% - 50px);
+    padding-bottom: 50px;
+    background: #96c4c4;
+  }
+
+  footer{
+    position: relative;
+    bottom: 0;
+    width: 100%;
+
+    text-align: center;
+    padding: 20px 0;
+}
+

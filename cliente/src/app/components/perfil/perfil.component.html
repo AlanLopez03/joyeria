@@ -1,0 +1,191 @@
+<div class="contenedor">
+    <div class="row">
+        <div class="col s4 m4 center">
+            <img *ngIf="usuario.foto == 0" src="../../../assets/images/profile.png" width="70%">
+            <img *ngIf="usuario.foto == 1" [src]="liga" [alt]="liga" width="80%"> 
+            <div>
+                <input type="file"  (change)="cargandoImagen($event)">    
+            </div>
+        </div>
+        
+        <div class="col s8 m8">
+            <table class="striped" *ngIf="usuario != undefined">
+                <thead>
+                    <th>{{"Datos del cliente"|translate}}</th>
+                    <th><a class="modal-trigger waves-effect waves-light btn pink darken-3" data-target="modalActP"(click)="abrirActP()"><i
+                                class="material-icons">edit</i>{{"Editar Nombre"|translate}}</a></th>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>{{"Nombre"|translate}}</td>
+                    <td>{{usuario.nombre}}</td>
+                </tr>
+                <tr>
+                    <td>{{"Nombre de usuario"|translate}}</td>
+                    <td>{{usuario.username}}</td>
+                </tr>
+                <tr>
+                    <td>{{"Correo"|translate}}</td>
+                    <td>{{usuario.correo}}</td>
+                </tr>
+                <tr>
+                    <td>{{"Tipo de usuario"|translate}}</td>
+                    <td *ngIf="idioma == 'es'">{{rol.nombreRol}}</td>
+                    <td *ngIf="idioma == 'en'">{{rol.nameRol}}</td>
+                </tr>
+            </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <ul class="collapsible">
+            <li>
+                <div class="collapsible-header"><i class="material-icons">home</i>{{"Direcciones"|translate}}</div>
+                <div class="collapsible-body">
+                    <table class="default" *ngIf="flagD == 0">
+                        <tr>
+                            <th>{{"Codigo postal"|translate}}</th>
+                            <th>{{"Calle"|translate}}</th>
+                            <th>{{"Numero"|translate}}</th>
+                            <th>{{"Colonia"|translate}}</th>
+                            <th>{{"Ciudad"|translate}}</th>
+                            <th>{{"Estado"|translate}}</th>
+                            <th>{{"Editar"|translate}}</th>
+                            <th>{{"Eliminar"|translate}}</th>
+                        </tr>
+                        <tr *ngFor="let direccion of direcciones">
+                            <td>{{direccion.cp}}</td>
+                            <td>{{direccion.calle}}</td>
+                            <td>{{direccion.numero}}</td>
+                            <td>{{direccion.colonia}}</td>
+                            <td>{{direccion.ciudad}}</td>
+                            <td>{{direccion.estado}}</td>
+                            <td><a class=" modal-trigger waves-effect waves-light btn pink darken-4 " data-target="modalAct" (click)="abrirActD(direccion.idDomicilio)"><i
+                                class="material-icons">edit</i></a></td>
+                            <td><a class=" waves-effect waves-light btn pink darken-3" (click)="eliminarDir(direccion.idDomicilio)"><i
+                                        class="material-icons">delete</i></a></td>
+                        </tr>
+                    </table>
+                    <table class="default" *ngIf="flagD == 1">
+                        <tr>
+                            <td>{{"No hay direcciones disponibles"|translate}}</td>
+                        </tr>
+                    </table>
+                    <td><a class="modal-trigger waves-effect waves-light btn pink darken-3" data-target="modalN" (click)="abrirND()"><i
+                                class="material-icons" >edit</i>{{"Agregar nueva direccion"|translate}}</a>
+                                
+                       
+                            </td>
+
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div id="modalN" class="modal">
+    <div class="modal-content">
+        <H4>{{"Agregar direccion"|translate}}</H4>
+        <form class="col s8">
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="calle" type="text" [(ngModel)]="direccion.calle" name="calle" class="validate">
+                    <label for="calle">{{"Calle"|translate}}</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="numero" type="text" [(ngModel)]="direccion.numero" name="calle" class="validate">
+                    <label for="numero">{{"Numero"|translate}}</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="colonia" type="text" [(ngModel)]="direccion.colonia" name="colonia" class="validate">
+                    <label for="colonia">{{"Colonia"|translate}}</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="ciudad" type="text" [(ngModel)]="direccion.ciudad" name="Ciudad" class="validate">
+                    <label for="ciudad">{{"Ciudad"|translate}}</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="estado" type="text" [(ngModel)]="direccion.estado" name="Estado" class="validate">
+                    <label for="estado">{{"Estado"|translate}}</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="cp" type="number" [(ngModel)]="direccion.cp" name="codigo_postal"
+                        class="validate">
+                    <label for="cp">{{"Codigo postal"|translate}}</label>
+                </div>
+            </div>
+        </form>
+
+    </div>
+    <div class="modal-footer">
+        <a (click)="agregarDireccion()" class="waves-effect waves-light btn pink darken-3">{{"AGREGAR DIRECCION"|translate}}</a>
+        <a class="red-text" (click)="cerrarND()">{{"CANCELAR"|translate}}</a>
+    </div>
+</div>
+
+<div id="modalAct" class="modal">
+    <div class="modal-content">
+        <H4>{{"Actualizar direcciones"|translate}}</H4>
+        <form class="col s8">
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="calle" type="text" [(ngModel)]="direccion.calle" name="calle" class="validate">
+                    <label class="active" for="calle">{{"Calle"|translate}}</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="numero" type="text" [(ngModel)]="direccion.numero" name="numero" class="validate">
+                    <label class="active" for="numero">{{"Numero"|translate}}</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="colonia" type="text" [(ngModel)]="direccion.colonia" name="colonia" class="validate">
+                    <label class="active" for="colonia">{{"Colonia"|translate}}</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="ciudad" type="text" [(ngModel)]="direccion.ciudad" name="Ciudad" class="validate">
+                    <label class="active" for="ciudad">{{"Ciudad"|translate}}</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="estado" type="text" [(ngModel)]="direccion.estado" name="Estado" class="validate">
+                    <label class="active" for="estado">{{"Estado"|translate}}</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="cp" type="number" [(ngModel)]="direccion.cp" name="codigo_postal"
+                        class="validate">
+                    <label class="active" for="cp">{{"Codigo postal"|translate}}</label>
+                </div>
+            </div>
+        </form>
+
+    </div>
+    <div class="modal-footer">
+        <a (click)="actualizarDireccion()" class="waves-effect waves-light btn pink darken-3">{{"ACTUALIZAR DIRECCION"|translate}}</a>
+        <a class="red-text" (click)="cerrarActD()">{{"CANCELAR"|translate}}</a>
+    </div>
+</div>
+
+<div id="modalActP" class="modal">
+    <div class="modal-content">
+        <H4>{{"Editar nombre de usuario"|translate}}</H4>
+        <form class="col s9">
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="nombre" type="text" [(ngModel)]="usuario.nombre" name="nombre" class="validate">
+                    <label class="active" for="nombre">{{"Nombre"|translate}}</label>
+                </div>
+            </div>
+        </form>
+
+    </div>
+    <div class="modal-footer">
+        <a class="waves-effect waves-light btn pink darken-3" (click)="actualizar()">{{"EDITAR USUARIO"|translate}}</a>
+        <a class="red-text" (click)="cerrarActP()">{{"CANCELAR"|translate}}</a>
+    </div>
+</div>

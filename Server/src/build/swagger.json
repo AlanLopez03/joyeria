@@ -1,0 +1,3417 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Documentacion",
+        "description": "<html><body>Documentacion de los sevicios del proyecto de la<b> joyeria</b></body></html>",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "host": "https://joyeria.onrender.com",
+    "basePath": "",
+    "tags": [
+        {
+            "name": "Usuarios",
+            "description": "API para obtener información de los usuarios del sistema"
+        },
+        {
+            "name": "Roles",
+            "description": "API para obtener información de los roles de usuario del sistema"
+        },
+        {
+            "name": "Resenas",
+            "description": "API para obtener información de las reseñas de los clientes del sistema"
+        },
+        {
+            "name": "Productos",
+            "description": "API para obtener información de los productos que existen en el sistema"
+        },
+        { "name": "Pedidos",
+            "description": "API para obtener información de los pedidos del sistema"
+        },
+        {
+            "name": "Marcas",
+            "description": "API para obtener información de las marcas existentes del sistema"
+        },
+        {
+            "name": "Categorias",
+            "description": "API para obtener información de las categorias de productos del sistema"
+        },
+        {
+            "name": "Domicilios",
+            "description": "API para obtener información de los domicilios de los clientes del sistema"
+        },
+        {
+            "name": "EstadosCompra",
+            "description": "API para obtener información de los estados de las compras del sistema"
+        },
+        {
+            "name": "Materiales",
+            "description": "API para obtener los materiales de fabricación de los productos"
+        },
+        {
+            "name": "Compras",
+            "description": "API para obtener información de las compras del sistema"
+        },
+        {
+            "name": "Carrito",
+            "description": "API para obtener información del carrito de compras del sistema"
+        }
+    ],
+    "schemes": [
+        "https"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/api/usuarios/": {
+            "get": {
+                "tags": ["Usuarios"],
+                "summary": "Listado de todos los usuarios que existen en el sistema.",
+                "description": "<p>Servicio que devuelve la información detallada de todos los usuarios que existen en el sistema.Si no encuentra nada devuelve falso",
+                "responses": {
+                    "200": {
+                        "description": "Lista de usuarios del sistema",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "idUsuario": 1,
+                                    "nombre": "Juan Perez",
+                                    "correo": "correo@example.com",
+                                    "username": "juanperez",
+                                    "password": "123",
+                                    "idRol": 1
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Usuarios"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/usuarios/login/{correo}/{password}": {
+            "get": {
+                "tags": ["Usuarios"],
+                "summary": "Iniciar sesión",
+                "description": "<p>Servicio que  que valida el inicio de desion de un usuario mediante su correo y contraseña,</p>Si se tiene éxito devuelve la información del usuario.Si no devuelve false,ya funciona con la encriptacion",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "correo",
+                        "in": "path",
+                        "description": "Correo del usuario",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "password",
+                        "in": "path",
+                        "description": "Contraseña del usuario",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Devuelve los datos del usuario si el inicio de sesion es correcto",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "idUsuario": 1,
+                                    "nombre": "Juan Perez",
+                                    "correo": "correo@example.com",
+                                    "username": "juanperez",
+                                    "password": "123",
+                                    "idRol": 1
+                                }
+                            ]
+                        }
+                    },
+                    "403": {
+                        "description": "Devuelve falso"
+                    }
+                }
+            }
+        },
+        "/api/usuarios/crearUsuario/": {
+            "post": {
+                "tags": ["Usuarios"],
+                "summary": "Creando un nuevo usuario",
+                "description": "<p>Servicio que agrega un nuevo usuario al sistema,además,encripta la contraseña proporcionada</p>",
+                "operationId": "create",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Usuarios",
+                        "in": "body",
+                        "description": "Datos del nuevo usuario",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/nuevoUsuario"
+                        }
+                    }
+                ],
+                "tag": ["Usuarios"],
+                "responses": {
+                    "200": {
+                        "description": "Devuelve los datos del usuario creado"
+                    },
+                    "403": {
+                        "description": "Muestra un mensaje de error(sugerido cambiar a false"
+                    }
+                }
+            }
+        },
+        "/api/usuarios/{id}": {
+            "get": {
+                "tags": ["Usuarios"],
+                "summary": "Usuario en especifico",
+                "description": "<p>Servicio que devuelve la información detallada de un solo usuario.",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "id": 4,
+                                    "nombre": "Angel Cruz",
+                                    "correo": "Angel@gmail.com",
+                                    "id_Rol": 4,
+                                    "contrasena": "789*"
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Usuario"
+                        }
+                    },
+                    "404": {
+                        "description": "Devuelve falso si no encuentra al usuario"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "id....",
+                        "type": "number",
+                        "default": "1"
+                    }
+                ]
+            }
+        },
+        "/api/usuarios/buscarUsuario": {
+            "post": {
+                "tags": ["Usuarios"],
+                "summary": "Busca un usuario",
+                "description": "<p>Servicio que devuelve la información detallada los usuarios mediante su nombre</p>",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Usuarios",
+                        "in": "body",
+                        "description": "Nombre a buscar",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Buscar"
+                        }
+                    }
+                ],
+                "tag": ["Usuarios"],
+                "responses": {
+                    "200": {
+                        "description": "devuelve un arreglo con todos los usuarios con coincidencia en el nombre"
+                    },
+                    "404": {
+                        "description": "falso"
+                    }
+                }
+            }
+        },
+        "/api/usuarios/existeC": {
+            "post": {
+                "tags": ["Usuarios"],
+                "summary": "Busca un usuario",
+                "description": "<p>Servicio que devuelve los datos del usuario por el correo</p>",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Correo",
+                        "in": "body",
+                        "description": "Correo a buscar",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/BuscarC"
+                        }
+                    }
+                ],
+                "tag": ["Usuarios"],
+                "responses": {
+                    "200": {
+                        "description": "devuelve un arreglo con todos los usuarios con coincidencia en el nombre"
+                    },
+                    "404": {
+                        "description": "falso"
+                    }
+                }
+            }
+        },
+        "/api/usuarios/recomendaciones/{id}": {
+            "get": {
+                "tags": ["Usuarios"],
+                "summary": "Usuario en especifico",
+                "description": "<p>Servicio que devuelve 5 recomendaciones en base a los productos que más haya comprado.Si no ha comprado nada devuelve 5 productos al azar.</p>",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "idProducto": 1,
+                                    "nombre": "Anillo",
+                                    "descripcion": "Anillo de oro #27",
+                                    "stock": 25,
+                                    "precio": 24,
+                                    "descuento": 1,
+                                    "inicio_descuento": "2020-11-11",
+                                    "fin_descuento": "2020-11-11",
+                                    "idMaterial": 1,
+                                    "idCategoria": 1,
+                                    "idMarca": 1
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Producto"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "id....",
+                        "type": "number",
+                        "default": "1"
+                    }
+                ]
+            }
+        },
+        "/api/usuarios/eliminar/{id}": {
+            "delete": {
+                "tags": ["Usuarios"],
+                "summary": "Usuario en especifico",
+                "description": "<p>Servicio que elimina a un usuario del sistema.",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "id....",
+                        "type": "number",
+                        "default": "1"
+                    }
+                ]
+            }
+        },
+        "/api/usuarios/actualizar/{id}": {
+            "put": {
+                "summary": "Modifica los datos de un usuario",
+                "operationId": "update",
+                "consumes": ["application/json"],
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id del usuario",
+                        "required": true,
+                        "default": 10
+                    },
+                    {
+                        "name": "Usuario",
+                        "in": "body",
+                        "description": "usuario...",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/nuevoUsuario"
+                        }
+                    }
+                ],
+                "tags": ["Usuarios"],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/usuarios/reestablecerPassword/{token}": {
+            "put": {
+                "summary": "Modifica los datos de un usuario",
+                "operationId": "update",
+                "consumes": ["application/json"],
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "path",
+                        "description": "token del correo del usuario",
+                        "required": true,
+                        "default": 10
+                    },
+                    {
+                        "name": "Usuario",
+                        "in": "body",
+                        "description": "usuario...",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/reestablecer"
+                        }
+                    }
+                ],
+                "tags": ["Usuarios"],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/usuarios/rastrearPedidos/{id}": {
+            "get": {
+                "tags": ["Usuarios"],
+                "summary": "Usuario en especifico",
+                "description": "<p>Servicio que devuelve la información detallada de un solo pedido.",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "idPedido": 1,
+                                    "cantidadProducto": 2,
+                                    "subtotal": 5000,
+                                    "estado": "En proceso",
+                                    "idCompra": 1,
+                                    "idProducto": 1
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Usuario"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "id del pedido....",
+                        "type": "number",
+                        "default": "1"
+                    }
+                ]
+            }
+        },
+        "/api/usuarios/verPedidos/{id}": {
+            "get": {
+                "tags": ["Usuarios"],
+                "summary": "Usuario en especifico",
+                "description": "<p>Servicio que devuelve la información detallada de los pedidos de un usuario.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "id del usuario",
+                        "type": "number",
+                        "default": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "lista de los pedidos de un usuario",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "idPedido": 1,
+                                    "cantidadProducto": 2,
+                                    "subtotal": 5000,
+                                    "idCompra": 1,
+                                    "idProducto": 1
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Pedidos"
+                        }
+                    },
+                    "404": {
+                        "description": "Falso"
+                    }
+                }
+            }
+        },
+        "/api/roles/": {
+            "get": {
+                "tags": ["Roles"],
+                "summary": "Listado de todos los Roles que existen en el sistema.",
+                "description": "<p>Servicio que devuelve la información detallada de todos los roles de usuario del sistema.",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "idRol": 1,
+                                    "nombreRol": "Administrador"
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/roles"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    },
+                    "404": {
+                        "description": "Falso"
+                    }
+                }
+            }
+        },
+        "/api/roles/crearRol": {
+            "post": {
+                "tags": ["Roles"],
+                "summary": "Creando un rol de usuario",
+                "description": "<p>Servicio que agrega un nuevo rol de usuario al sistema.El id es de tipo autoincremento</p>",
+                "operationId": "create",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Datos ",
+                        "in": "body",
+                        "description": "Nuevo rol a agregar",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/nuevoRol"
+                        }
+                    }
+                ],
+                "tag": ["Roles"],
+                "responses": {
+                    "200": {
+                        "description": "Respuesta"
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    },
+                    "404": {
+                        "description": "Falso"
+                    }
+                }
+            }
+        },
+        "/api/roles/{id}": {
+            "get": {
+                "tags": ["Roles"],
+                "summary": "Rol en especifico",
+                "description": "<p>Servicio que devuelve la información detallada de un solo rol de usuario",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "idRol": 2,
+                                    "nombreRol": "Cliente"
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Rol"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    },
+                    "404": {
+                        "description": "Falso"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "id del rol....",
+                        "type": "number",
+                        "default": "1"
+                    }
+                ]
+            }
+        },
+        "/api/roles/eliminar/{id}": {
+            "delete": {
+                "tags": ["Roles"],
+                "summary": "Rol en especifico",
+                "description": "<p>Servicio que elimina a un rol del sistema",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "id del rol a eliminar....",
+                        "type": "number",
+                        "default": "1"
+                    }
+                ]
+            }
+        },
+        "/api/roles/actualizar/{id}": {
+            "put": {
+                "summary": "Modificando rol",
+                "operationId": "update",
+                "consumes": ["application/json"],
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id del rol a modificar",
+                        "required": true,
+                        "default": 10
+                    },
+                    {
+                        "name": "Rol",
+                        "in": "body",
+                        "description": "Nuevos datos del rol",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/nuevoRol"
+                        }
+                    }
+                ],
+                "tags": ["Roles"],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/domicilios/": {
+            "get": {
+                "tags": ["Domicilios"],
+                "summary": "Listado de todos los Domicilios de los clientes que existen en el sistema.",
+                "description": "<p>Servicio que devuelve la información detallada de todos los domicilios de los clientes registrados en el sistema",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "idDomicilio": 1,
+                                    "calle": "Calle 1",
+                                    "colonia": "Colonia 1",
+                                    "ciudad": "Ciudad 1",
+                                    "estado": "Estado 1",
+                                    "cp": "12345",
+                                    "idCliente": 1
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Domicilios"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/domicilios/crearDomicilio": {
+            "post": {
+                "tags": ["Domicilios"],
+                "summary": "Creando un domicilio",
+                "description": "<p>Servicio que agrega un nuevo domicilio al sistema.El id del domicilio es de tipo autoincremento</p>",
+                "operationId": "create",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Domicilio",
+                        "in": "body",
+                        "description": "Nuevo domicilio agregado",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/nuevoDomicilio"
+                        }
+                    }
+                ],
+                "tag": ["Domicilios"],
+                "responses": {
+                    "200": {
+                        "description": "respuesta.."
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/domicilios/{id}": {
+            "get": {
+                "tags": ["Domicilios"],
+                "summary": "Domicilio en especifico",
+                "description": "<p>Servicio que devuelve la información detallada de los domicilios de un cliente en específico.",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "idDomicilio": 1,
+                                    "calle": "Calle 1",
+                                    "colonia": "Colonia 1",
+                                    "ciudad": "Ciudad 1",
+                                    "estado": "Estado 1",
+                                    "cp": "12345",
+                                    "idCliente": 1
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Domicilio"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id ",
+                        "in": "path",
+                        "required": true,
+                        "description": "id del cliente",
+                        "type": "number",
+                        "default": "1"
+                    }
+                ]
+            }
+        },
+        "/api/domicilios/direccion/{id}": {
+            "get": {
+                "tags": ["Domicilios"],
+                "summary": "Mostrando un domicilio",
+                "description": "<p>Servicio que devuelve la información detallada de un domicilio en específico.",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "idDomicilio": 1,
+                                    "calle": "Calle 1",
+                                    "colonia": "Colonia 1",
+                                    "ciudad": "Ciudad 1",
+                                    "estado": "Estado 1",
+                                    "cp": "12345",
+                                    "idCliente": 1
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Domicilio"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id ",
+                        "in": "path",
+                        "required": true,
+                        "description": "id del cliente",
+                        "type": "number",
+                        "default": "1"
+                    }
+                ]
+            }
+        },
+        "/api/domicilios/eliminar/{id}": {
+            "delete": {
+                "tags": ["Domicilios"],
+                "summary": "Domicilio en especifico",
+                "description": "<p>Servicio que da de baja un domicilio de un cliente del sistema.",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "id del domicilio",
+                        "type": "number",
+                        "default": "1"
+                    }
+                ]
+            }
+        },
+        "/api/domicilios/actualizar/{id}": {
+            "put": {
+                "summary": "Modificando domicilio",
+                "operationId": "update",
+                "consumes": ["application/json"],
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id del domicilio",
+                        "required": true,
+                        "default": 1
+                    },
+                    {
+                        "name": "Domicilio",
+                        "in": "body",
+                        "description": "Datos a modificar del domicilio",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/nuevoDomicilio"
+                        }
+                    }
+                ],
+                "tags": ["Domicilios"],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/productos/": {
+            "get": {
+                "tags": ["Productos"],
+                "summary": "Listado de todos los productos  que existen en el sistema.",
+                "description": "<p>Servicio que devuelve la información detallada de todos los productos que existen en el sistema.",
+                "responses": {
+                    "200": {
+                        "description": "Lista de productos del sistema",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "idProducto": 1,
+                                    "nombre": "Anillo",
+                                    "descripcion": "Anillo de oro #27",
+                                    "stock": 25,
+                                    "precio": 24,
+                                    "descuento": 1,
+                                    "inicio_descuento": "2020-11-11",
+                                    "fin_descuento": "2020-11-11",
+                                    "idMaterial": 1,
+                                    "idCategoria": 1,
+                                    "idMarca": 1
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Productos"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/productos/verOfertas": {
+            "get": {
+                "tags": ["Productos"],
+                "summary": "Productos en oferta",
+                "description": "<p>Servicio que devuelve la información detallada de los productos que tienen descuento.</p>",
+                "responses": {
+                    "200": {
+                        "description": "Lista de todos los productos con descuento",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "idProducto": 1,
+                                    "nombre": "Anillo",
+                                    "descripcion": "Anillo de oro #27",
+                                    "stock": 25,
+                                    "precio": 24,
+                                    "descuento": 1,
+                                    "inicio_descuento": "2024-11-11",
+                                    "fin_descuento": "2024-11-11",
+                                    "idMaterial": 1,
+                                    "idCategoria": 1,
+                                    "idMarca": 1
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Producto"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    },
+                    "404": {
+                        "description": "Falso"
+                    }
+                }
+            }
+        },
+        "/api/productos/crearProducto": {
+            "post": {
+                "tags": ["Productos"],
+                "summary": "Creando un nuevo producto",
+                "description": "<p>Servicio que agrega un nuevo producto al sistema.El id del producto debe ser introducido forzozamente</p>",
+                "operationId": "create",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Productos",
+                        "in": "body",
+                        "description": "Datos del producto",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Producto"
+                        }
+                    }
+                ],
+                "tag": ["Productos"],
+                "responses": {
+                    "200": {
+                        "description": "respuesta.."
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    },
+                    "404": {
+                        "description": "Falso"
+                    }
+                }
+            }
+        },
+        "/api/productos/{id}": {
+            "get": {
+                "tags": ["Productos"],
+                "summary": "Producto en especifico",
+                "description": "<p>Servicio que devuelve la información detallada de un solo producto.</p>",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "idProducto": 4,
+                                    "nombre": "Collar",
+                                    "descripcion": "Collar de perlas blancas",
+                                    "stock": 5,
+                                    "precio": 3500,
+                                    "idMaterial": 1,
+                                    "idCategoria": 1,
+                                    "idMarca": 1
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Producto"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "id del producto....",
+                        "type": "number",
+                        "default": "1"
+                    }
+                ]
+            }
+        },
+        "/api/productos/actualizar/{id}": {
+            "put": {
+                "summary": "Modificando producto",
+                "operationId": "update",
+                "consumes": ["application/json"],
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id del producto",
+                        "required": true,
+                        "default": 1
+                    },
+                    {
+                        "name": "Productos",
+                        "in": "body",
+                        "description": "Nuevos datos del producto...",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/nuevoProducto"
+                        }
+                    }
+                ],
+                "tags": ["Productos"],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/productos/eliminar/{id}": {
+            "delete": {
+                "tags": ["Productos"],
+                "summary": "Producto en especifico",
+                "description": "<p>Servicio que elimina un producto del sistema mediante su id, ademas de esto, dentro de este mismo servicio se eliminan todos los registros de las ventas de este productos, si la compra lleva mas de un producto y por alguna razón se elimina alguno de esos dos productos se le resta a compra la cantidad equivalente al producto comprado y eliminado.</p>",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "id del producto a eliminar....",
+                        "type": "number",
+                        "default": "1"
+                    }
+                ]
+            }
+        },
+        "/api/productos/aplicarDescuento/{id}": {
+            "put": {
+                "tags": ["Productos"],
+                "summary": "Producto en especifico",
+                "description": "<p>Servicio que devuelve el precio de un producto aplicando un descuento durante un periodo de tiempo.El descuento es una multiplicacion del campo descuento * precio<br>Por defecto todos los productos tienen descuento de 1</p>",
+                "responses": {
+                    "200": {
+                        "description": "Se actualiza el campo descuento del producto"
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    },
+                    "404": {
+                        "description": "Falso"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "id del producto....",
+                        "type": "number",
+                        "default": "1"
+                    },
+                    {
+                        "name": "Productos",
+                        "in": "body",
+                        "description": "Datos del producto...",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ProductoDescuento"
+                        }
+                    }
+                ]
+            }
+        },
+        "/api/productos/filtrarProductos/{id}": {
+            "get": {
+                "tags": ["Productos"],
+                "summary": "Productos en una categoría.",
+                "description": "<p>Servicio que devuelve la información detallada de los productos de una categoría en específico mediante el id de la categoria.</p>",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "idProducto": 1,
+                                    "nombre": "Anillo",
+                                    "descripcion": "Anillo de oro #27",
+                                    "stock": 25,
+                                    "precio": 24,
+                                    "descuento": 1,
+                                    "inicio_descuento": "2020-11-11",
+                                    "fin_descuento": "2020-11-11",
+                                    "idMaterial": 1,
+                                    "idCategoria": 1,
+                                    "idMarca": 1
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Producto"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    },
+                    "404": {
+                        "description": "Falso"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "id de la categoria....",
+                        "type": "number",
+                        "default": "1"
+                    }
+                ]
+            }
+        },
+        "/api/productos/buscarNombre": {
+            "post": {
+                "tags": ["Productos"],
+                "summary": "Busca un producto",
+                "description": "<p>Servicio que devuelve la información detallada de los productos mediante su nombre</p>",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Productos",
+                        "in": "body",
+                        "description": "Nombre a buscar",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Buscar"
+                        }
+                    }
+                ],
+                "tag": ["Productos"],
+                "responses": {
+                    "200": {
+                        "description": "Devuelve un arreglo con todos los productos con coincidencia en el nombre"
+                    },
+                    "404": {
+                        "description": "falso"
+                    }
+                }
+            }
+        },
+        "/api/productos/agregarStock/{id}": {
+            "put": {
+                "tags": ["Productos"],
+                "summary": "Agrega stock a un producto",
+                "description": "<p>Servicio que agrega stock a un producto en específico mediante su id.</p>",
+                "responses": {
+                    "200": {
+                        "description": "Se actualiza el campo stock del producto"
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    },
+                    "404": {
+                        "description": "Falso"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "id del producto....",
+                        "type": "number",
+                        "default": "1"
+                    },
+                    {
+                        "name": "Productos",
+                        "in": "body",
+                        "description": "Datos del producto...",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/stockProducto"
+                        }
+                    }
+                ]
+            }
+        },
+        "/api/pedidos/": {
+            "get": {
+                "tags": ["Pedidos"],
+                "summary": "Listado de todos los pedidos  que existen en el sistema.",
+                "description": "<p>Servicio que devuelve la información detallada de todos los pedidos que existen en el sistema.</p>",
+                "responses": {
+                    "200": {
+                        "description": "Lista de todos los pedidos del sistema",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "idPedido": 1,
+                                    "cantidadProducto": 2,
+                                    "subtotal": 5000,
+                                    "idCompra": 1,
+                                    "idProducto": 1
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Pedidos"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    },
+                    "404": {
+                        "description": "False"
+                    }
+                }
+            }
+        },
+        "/api/pedidos/{id}": {
+            "get": {
+                "tags": ["Pedidos"],
+                "summary": "Pedido en especifico",
+                "description": "<p>Servicio que devuelve la información detallada de un solo pedido mediante su id.</p>",
+                "responses": {
+                    "200": {
+                        "description": "Informacion de un pedido",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "idPedido": 1,
+                                    "cantidadProducto": 2,
+                                    "subtotal": 5000,
+                                    "idCompra": 1,
+                                    "idProducto": 1
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Pedido"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    },
+                    "404": {
+                        "description": "Falso"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "id del pedido....",
+                        "type": "number",
+                        "default": "1"
+                    }
+                ]
+            }
+        },
+        "/api/pedidos/gestionarPedidos": {
+            "get": {
+                "tags": ["Pedidos"],
+                "produces": [
+                    "application/json"
+                ],
+                "tag": ["Pedidos"],
+                "description": "Servicio sin usar",
+                "responses": {
+                    "200": {
+                        "description": "Ok..",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "idPedido": 1,
+                                    "cantidadProducto": 2,
+                                    "subtotal": 5000,
+                                    "idCompra": 1,
+                                    "idProducto": 1
+                                }
+                            ]
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/pedidos/crearPedido": {
+            "post": {
+                "tags": ["Pedidos"],
+                "summary": "Creando un nuevo pedido.El id del pedido es de tipo autoincremento",
+                "operationId": "create",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Pedido",
+                        "in": "body",
+                        "description": "Informacion del nuevo pedido",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/nuevoPedido"
+                        }
+                    }
+                ],
+                "tag": ["Pedidos"],
+                "responses": {
+                    "200": {
+                        "description": "respuesta.."
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/pedidos/eliminar/{id}": {
+            "delete": {
+                "tags": ["Pedidos"],
+                "summary": "Pedido en especifico",
+                "description": "<p>Servicio que elimina un pedido del sistema.",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "id del pedido....",
+                        "type": "number",
+                        "default": "1"
+                    }
+                ]
+            }
+        },
+        "/api/pedidos/actualizar/{id}": {
+            "put": {
+                "summary": "Modificando un pedido",
+                "operationId": "update",
+                "consumes": ["application/json"],
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id del pedido",
+                        "required": true,
+                        "default": 1
+                    },
+                    {
+                        "name": "Pedido",
+                        "in": "body",
+                        "description": "Nuevos detalles del pedido",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/nuevoPedido"
+                        }
+                    }
+                ],
+                "tags": ["Pedidos"],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/pedidos/verPedidos/{idCompra}": {
+            "get": {
+                "tags": ["Pedidos"],
+                "summary": "Pedidos de un cliente",
+                "description": "<p>Servicio que devuelve la información detallada de los pedidos asociados a una compra</p>",
+                "parameters": [
+                    {
+                        "name": "idCompra",
+                        "in": "path",
+                        "required": true,
+                        "description": "id de la compra....",
+                        "type": "number",
+                        "default": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lista de pedidos asiciados a una compra",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "idPedido": 1,
+                                    "cantidadProducto": 2,
+                                    "subtotal": 5000,
+                                    "idCompra": 1,
+                                    "idProducto": 1
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Pedidos"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    },
+                    "404": {
+                        "description": "Falso"
+                    }
+                }
+            }
+        },
+        "/api/compras/modificarEstadoCompra/{id}": {
+            "put": {
+                "summary": "Modificando el estado de una compra",
+                "operationId": "update1",
+                "consumes": ["application/json"],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Compra a modificar",
+                        "required": true,
+                        "default": 1
+                    },
+                    {
+                        "name": "estado",
+                        "in": "body",
+                        "description": "Nuevo estado del pedido",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/nuevoEstadoPedido"
+                        }
+                    }
+                ],
+                "tags": ["Compras"],
+                "responses": {
+                    "200": {
+                        "description": "respuesta.."
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/compras/verVentas": {
+            "post": {
+                "tags": ["Compras"],
+                "summary": "Listado de todas las compras en el sistema.",
+                "description": "<p>Servicio que devuelve la información detallada de las compras realizadas en un intervalo de tiempo.Si no se proporciona uno se sevuelven todas las ventas realizadas</p>",
+                "responses": {
+                    "200": {
+                        "description": "Arreglo con todas las compras realizadas en el intervalo de tiempo",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "idCompra": 1,
+                                    "fechaCompra": "2024-03-20",
+                                    "total": 5000,
+                                    "idEstadoCompra": 1,
+                                    "idCliente": 1
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Compra"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    },
+                    "404": {
+                        "description": "Falso"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "Fecha",
+                        "in": "body",
+                        "description": "Intervalo de busqueda",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Periodo"
+                        }
+                    }
+                ]
+            }
+        },
+        "/api/compras/verCompras/{id}": {
+            "get": {
+                "tags": ["Compras"],
+                "summary": "Compras de un cliente",
+                "description": "<p>Servicio que devuelve la información detallada de las compras de un cliente en específico.</p>",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "id del cliente....",
+                        "type": "number",
+                        "default": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lista de compras de un cliente",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "idCompra": 1,
+                                    "fecha": "2020-11-11",
+                                    "monto": 5000,
+                                    "idEdo": 1,
+                                    "idCliente": 1
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Compras"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    },
+                    "404": {
+                        "description": "Falso si no encuentra al cliente"
+                    }
+                }
+            }
+        },
+        "/api/compras/crearCompra/{id}": {
+            "post": {
+                "tags": ["Compras"],
+                "summary": "Creando una nueva compra.El id de la compra es de tipo autoincremento",
+                "operationId": "create",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id del cliente",
+                        "required": true,
+                        "default": 1
+                    },
+                    {
+                        "name": "Compra",
+                        "in": "body",
+                        "description": "Compra agregada",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/nuevaCompra1"
+                        }
+                    }
+                ],
+                "tag": ["Compras"],
+                "responses": {
+                    "200": {
+                        "description": "respuesta.."
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/compras/{id}": {
+            "get": {
+                "tags": ["Compras"],
+                "summary": "Compra en especifico",
+                "description": "<p>Servicio que devuelve la información detallada de una compra específica mediante su id.</p>",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "idCompra": 1,
+                                    "fechaCompra": "2020-11-11T00:00:00.000Z",
+                                    "total": 5000,
+                                    "idEstadoCompra": 1,
+                                    "idCliente": 1
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Compra"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "id de la compra....",
+                        "type": "number",
+                        "default": "1"
+                    }
+                ]
+            }
+        },
+        "/api/compras/verMasVendidos": {
+            "post": {
+                "summary": "Lo más vendido",
+                "description": "<p>Devuelve la lista de los 10 productos más vendidos en un intervalo de tiempo. Si no se da un intervalo devuelve los 10 productos mas vendidos</p>",
+                "operationId": "post1",
+                "consumes": ["application/json"],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Fecha",
+                        "in": "body",
+                        "description": "Intervalo de busqueda",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Periodo"
+                        }
+                    }
+                ],
+                "tags": ["Compras"],
+                "responses": {
+                    "200": {
+                        "description": "respuesta.."
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/compras/verMenosVendidos": {
+            "post": {
+                "summary": "Lo menos vendido",
+                "description": "<p>Devuelve la lista de los 10 productos menos vendidos en un intervalo de tiempo. Si no se da un intervalo devuelve los 10 productos menos vendidos</p>",
+                "operationId": "post2",
+                "consumes": ["application/json"],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Fecha",
+                        "in": "body",
+                        "description": "Intervalo de busqueda",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Periodo"
+                        }
+                    }
+                ],
+                "tags": ["Compras"],
+                "responses": {
+                    "200": {
+                        "description": "respuesta.."
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/compras/eliminar/{id}": {
+            "delete": {
+                "tags": ["Compras"],
+                "summary": "Compra en especifico",
+                "description": "<p>Servicio que elimina una compra del sistema con su id.</p>",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "id de la compra....",
+                        "type": "number",
+                        "default": "1"
+                    }
+                ]
+            }
+        },
+        "/api/compras/actualizar/{id}": {
+            "put": {
+                "summary": "Modificando una compra",
+                "operationId": "update",
+                "consumes": ["application/json"],
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id de la compra",
+                        "required": true,
+                        "default": 10
+                    },
+                    {
+                        "name": "Compra",
+                        "in": "body",
+                        "description": "Datos nuevos para la compra",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/nuevaCompra"
+                        }
+                    }
+                ],
+                "tags": ["Compras"],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/categorias/": {
+            "get": {
+                "tags": ["Categorias"],
+                "summary": "Listado de todas las categorias de productos del sistema",
+                "description": "<p>Servicio que devuelve la información de las categorias de productos del sistema<br>El id de la categoria es de tipo autoincremento</p>",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "idCategoria": 1,
+                                    "nombre": "Anillos"
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/roles"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/categorias/crearCategoria": {
+            "post": {
+                "tags": ["Categorias"],
+                "summary": "Creando una categoria de producto",
+                "description": "<p>Servicio que agrega una nueva categoria de producto al sistema.El id de la categoria es de tipo autoincremento</p>",
+                "operationId": "create",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Categorias",
+                        "in": "body",
+                        "description": "Categoria agregada",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/nuevaCategoria"
+                        }
+                    }
+                ],
+                "tag": ["Categoria"],
+                "responses": {
+                    "200": {
+                        "description": "respuesta.."
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/categorias/{id}": {
+            "get": {
+                "tags": ["Categorias"],
+                "summary": "Una categoria en especifico",
+                "description": "<p>Servicio que devuelve la información detallada de una sola categoria de producto mediante su id.",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "idCategoria": 1,
+                                    "nombre": "Anillos"
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Categoria"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "id a buscar....",
+                        "type": "number",
+                        "default": "1"
+                    }
+                ]
+            }
+        },
+        "/api/categorias/eliminar/{id}": {
+            "delete": {
+                "tags": ["Categorias"],
+                "summary": "Una categoria en especifico",
+                "description": "<p>Servicio que elimina a una categoria de producto del sistema.</p>",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "id a eliminar....",
+                        "type": "number",
+                        "default": "1"
+                    }
+                ]
+            }
+        },
+        "/api/categorias/actualizar/{id}": {
+            "put": {
+                "summary": "Modificando una categoría en específico",
+                "operationId": "update",
+                "consumes": ["application/json"],
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id de la categoria",
+                        "required": true,
+                        "default": 10
+                    },
+                    {
+                        "name": "Categoria",
+                        "in": "body",
+                        "description": "Nueva informacion de la categorias",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/nuevaCategoria"
+                        }
+                    }
+                ],
+                "tags": ["Categorias"],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/marcas/": {
+            "get": {
+                "tags": ["Marcas"],
+                "summary": "Listado de todas las marcas que existen en el sistema.",
+                "description": "<p>Servicio que devuelve la información detallada de todas las marcas que existen en el sistema.</p>",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "idMarca": 1,
+                                    "nombre": "Rolex"
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Marca"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/marcas/crearMarca": {
+            "post": {
+                "tags": ["Marcas"],
+                "summary": "Creando una marca",
+                "description": "<p>Servicio que agrega una nueva marca de producto al sistema.El id de la marca es de tipo autoincremento</p>",
+                "operationId": "create",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Marcas",
+                        "in": "body",
+                        "description": "Marca agregado",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/nuevaMarca"
+                        }
+                    }
+                ],
+                "tag": ["Marcas"],
+                "responses": {
+                    "200": {
+                        "description": "respuesta.."
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/marcas/{id}": {
+            "get": {
+                "tags": ["Marcas"],
+                "summary": "Marca en especifico",
+                "description": "<p>Servicio que devuelve la información detallada de una sola marca mediante el id de la marca.",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "idMarca": 1,
+                                    "nombre": "Rolex"
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Marca"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "id de la marca buscada....",
+                        "type": "number",
+                        "default": "1"
+                    }
+                ]
+            }
+        },
+        "/api/marcas/eliminar/{id}": {
+            "delete": {
+                "tags": ["Marcas"],
+                "summary": "Marca en especifico",
+                "description": "<p>Servicio que elimina una marca de producto del sistema.</p> e",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "id a eliminar....",
+                        "type": "number",
+                        "default": "1"
+                    }
+                ]
+            }
+        },
+        "/api/marcas/actualizar/{id}": {
+            "put": {
+                "summary": "Modificando los datos de una marca",
+                "operationId": "update",
+                "consumes": ["application/json"],
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id de marca",
+                        "required": true,
+                        "default": 10
+                    },
+                    {
+                        "name": "Marca",
+                        "in": "body",
+                        "description": "Nuevos atributos...",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/nuevaMarca"
+                        }
+                    }
+                ],
+                "tags": ["Marcas"],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/materiales/": {
+            "get": {
+                "tags": ["Materiales"],
+                "summary": "Listado de todos los materiales que existen en el sistema.",
+                "description": "<p>Servicio que devuelve la información detallada de todos los materiales que existen en el sistema.</p>",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "idMaterial": 1,
+                                    "nombreMaterial": "Oro"
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Material"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/materiales/crearMaterial": {
+            "post": {
+                "tags": ["Materiales"],
+                "summary": "Creando un material",
+                "description": "<p>Servicio que agrega un nuevo material al sistema.El id del material es de tipo autoincremento</p>",
+                "operationId": "create",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Material",
+                        "in": "body",
+                        "description": "Material agregado",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/nuevoMaterial"
+                        }
+                    }
+                ],
+                "tag": ["Materiales"],
+                "responses": {
+                    "200": {
+                        "description": "respuesta.."
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/materiales/{id}": {
+            "get": {
+                "tags": ["Materiales"],
+                "summary": "Material en especifico",
+                "description": "<p>Servicio que devuelve la información detallada de un solo material.</p>",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "idMaterial": 1,
+                                    "nombreMaterial": "Oro"
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Material"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "id del material",
+                        "type": "number",
+                        "default": "1"
+                    }
+                ]
+            }
+        },
+        "/api/materiales/eliminar/{id}": {
+            "delete": {
+                "tags": ["Materiales"],
+                "summary": "Material en especifico",
+                "description": "<p>Servicio que elimina a un material del sistema.</p>",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "id del material",
+                        "type": "number",
+                        "default": "1"
+                    }
+                ]
+            }
+        },
+        "/api/materiales/actualizar/{id}": {
+            "put": {
+                "summary": "Modificando los datos de un material",
+                "operationId": "update",
+                "consumes": ["application/json"],
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id del material",
+                        "required": true,
+                        "default": 10
+                    },
+                    {
+                        "name": "Material",
+                        "in": "body",
+                        "description": "Nuevos datos del material...",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/nuevoMaterial"
+                        }
+                    }
+                ],
+                "tags": ["Materiales"],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/estadosCompra/": {
+            "get": {
+                "tags": ["EstadosCompra"],
+                "summary": "Listado de todos los estados de compra que existen en el sistema.",
+                "description": "<p>Servicio que devuelve la información detallada de todos los estados de compra que existen en el sistema.</p>",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "idEstado": 1,
+                                    "nombre": "En proceso"
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/EstadoCompra"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/estadosCompra/crearEstadoCompra": {
+            "post": {
+                "tags": ["EstadosCompra"],
+                "summary": "Creando un estado de compra",
+                "description": "<p>Servicio que agrega un nuevo estado de compra al sistema.El id del estado de compra es de tipo autoincremento</p>",
+                "operationId": "create",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "EstadoCompra",
+                        "in": "body",
+                        "description": "Estado de compra agregado",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/nuevoEstadoCompra"
+                        }
+                    }
+                ],
+                "tag": ["EstadosCompra"],
+                "responses": {
+                    "200": {
+                        "description": "respuesta.."
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/estadosCompra/{id}": {
+            "get": {
+                "tags": ["EstadosCompra"],
+                "summary": "Estado de compra en especifico",
+                "description": "<p>Servicio que devuelve la información detallada de un solo estado de compra.</p>",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "idEstado": 1,
+                                    "nombre": "En proceso"
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/EstadoCompra"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "id del estado de compra",
+                        "type": "number",
+                        "default": "1"
+                    }
+                ]
+            }
+        },
+        "/api/estadosCompra/eliminar/{id}": {
+            "delete": {
+                "tags": ["EstadosCompra"],
+                "summary": "Estado de compra en especifico",
+                "description": "<p>Servicio que elimina a un estado de compra del sistema.</p>",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "id del estado de compra",
+                        "type": "number",
+                        "default": "1"
+                    }
+                ]
+            }
+        },
+        "/api/estadosCompra/actualizar/{id}": {
+            "put": {
+                "summary": "Modificando los datos de un estado de compra",
+                "operationId": "update",
+                "consumes": ["application/json"],
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id del estado de compra",
+                        "required": true,
+                        "default": 10
+                    },
+                    {
+                        "name": "EstadoCompra",
+                        "in": "body",
+                        "description": "Estado de compra...",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/nuevoEstadoCompra"
+                        }
+                    }
+                ],
+                "tags": ["EstadosCompra"],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/carrito/verCarrito/{id}": {
+            "get": {
+                "tags": ["Carrito"],
+                "summary": "Carrito de un cliente en especifico",
+                "description": "<p>Servicio que devuelve la información detallada de un carrito de compras del cliente.Recibe el id del cliente y devuelve el nombre,cantidad seleccionada,precio unitario,stock disponible y subtotal de un producto en el carrito</p>",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "idProducto": 1,
+                                    "precio por unidad": 5,
+                                    "cantidad": 1
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/getCarrito"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "id del cliente",
+                        "type": "number",
+                        "default": "1"
+                    }
+                ]
+            }
+        },
+        "/api/carrito/insertarProducto": {
+            "post": {
+                "tags": ["Carrito"],
+                "summary": "Insertando un producto en el carrito de usuario o agrega cierta cantidad a un carrito ya existente",
+                "operationId": "create",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Carrito",
+                        "in": "body",
+                        "description": "Id del producto a insertar y cantidad a insertar",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Carrito"
+                        }
+                    }
+                ],
+                "tag": ["Carrito"],
+                "responses": {
+                    "200": {
+                        "description": "respuesta.."
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/carrito/listarCompras/{id}": {
+            "get": {
+                "tags": ["Carrito"],
+                "summary": "Listado de todos los articulos de un cliente en el carrito",
+                "description": "<p>Servicio que devuelve la información  de todos los productos en el carrito de un cliente en especifico.</p>",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "id del cliente....",
+                        "type": "number",
+                        "default": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lista de productos en el carrito de un cliente",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "idProducto": 1,
+                                    "precio por unidad": 5,
+                                    "cantidad": 1
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Carrito"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/carrito/limpiarCarrito/{id}": {
+            "delete": {
+                "tags": ["Carrito"],
+                "summary": "Conjunto de productos de un cliente en especifico",
+                "description": "Servicio que elimina un carrito de cliente del sistema.Ademas agrega de nuevo al inventario los productos que este tuviese",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "id....",
+                        "type": "number",
+                        "default": "1"
+                    }
+                ]
+            }
+        },
+        "/api/carrito/eliminarProducto/{id}": {
+            "delete": {
+                "tags": ["Carrito"],
+                "summary": "Producto en especifico",
+                "description": "<p>Servicio que elimina un producto del carrito de usuario del sistema.</p>",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "id del producto",
+                        "type": "number",
+                        "default": "1"
+                    }
+                ]
+            }
+        },
+        "/api/resenas/verResenas": {
+            "get": {
+                "tags": ["Resenas"],
+                "summary": "Listado de todas las reseñas de los usuarios del sistema.",
+                "description": "<p>Servicio que devuelve el contenido de las reseñas de los productos por parte d elos usuarios.</p>",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "idResena": 1,
+                                    "calificacion": "Buen producto :)",
+                                    "idProducto": 1,
+                                    "idUsuario": 1
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Resena"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/resenas/crearResena": {
+            "post": {
+                "tags": ["Resenas"],
+                "summary": "Creando un estado de compra",
+                "description": "<p>Servicio que agrega un nuevo estado de compra al sistema.El id del estado de compra es de tipo autoincremento</p>",
+                "operationId": "create",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "EstadoCompra",
+                        "in": "body",
+                        "description": "Estado de compra agregado",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/nuevaResena"
+                        }
+                    }
+                ],
+                "tag": ["Resenas"],
+                "responses": {
+                    "200": {
+                        "description": "respuesta.."
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/resenas/verResena/{id}": {
+            "get": {
+                "tags": ["Resenas"],
+                "summary": "Estado de compra en especifico",
+                "description": "<p>Servicio que devuelve la información detallada de un solo estado de compra.</p>",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "idResena": 1,
+                                    "calificacion": "Buen producto :)",
+                                    "idProducto": 1,
+                                    "idUsuario": 1
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/EstadoCompra"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "id de la reseña",
+                        "type": "number",
+                        "default": "1"
+                    }
+                ]
+            }
+        },
+        "/api/resenas/eliminarResena/{id}": {
+            "delete": {
+                "tags": ["Resenas"],
+                "summary": "Reseña en especifico",
+                "description": "<p>Servicio que elimina una reseña del sistema.</p>",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "id de la reseña",
+                        "type": "number",
+                        "default": "1"
+                    }
+                ]
+            }
+        },
+        "/api/resenas/actualizarResena/{id}": {
+            "put": {
+                "summary": "Modificando los datos de un estado de compra",
+                "operationId": "update",
+                "consumes": ["application/json"],
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id de la reseña",
+                        "required": true,
+                        "default": 10
+                    },
+                    {
+                        "name": "Resena",
+                        "in": "body",
+                        "description": "Nueva opinion de la reseña...",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/nuevaResena"
+                        }
+                    }
+                ],
+                "tags": ["Resenas"],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Usuario": {
+            "type": "object",
+            "properties": {
+                "idUsuario": {
+                    "type": "number",
+                    "description": "Permite identificar al usuario"
+                },
+                "nombre": {
+                    "type": "Text",
+                    "description": "Nombre del usuario"
+                },
+                "correo": {
+                    "type": "Text",
+                    "description": "Correo del usuario"
+                },
+                "username": {
+                    "type": "Text",
+                    "description": "Username de usuario"
+                },
+                "password": {
+                    "type": "Text",
+                    "description": "Password de usuario"
+                },
+                "idRol": {
+                    "type": "number",
+                    "description": "Id del rol del usuario"
+                }
+            }
+        },
+        "Usuarios": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Usuario"
+            }
+        },
+        "Buscar": {
+            "type": "object",
+            "properties": {
+                "nombre": {
+                    "type": "Text",
+                    "description": "Valor a buscar"
+                }
+            }
+        },
+        "BuscarC": {
+            "type": "object",
+            "properties": {
+                "correo": {
+                    "type": "Text",
+                    "description": "Correo a buscar"
+                }
+            }
+        },
+        "login": {
+            "type": "object",
+            "properties": {
+                "correo": {
+                    "type": "Text",
+                    "description": "Nombre de usuario"
+                },
+                "password": {
+                    "type": "Text",
+                    "description": "Contraseña de usuario"
+                }
+            }
+        },
+        "nuevoUsuario": {
+            "type": "object",
+            "properties": {
+                "nombre": {
+                    "type": "Text",
+                    "description": "Nombre del usuario"
+                },
+                "correo": {
+                    "type": "Text",
+                    "description": "Correo del usuario"
+                },
+                "username": {
+                    "type": "Text",
+                    "description": "Username de usuario"
+                },
+                "password": {
+                    "type": "Text",
+                    "description": "Password de usuario"
+                },
+                "idRol": {
+                    "type": "number",
+                    "description": "Id del rol del usuario"
+                }
+            }
+        },
+        "Rol": {
+            "type": "object",
+            "properties": {
+                "idRol": {
+                    "type": "number",
+                    "description": "Permite identificar al rol"
+                },
+                "nombreRol": {
+                    "type": "Text",
+                    "description": "Nombre del rol"
+                }
+            }
+        },
+        "roles": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Rol"
+            }
+        },
+        "nuevoRol": {
+            "type": "object",
+            "properties": {
+                "nombreRol": {
+                    "type": "Text",
+                    "description": "Nombre del rol"
+                }
+            }
+        },
+        "Domicilio": {
+            "type": "object",
+            "properties": {
+                "idDomicilio": {
+                    "type": "number",
+                    "description": "Permite identificar al domicilio"
+                },
+                "calle": {
+                    "type": "Text",
+                    "description": "Nombre de la calle"
+                },
+                "colonia": {
+                    "type": "Text",
+                    "description": "Nombre de la colonia"
+                },
+                "ciudad": {
+                    "type": "Text",
+                    "description": "Nombre de la ciudad"
+                },
+                "estado": {
+                    "type": "Text",
+                    "description": "Nombre del estado"
+                },
+                "cp": {
+                    "type": "number",
+                    "description": "Codigo postal"
+                },
+                "idCliente": {
+                    "type": "number",
+                    "description": "Id del cliente"
+                }
+            }
+        },
+        "Domicilios": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Domicilio"
+            }
+        },
+        "nuevoDomicilio": {
+            "type": "object",
+            "properties": {
+                "calle": {
+                    "type": "Text",
+                    "description": "Nombre de la calle"
+                },
+                "colonia": {
+                    "type": "Text",
+                    "description": "Nombre de la colonia"
+                },
+                "ciudad": {
+                    "type": "Text",
+                    "description": "Nombre de la ciudad"
+                },
+                "estado": {
+                    "type": "Text",
+                    "description": "Nombre del estado"
+                },
+                "cp": {
+                    "type": "number",
+                    "description": "Codigo postal"
+                },
+                "idCliente": {
+                    "type": "number",
+                    "description": "Id del cliente"
+                }
+            }
+        },
+        "Producto": {
+            "type": "object",
+            "properties": {
+                "idProducto": {
+                    "type": "number",
+                    "descripcion": "Id del producto",
+                    "default": 1234
+                },
+                "nombre": {
+                    "type": "Text",
+                    "description": "Nombre comercial del producto",
+                    "default": "Anillo de compromiso"
+                },
+                "descripcion": {
+                    "type": "Text",
+                    "descripcion": "Descripcion del producto",
+                    "default": "Anillo de compromiso de oro blanco con diamante"
+                },
+                "stock": {
+                    "type": "number",
+                    "descripcion": "Cantidad de productos en existencia",
+                    "default": 10
+                },
+                "precio": {
+                    "type": "number",
+                    "descripcion": "Precio unitario del producto",
+                    "default": 5000
+                },
+                "descuento": {
+                    "type": "number",
+                    "descripcion": "Descuento del producto",
+                    "default": 0
+                },
+                "inicio_descuento": {
+                    "type": "date",
+                    "descripcion": "Fecha de inicio del descuento",
+                    "default": "2023-12-11"
+                },
+                "fin_descuento": {
+                    "type": "date",
+                    "descripcion": "Fecha de fin del descuento",
+                    "default": "2023-12-11"
+                },
+                "idMaterial": {
+                    "type": "number",
+                    "descripcion": "Material de fabricación del producto",
+                    "default": 1
+                },
+                "idCategoria": {
+                    "type": "number",
+                    "descripcion": "Categoria del producto",
+                    "default": 1
+                },
+                "idMarca": {
+                    "type": "number",
+                    "Text": "Es la marca del producto",
+                    "default": 1
+                }
+            }
+        },
+        "nuevoProducto": {
+            "type": "object",
+            "properties": {
+                "nombre": {
+                    "type": "Text",
+                    "description": "Nombre comercial del producto",
+                    "default": "Anillo de compromiso"
+                },
+                "descripcion": {
+                    "type": "Text",
+                    "descripcion": "Descripcion del producto",
+                    "default": "Anillo de compromiso de oro blanco con diamante"
+                },
+                "stock": {
+                    "type": "number",
+                    "descripcion": "Cantidad de productos en existencia",
+                    "default": 10
+                },
+                "precio": {
+                    "type": "number",
+                    "descripcion": "Precio unitario del producto",
+                    "default": 5000
+                },
+                "descuento": {
+                    "type": "number",
+                    "descripcion": "Descuento del producto",
+                    "default": 0
+                },
+                "inicio_descuento": {
+                    "type": "date",
+                    "descripcion": "Fecha de inicio del descuento",
+                    "default": "2023-12-11"
+                },
+                "fin_descuento": {
+                    "type": "date",
+                    "descripcion": "Fecha de fin del descuento",
+                    "default": "2023-12-11"
+                },
+                "idMaterial": {
+                    "type": "number",
+                    "descripcion": "Material de fabricación del producto",
+                    "default": 1
+                },
+                "idCategoria": {
+                    "type": "number",
+                    "descripcion": "Categoria del producto",
+                    "default": 1
+                },
+                "idMarca": {
+                    "type": "number",
+                    "Text": "Es la marca del producto",
+                    "default": 1
+                }
+            }
+        },
+        "ProductoDescuento": {
+            "type": "object",
+            "properties": {
+                "descuento": {
+                    "type": "number",
+                    "descripcion": "Descuento del producto",
+                    "default": 1
+                },
+                "inicio_descuento": {
+                    "type": "date",
+                    "descripcion": "Fecha de inicio del descuento",
+                    "default": "2023-12-11"
+                },
+                "fin_descuento": {
+                    "type": "date",
+                    "descripcion": "Fecha de fin del descuento",
+                    "default": "2023-12-11"
+                }
+            }
+        },
+        "stockProducto": {
+            "type": "object",
+            "properties": {
+                "stock": {
+                    "type": "number",
+                    "descripcion": "Cantidad de productos en existencia",
+                    "default": 10
+                }
+            }
+        },
+        "Periodo": {
+            "type": "object",
+            "properties": {
+                "fechaInicio": {
+                    "type": "date",
+                    "descripcion": "Fecha de inicio ",
+                    "default": "2024-01-01"
+                },
+                "fechaFin": {
+                    "type": "date",
+                    "descripcion": "Fecha de fin ",
+                    "default": "2024-12-31"
+                }
+            }
+        },
+        "Productos": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Producto"
+            }
+        },
+        "Pedidos": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/pedido"
+            }
+        },
+        "nuevoPedido": {
+            "type": "object",
+            "properties": {
+                "cantidadProducto": {
+                    "type": "number",
+                    "descripcion": "Cantidad de productos en el pedido",
+                    "default": 1
+                },
+                "subtotal": {
+                    "type": "number",
+                    "descripcion": "Subtotal del pedido",
+                    "default": 0
+                },
+                "idCompra": {
+                    "type": "number",
+                    "descripcion": "Id de la compra"
+                },
+                "idProducto": {
+                    "type": "number",
+                    "descripcion": "Id del producto en el pedido"
+                }
+            }
+        },
+        "pedido": {
+            "type": "object",
+            "properties": {
+                "idPedido": {
+                    "type": "number",
+                    "descripcion": "Id del pedido"
+                },
+                "cantidadProducto": {
+                    "type": "number",
+                    "descripcion": "Cantidad de productos en el pedido"
+                },
+                "subtotal": {
+                    "type": "number",
+                    "descripcion": "Subtotal del pedido"
+                },
+                "idCompra": {
+                    "type": "number",
+                    "descripcion": "Id de la compra"
+                },
+                "idProducto": {
+                    "type": "number",
+                    "descripcion": "Id del producto en el pedido"
+                }
+            }
+        },
+        "Compra": {
+            "type": "object",
+            "properties": {
+                "idCompra": {
+                    "type": "number",
+                    "descripcion": "Id de la compra"
+                },
+                "fecha": {
+                    "type": "date",
+                    "descripcion": "Fecha de la compra"
+                },
+                "monto": {
+                    "type": "number",
+                    "descripcion": "Total de la compra"
+                },
+                "idEsdo": {
+                    "type": "number",
+                    "descripcion": "Id del estado de la compra"
+                },
+                "idCliente": {
+                    "type": "number",
+                    "descripcion": "Id del cliente"
+                }
+            }
+        },
+        "Compras": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Compra"
+            }
+        },
+        "nuevaCompra": {
+            "type": "object",
+            "properties": {
+                "fecha": {
+                    "type": "date",
+                    "descripcion": "Fecha de la compra"
+                },
+                "monto": {
+                    "type": "number",
+                    "descripcion": "Total de la compra"
+                },
+                "idEdo": {
+                    "type": "number",
+                    "descripcion": "Id del estado de la compra"
+                },
+                "idCliente": {
+                    "type": "number",
+                    "descripcion": "Id del cliente"
+                }
+            }
+        },
+        "nuevaCompra1": {
+            "type": "object",
+            "properties": {
+                "fecha": {
+                    "type": "date",
+                    "descripcion": "Fecha de la compra",
+                    "default": "2023-12-11"
+                },
+                "idEdo": {
+                    "type": "number",
+                    "descripcion": "Id del estado de la compra"
+                }
+            }
+        },
+        "Categoria": {
+            "type": "object",
+            "properties": {
+                "idCategoria": {
+                    "type": "number",
+                    "descripcion": "Id de la categoria"
+                },
+                "nombreCategoria": {
+                    "type": "Text",
+                    "descripcion": "Nombre de la categoria"
+                }
+            }
+        },
+        "Categorias": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Categoria"
+            }
+        },
+        "nuevaCategoria": {
+            "type": "object",
+            "properties": {
+                "nombre": {
+                    "type": "Text",
+                    "descripcion": "Nombre de la categoria"
+                }
+            }
+        },
+        "Material": {
+            "type": "object",
+            "properties": {
+                "idMaterial": {
+                    "type": "number",
+                    "descripcion": "Id del material"
+                },
+                "nombre": {
+                    "type": "Text",
+                    "descripcion": "Nombre del material"
+                }
+            }
+        },
+        "Materiales": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Material"
+            }
+        },
+        "nuevoMaterial": {
+            "type": "object",
+            "properties": {
+                "nombre": {
+                    "type": "Text",
+                    "descripcion": "Nombre del material"
+                }
+            }
+        },
+        "Marca": {
+            "type": "object",
+            "properties": {
+                "idMarca": {
+                    "type": "number",
+                    "descripcion": "Id de la marca"
+                },
+                "nombre": {
+                    "type": "Text",
+                    "descripcion": "Nombre de la marca"
+                }
+            }
+        },
+        "Marcas": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Marca"
+            }
+        },
+        "nuevaMarca": {
+            "type": "object",
+            "properties": {
+                "nombreMarca": {
+                    "type": "Text",
+                    "descripcion": "Nombre de la marca"
+                }
+            }
+        },
+        "estadoCompra": {
+            "type": "object",
+            "properties": {
+                "idEstado": {
+                    "type": "number",
+                    "descripcion": "Id del estado de la compra"
+                },
+                "nombre": {
+                    "type": "Text",
+                    "descripcion": "Nombre del estado de la compra"
+                }
+            }
+        },
+        "estadosCompra": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/estadoCompra"
+            }
+        },
+        "nuevoEstadoCompra": {
+            "type": "object",
+            "properties": {
+                "nombre": {
+                    "type": "Text",
+                    "descripcion": "Nombre del estado de la compra"
+                }
+            }
+        },
+        "nuevoEstadoPedido": {
+            "type": "object",
+            "properties": {
+                "estado": {
+                    "type": "number",
+                    "descripcion": "id del nuevo estado de la compra"
+                }
+            }
+        },
+        "Resena": {
+            "type": "object",
+            "properties": {
+                "idResena": {
+                    "type": "number",
+                    "descripcion": "Id de la reseña",
+                    "default": 1
+                },
+                "calificacion": {
+                    "type": "number",
+                    "descripcion": "Calificacion de la reseña",
+                    "default": 8
+                },
+                "comentario": {
+                    "type": "Text",
+                    "descripcion": "Comentario de la reseña",
+                    "default": "Buen producto"
+                },
+                "idUsuario": {
+                    "type": "number",
+                    "descripcion": "Id del usuario",
+                    "default": 1
+                },
+                "idProducto": {
+                    "type": "number",
+                    "descripcion": "Id del producto",
+                    "default": 1
+                }
+            }
+        },
+        "Resenas": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Resena"
+            }
+        },
+        "nuevaResena": {
+            "type": "object",
+            "properties": {
+                "calificacion": {
+                    "type": "number",
+                    "descripcion": "Calificacion de la reseña",
+                    "default": 8
+                },
+                "comentario": {
+                    "type": "Text",
+                    "descripcion": "Comentario de la reseña",
+                    "default": "Buen producto"
+                },
+                "idUsuario": {
+                    "type": "number",
+                    "descripcion": "Id del cliente",
+                    "default": 1
+                },
+                "idProducto": {
+                    "type": "number",
+                    "descripcion": "Id del producto",
+                    "default": 1
+                }
+            }
+        },
+        "Carrito": {
+            "type": "object",
+            "properties": {
+                "idCliente": {
+                    "type": "number",
+                    "descripcion": "Id del cliente",
+                    "default": 1
+                },
+                "idProducto": {
+                    "type": "number",
+                    "descripcion": "Id del producto",
+                    "default": 1
+                },
+                "cantidad": {
+                    "type": "number",
+                    "descripcion": "Cantidad de productos en el carrito",
+                    "default": 1
+                }
+            }
+        },
+        "Carritos": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Carrito"
+            }
+        },
+        "getCarrito": {
+            "type": "object",
+            "properties": {
+                "idProducto": {
+                    "type": "number",
+                    "descripcion": "Id del cliente"
+                },
+                "nombre": {
+                    "type": "Text",
+                    "descripcion": "Nombre del producto"
+                },
+                "stock": {
+                    "type": "number",
+                    "descripcion": "Cantidad de productos en el carrito"
+                }
+            }
+        },
+        "getCarritos": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/getCarrito"
+            }
+        },
+        "reestablecer": {
+            "type": "object",
+            "properties": {
+                "password": "Text",
+                "descripcion": "Nueva contraseña"
+            }
+        }
+    }
+}
