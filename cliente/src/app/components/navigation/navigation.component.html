@@ -21,12 +21,12 @@
   <li *ngIf="idioma == 'en'"><a [href]="isHome() ? 'javascript:void(0)' : 'home/'" (click)="Collares()">Necklaces</a></li>
   <li *ngIf="idioma == 'en'"><a [href]="isHome() ? 'javascript:void(0)' : 'home/'" (click)="Todas()">All</a></li>
 </ul>
-
+<!-- 
 <ul id="dropdown3" class="dropdown-content idioma-nav">
   <li (click)="setIdioma('es')"><a>{{"Español"|translate}}</a></li>
   <li (click)="setIdioma('en')"><a>{{"Inglés"|translate}}</a></li>
 
-</ul>
+</ul> -->
   
 <ul id="Categorias" class="dropdown-content" *ngIf="categorias!=undefined">
   <li *ngFor="let categoria of categorias"><a>{{categoria.nombre}}</a></li>
@@ -56,7 +56,7 @@
       <div class="nav-section right-section">
         <ul class="right hide-on-med-and-down">
           <li><a class="dropdown-trigger" href="#!" data-target="dropdown2"><i class="material-icons left">drag_handle</i>{{"Categorias" | translate}}</a></li>
-          <li><a class="dropdown-trigger" data-target="dropdown3">{{"Idioma" | translate}}<i class="material-icons right">arrow_drop_down</i></a></li>
+          <!-- <li><a class="dropdown-trigger" data-target="dropdown3">{{"Idioma" | translate}}<i class="material-icons right">arrow_drop_down</i></a></li> -->
           <li><a href="home/carrito"><i class="material-icons left">add_shopping_cart</i>{{"Carrito" | translate}}</a></li>
           <li><a [href]="isHome() ? 'javascript:void(0)' : 'home/'" (click)="MostrarOfertas(1)"><i class="material-icons left">local_offer</i>{{"Ofertas" | translate}}</a></li>
           <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">{{"Menú" | translate }}<i class="material-icons right">arrow_drop_down</i></a></li>
