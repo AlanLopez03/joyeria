@@ -1,25 +1,99 @@
 
-
-  footer {
-    margin: 0;
-    padding: 0;
-    background: #5582cf;
-    height: 100%;
-    position: relative;
-  }
-
-  .content{
-    min-height: calc(100% - 50px);
-    padding-bottom: 50px;
-    background: #96c4c4;
-  }
-
-  footer{
-    position: relative;
-    bottom: 0;
-    width: 100%;
-
-    text-align: center;
-    padding: 20px 0;
+body {
+    display: flex;
+    min-height: auto;
+    flex-direction: column;
 }
 
+main {
+    flex: 1 0 auto;
+}
+
+.page-footer{
+    background-color: #D19E66;
+}
+
+
+.card {
+    width: fit-content;
+    height: fit-content;
+    background-color: #D19E66;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    box-shadow: 0px 0px 20px #D19E66;
+  }
+  
+  /* for all social containers*/
+  .socialContainer {
+    width: 52px;
+    height: 52px;
+    background-color: #D19E66;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition-duration: .3s;
+  }
+  /* instagram*/
+  .containerOne:hover {
+    background-color: #d62976;
+    transition-duration: .3s;
+  }
+  /* twitter*/
+  .containerTwo:hover {
+    background-color: #00acee;
+    transition-duration: .3s;
+  }
+  /* linkdin*/
+  .containerThree:hover {
+    background-color: #0072b1;
+    transition-duration: .3s;
+  }
+  /* Whatsapp*/
+  .containerFour:hover {
+    background-color: #128C7E;
+    transition-duration: .3s;
+  }
+  
+  .socialContainer:active {
+    transform: scale(0.9);
+    transition-duration: .3s;
+  }
+  
+  .socialSvg {
+    width: 17px;
+  }
+  
+  .socialSvg path {
+    fill: rgb(255, 255, 255);
+  }
+  
+  .socialContainer:hover .socialSvg {
+    animation: slide-in-top 0.3s both;
+  }
+  
+  @keyframes slide-in-top {
+    0% {
+      transform: translateY(-50px);
+      opacity: 0;
+    }
+  
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+footer .row {
+  margin-bottom: 0;
+}
+
+footer .card {
+  margin-bottom: 0;
+}
+
+footer .container {
+  padding-bottom: 0;
+}

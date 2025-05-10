@@ -1,57 +1,8 @@
-
-.lateral{
-    width: 700px;
-    position: absolute;
-    right: 0% ;
-    top: 0%;
+.nav-extended {
+  background: white;
 }
 
-.nav-extended{
-    background: #5582cf;
-}
-
-.input-field {
-    width: 500px; /* Reduce el ancho de la barra de búsqueda */
-    height: 60px; /* Reduce la altura de la barra de búsqueda */
-    background-color: #e4fbfb;
-    border-radius: 30px;
-}
-
-.brand-logo{
-    padding-left: 150px;
-}
-
-.nav-content{
-    padding-left: 20px;
-}
-
-.buscar-texto {
-    position: absolute;
-    top: 50%;
-    left: 16px; /* Ajusta este valor según tu diseño */
-    transform: translateY(-50%);
-    pointer-events: none; /* Evita que el texto "Buscar" sea clickeable */
-    color: rgba(0, 0, 0, 0.5); /* Color tenue */
-    transition: opacity 0.2s; /* Agrega transición suave */
-  }
-    
-  .input-field {
-    position: relative; /* Asegura que el texto "Buscar" se posicione correctamente */
-    width: 400px;
-    height: 50px;
-    background-color: #ffffff;
-    border-radius: 30px;
-  }
-    .input-field input[type=search] {
-    padding-left: 40px; /* Ajusta el espacio para el icono de búsqueda */
-  }
-  
-  .input-field input[type=search]:focus + .buscar-texto,
-  .input-field input[type=search]:focus ~ .buscar-texto {
-    opacity: 0; /* Oculta el texto "Buscar" cuando el campo está enfocado */
-  }
-
-  .custom-navbar {
+.custom-navbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -76,7 +27,81 @@
   justify-content: flex-end;
 }
 
+/* Estilos para el logo */
+.brand-logo img {
+  height: 110px; 
+  width: auto;   
+  margin-top: 25px;
+  padding: 5px;
+}
+
 .search-bar {
   width: 100%;
-  max-width: 400px; /* o lo que desees */
+  max-width: 400px; 
+}
+
+.input-field {
+  position: relative;
+  width: 100%; /* O un valor fijo como 400px */
+  height: 50px;
+  background-color: #D19E66;
+  border-radius: 30px;
+  display: flex; 
+  align-items: center; 
+  padding-left: 10px; 
+}
+
+.label-icon {
+  color: #D19E66;
+  margin-top: -5px;
+  margin-right: 10px; /* Espacio entre el icono y el texto */
+}
+
+.input-field input[type=search] {
+  border: none;
+  background: transparent;
+  width: 100%;
+  height: 100%;
+  margin-bottom: -1px;
+  margin-left: -25px;
+  color: white;
+}
+
+/* Estilo para el texto "Buscar" dentro de la barra de búsqueda */
+.buscar-texto {
+  position: absolute;
+  top: 50%;
+  left: 40px; 
+  transform: translateY(-50%);
+  pointer-events: none; 
+  color: white;
+  transition: opacity 0.2s; 
+}
+
+/* Ocultar el texto "Buscar" al enfocar el input */
+.input-field input[type=search]:focus + .buscar-texto,
+.input-field input[type=search]:focus ~ .buscar-texto {
+  opacity: 0;
+}
+
+/* Estilos para el elemento lateral */
+.lateral {
+  width: 700px;
+  position: absolute;
+  right: 0%;
+  top: 0%;
+}
+
+/* Cambiar el color del texto general de los enlaces del navbar */
+.nav-wrapper a {
+  color: #D19E66 !important;
+}
+
+input[type=search]:-webkit-autofill {
+  box-shadow: 0 0 0px 100px #D19E66 inset !important;
+  -webkit-text-fill-color: white !important;
+}
+input[type=search] {
+  border-radius: 30px;
+  overflow: hidden;
 }

@@ -64,3 +64,4 @@
   .input-field input[type=search]:focus ~ .buscar-texto {
     opacity: 0; /* Oculta el texto "Buscar" cuando el campo está enfocado */
   }
+

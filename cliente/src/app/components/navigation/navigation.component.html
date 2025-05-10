@@ -37,8 +37,7 @@
       <!-- Logo -->
       <div class="nav-section left-section">
         <a class="brand-logo" href="home">
-          <img src="../../../assets/images/logoD.png" alt="Logo de la página"> Aurum
-          
+          <img src="../../../assets/images/logoD.png" alt="Logo de la página">
         </a>
       </div>
 
@@ -47,7 +46,7 @@
         <div class="input-field search-bar">
           <input [(ngModel)]="buscar" type="search" id="search" class="validate" 
                  (input)="Buscar()" (focus)="quitarTexto()" (blur)="restaurarTexto()" required>
-          <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+          <label class="label-icon" for="search"><i class="material-icons" >search</i></label>
           <span *ngIf="!buscar && !campoEnfocado" class="buscar-texto">{{"Buscar" | translate}}</span>
         </div>
       </div>
