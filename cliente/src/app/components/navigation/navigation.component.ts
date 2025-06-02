@@ -11,6 +11,7 @@ import { MostrarProductosComponent } from '../mostrar-productos/mostrar-producto
 import { Location } from '@angular/common';
 import { TranslateService } from "@ngx-translate/core";
 import { IdiomaService } from '../../services/idioma/idioma.service';
+import { NavbarService } from '../../services/navbar/navbar.service';
 import Swal from 'sweetalert2';
 import e from 'cors';
 declare var $:any;
@@ -26,7 +27,7 @@ export class NavigationComponent implements OnInit{
   campoEnfocado: boolean = false;
   idioma = localStorage.getItem('idioma') ?? 'es';
 constructor(private router:Router,private categoriaService:CategoriaService,
-  private idiomaService:IdiomaService,private inventarioService:InventarioService,private location: Location,private translate: TranslateService) {
+  private idiomaService:IdiomaService,private inventarioService:InventarioService,private location: Location,private translate: TranslateService,private navbarService: NavbarService) {
     this.translate.addLangs(["es","en"]);
    }
   ngOnInit(): void {
@@ -185,7 +186,8 @@ constructor(private router:Router,private categoriaService:CategoriaService,
     }
   }
   Buscar() {
-    if( this.buscar == ''){
+    this.navbarService.triggerSearch(this.buscar);
+    if( this.buscar === ''){
       this.inventarioService.list().subscribe(
         (res: any) => {
           this.productos = res;
@@ -194,6 +196,7 @@ constructor(private router:Router,private categoriaService:CategoriaService,
       );
     } else {
       this.inventarioService.BuscarProducto(this.buscar, this.idioma).subscribe((res: any) => {
+        console.log(res);
         if (res.id_producto == -1) {
           this.productos = [];
         }

@@ -9,6 +9,7 @@ import { ChangeDetectorRef } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { IdiomaService } from '../../services/idioma/idioma.service';
 import { TranslateService } from '@ngx-translate/core';
+import { NavbarService } from '../../services/navbar/navbar.service';
 declare var $: any;
 
 @Component({
@@ -30,7 +31,9 @@ export class MostrarProductosComponent implements OnInit {
   fileToUpload: any;
   liga: string = environment.API_URL_IMAGENES + '/productos';
 
-  constructor(private inventarioService: InventarioService, private carritoService: CarritoService, private router: Router,private idiomaService: IdiomaService,private translate: TranslateService) {
+  constructor(private inventarioService: InventarioService, private carritoService: CarritoService, private router: Router,private idiomaService: IdiomaService,private translate: TranslateService
+    , private navbarService: NavbarService, private changeDetectorRef: ChangeDetectorRef
+  ) {
     this.imgPrincipal = null;
     this.fileToUpload = null;
   }
@@ -40,6 +43,11 @@ export class MostrarProductosComponent implements OnInit {
     this.idiomaService.currentLanguage.subscribe(lang => {
       this.translate.use(lang);
       this.idioma = lang;
+    });
+
+    this.navbarService.search$.subscribe((searchTerm: string) => {
+      this.buscar = searchTerm;// ac
+      this.Buscar();//
     });
 
     $(document).ready(function () {

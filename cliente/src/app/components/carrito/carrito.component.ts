@@ -186,7 +186,7 @@ export class CarritoComponent implements OnInit {
           console.log("d", decremento)
           console.log("stock", stock + decremento);
 
-          if (decremento != null && -(decremento) <= cantidad) {
+          if (decremento != null && -(decremento) < cantidad) {
             this.inserta.setAtributos(id, parseInt(a), -1);
             this.carritoService.insertar(this.inserta).subscribe((res: any) => {
               this.ngOnInit();
@@ -334,5 +334,6 @@ export class CarritoComponent implements OnInit {
       );
     }
   }
+
 }
 

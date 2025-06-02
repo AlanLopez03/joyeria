@@ -156,9 +156,9 @@ class ProductoController
         const {idioma} = req.params;
         console.log ("Buscar: ", nombre);
         let respuesta = '';
-        if (idioma == '2')
+        if (idioma == 'es')
             respuesta = await pool.query('SELECT idProducto, nombre,name, descripcion,stock,precio,descuento,DATE(inicio_descuento),Date(fin_descuento),idMaterial,idCategoria,idMarca,foto FROM producto WHERE nombre LIKE ?', [`${nombre}%`]);
-        if (idioma == '1')
+        if (idioma == 'en')
             respuesta = await pool.query('SELECT idProducto, nombre,name, descripcion,stock,precio,descuento,DATE(inicio_descuento),Date(fin_descuento),idMaterial,idCategoria,idMarca,foto FROM producto WHERE name LIKE ?', [`${nombre}%`]);
         //const respuesta = await pool.query('SELECT idProducto, nombre,name, descripcion,stock,precio,descuento,DATE(inicio_descuento),Date(fin_descuento),idMaterial,idCategoria,idMarca,foto FROM producto WHERE nombre LIKE ?', [`${nombre}%`]);
 
