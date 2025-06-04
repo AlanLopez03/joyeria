@@ -1,0 +1,29 @@
+<div class="producto-container">
+    <div class="imagen-container">
+        <img src="{{liga}}/{{producto.idProducto}}.jpg" [alt]="producto.nombre" class="producto-imagen">
+    </div>
+    
+    <div class="detalles-container">
+        <h1 class="producto-nombre">{{producto.nombre}}</h1>
+        <h5 class="producto-material">{{material}}</h5>
+        
+        <div class="precio-container" *ngIf="producto.descuento < 1">
+            <h4 class="etiqueta-oferta">En Oferta</h4>
+            <h4 class="producto-precio">${{producto.precio}}</h4>
+        </div>
+        <h4 class="producto-precio" *ngIf="producto.descuento >= 1">${{producto.precio}}</h4>
+        <div class="cantidad-container">
+            <button class="btn-cantidad" (click)="disminuirCantidad()" [disabled]="cantidad <= 1">
+                <i class="material-icons">remove</i>
+            </button>
+            <span class="cantidad">{{ cantidad }}</span>
+            <button class="btn-cantidad" (click)="aumentarCantidad()" [disabled]="cantidad >= producto.stock">
+                <i class="material-icons">add</i>
+            </button>
+        </div>
+        <p class="producto-descripcion">{{producto.descripcion}}</p>
+
+        <a *ngIf="producto.stock > 0" class="waves-effect waves-light btn-large " id="botonAgregar" (click)="agregarProducto(producto.idProducto)">Agregar al carrito</a>
+        <a *ngIf="producto.stock <= 0" class="waves-effect waves-light btn-large disabled">Producto sin stock</a>
+    </div>
+</div>

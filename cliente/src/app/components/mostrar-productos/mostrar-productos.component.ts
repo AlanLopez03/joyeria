@@ -114,6 +114,10 @@ export class MostrarProductosComponent implements OnInit {
     localStorage.removeItem("Categoria");
     localStorage.removeItem("Arreglo");
   }
+  verProducto(id: number) {
+    this.router.navigate(['/home/verProducto', id]);
+
+  }
 
   listarOfertas() {
     this.inventarioService.obtenerOfertas().subscribe(
@@ -170,7 +174,7 @@ export class MostrarProductosComponent implements OnInit {
                 Swal.fire({
                   title: translations.title,
                   text: translations.text,
-                  icon: 'warning',
+                  icon: 'success',
                   confirmButtonText: translations.confirm
                 })
           },
