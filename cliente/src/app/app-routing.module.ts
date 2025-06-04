@@ -16,6 +16,7 @@ import { NewPasswordComponent } from './components/new-password/new-password.com
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { EscogerDomicilioComponent } from './components/escoger-domicilio/escoger-domicilio.component';
 import { OfertasComponent } from './components/ofertas/ofertas.component';
+import { VerProductoComponent } from './components/ver-producto/ver-producto.component';
 const routes: Routes = [
   { path: "", redirectTo: "login", pathMatch: "full" }, { path: 'login', component: LoginComponent, },
 
@@ -28,7 +29,8 @@ const routes: Routes = [
         { path: "", component: MostrarProductosComponent, },
         { path: 'usuarioCompras', redirectTo: 'usuarioCompras', pathMatch: 'full' }, { path: 'usuarioCompras', component: UsuarioComprasComponent, },
         { path: 'perfil', component: PerfilComponent },
-        { path: 'escogerDomicilio', component: EscogerDomicilioComponent}
+        { path: 'escogerDomicilio', component: EscogerDomicilioComponent },
+        { path: 'verProducto/:id', component: VerProductoComponent }
 
       ]
   },
@@ -40,6 +42,7 @@ const routes: Routes = [
         { path: 'reportes', redirectTo: 'reportes', pathMatch: 'full' }, { path: 'reportes', component: ReportesComponent, },
         { path: 'modificarUsuario', redirectTo: 'modificarUsuario', pathMatch: 'full' }, { path: 'modificarUsuario', component: ModificarUsuarioComponent, },
         {path:'ofertas',redirectTo:'ofertas',pathMatch:'full'},{path:'ofertas',component:OfertasComponent,}
+        
       ]
   },
   { path: 'nuevoUsuario', component: RegistrarUsuarioComponent, },

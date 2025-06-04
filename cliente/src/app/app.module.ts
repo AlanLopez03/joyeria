@@ -26,6 +26,7 @@ import { EscogerDomicilioComponent } from './components/escoger-domicilio/escoge
 import { OfertasComponent } from './components/ofertas/ofertas.component';
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { VerProductoComponent } from './components/ver-producto/ver-producto.component';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
 }
@@ -51,7 +52,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     NewPasswordComponent,
     PerfilComponent,
     EscogerDomicilioComponent,
-    OfertasComponent
+    OfertasComponent,
+    VerProductoComponent
   ],
   imports: [
     FormsModule,
