@@ -1,18 +1,166 @@
-#direccion{
-    width: 100%;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    border: saddlebrown 1px solid;
-    text-align: center;
+.carrito-header {
+  background: #1a1607;
+  color: #f9f5ef;
+  padding: 20px;
+  text-align: center;
+  font-family: 'Playfair Display', serif;
+  letter-spacing: 1px;
 }
 
-.divOlvide
-{
-    color: rgb(0, 0, 0);
-    padding-top: 10px;
-    padding-bottom: 10px;
-    text-align: center;
-    background: #D19E66;
+.carrito-vacio {
+  text-align: center;
+  padding: 60px 20px;
+  font-size: 16px;
+  color: #777;
 }
 
+.carrito-vacio img {
+  width: 100px;
+  margin-bottom: 15px;
+}
 
+.carrito-container {
+  padding: 40px 10%;
+}
+
+.tabla-carrito {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Playfair Display', serif;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+.tabla-carrito th {
+  background-color: #f8f6f2;
+  color: #a88c4a;
+  font-weight: 600;
+  padding: 12px;
+  border-bottom: 2px solid #e3dfd5;
+  text-align: center;
+}
+
+.tabla-carrito td {
+  padding: 15px;
+  text-align: center;
+  border-bottom: 1px solid #f0edea;
+}
+
+.tabla-carrito img {
+  width: 80px;
+  border-radius: 8px;
+}
+
+.acciones i {
+  cursor: pointer;
+  margin: 0 4px;
+  color: #1a1607;
+  transition: color 0.2s;
+}
+
+.acciones i:hover {
+  color: #c09b2f;
+}
+
+.carrito-controles {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 25px;
+  flex-wrap: wrap;
+}
+
+.btn-carrito {
+  background-color: #1a1607;
+  color: #fff;
+  padding: 10px 25px;
+  border-radius: 30px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+  margin-top: 10px;
+}
+
+.btn-carrito:hover {
+  background-color: #c09b2f;
+  color: #000;
+}
+
+.carrito-paginacion {
+  margin: 15px auto;
+  font-size: 14px;
+}
+
+.modal-carrito .modal-content {
+  background-color: #f9f5ef;
+  font-family: 'Playfair Display', serif;
+}
+
+.direcciones {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.direccion {
+  border: 1px solid #a88c4a;
+  padding: 15px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  text-align: center;
+}
+
+.direccion:hover {
+  background-color: #f3efe8;
+}
+
+.modal-footer a {
+  color: #1a1607;
+  font-weight: bold;
+}
+
+::ng-deep .carrito-paginacion .pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 25px auto;
+  font-family: 'Playfair Display', serif;
+  font-size: 14px;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+::ng-deep .carrito-paginacion .pagination-controls .ngx-pagination {
+  display: flex;
+  gap: 6px;
+  padding: 10px 20px;
+  border-radius: 30px;
+  background-color: #f8f6f2;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+::ng-deep .carrito-paginacion .pagination-controls .ngx-pagination a,
+::ng-deep .carrito-paginacion .pagination-controls .ngx-pagination span {
+  padding: 6px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: #1a1607;
+  text-decoration: none;
+}
+
+::ng-deep .carrito-paginacion .pagination-controls .ngx-pagination a:hover {
+  background-color: #c09b2f;
+  color: #fff;
+}
+
+::ng-deep .carrito-paginacion .pagination-controls .ngx-pagination .current {
+  background-color: #1a1607;
+  color: #fff;
+  font-weight: bold;
+}
+
+::ng-deep .carrito-paginacion .pagination-controls .ngx-pagination .disabled {
+  color: #ccc;
+  pointer-events: none;
+}

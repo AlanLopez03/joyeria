@@ -1,89 +1,65 @@
-<div class="divOlvide">
-  <h4>
-  {{"Carrito de Compras" | translate }}
-  </h4>
+<div class="carrito-header">
+  <h4>{{"Carrito de Compras" | translate }}</h4>
 </div>
 
-<div class="container" *ngIf="!carrito">
-  <div class="row center-align">
-    <img src="../../../assets/images/no-product.png">
-  </div>
+<div class="carrito-vacio" *ngIf="!carrito">
+  <img src="../../../assets/images/no-product.png" alt="Sin productos">
+  <p>{{ "No hay productos en el carrito" | translate }}</p>
 </div>
 
-<div class="container" *ngIf="carrito">
-  <table class="default" *ngIf="carrito != undefined">
+<div class="carrito-container" *ngIf="carrito">
+  <table class="tabla-carrito" *ngIf="carrito != undefined">
     <tr>
-<!-- <<<<<<< HEAD
-    <tr *ngFor="let producto of carrito | paginate: { itemsPerPage: pageSize, currentPage: p }; let i = index">
-      <td [width]="150">
-        <img *ngIf="producto.foto == 0" src="../../../assets/images/productoDesconocido.jpeg" style="width: 100px;">
-        <img *ngIf="producto.foto == 1" src="{{liga}}/{{producto.idProducto}}.jpg" [alt]="liga" style="width: 100px;"> 
-======= -->
-      <td>{{"Imagen"|translate}}</td>
-      <td>{{"Nombre"|translate}}</td>
-      <td>{{"Cantidad"|translate}}</td>
-      <td>{{"Precio Unitario"|translate}}</td>
-      <td>{{"Acciones"|translate}}</td>
+      <th>{{"Imagen"|translate}}</th>
+      <th>{{"Nombre"|translate}}</th>
+      <th>{{"Cantidad"|translate}}</th>
+      <th>{{"Precio Unitario"|translate}}</th>
+      <th>{{"Acciones"|translate}}</th>
     </tr>
 
     <tr *ngFor="let producto of carrito | paginate: { itemsPerPage: pageSize, currentPage: p }; let i = index">
-      <td [width]="150">
-        <img *ngIf="producto.foto == 0" src="../../../assets/images/productoDesconocido.jpeg" style="width: 100px;">
-        <img *ngIf="producto.foto == 1" src="{{liga}}/{{producto.idProducto}}.jpg" [alt]="liga" style="width: 100px;"> 
+      <td>
+        <img *ngIf="producto.foto == 0" src="../../../assets/images/productoDesconocido.jpeg">
+        <img *ngIf="producto.foto == 1" [src]="liga + '/' + producto.idProducto + '.jpg'" [alt]="liga">
       </td>
-      <td *ngIf="idioma == '2'">{{ producto.nombre }}</td>
-      <td *ngIf="idioma == '1'">{{ producto.name}}</td>
-      <td>
-        <span >{{ producto.cantidad }}</span>
-      </td> 
-      <td [width]="200">${{ producto.precio* producto.descuento }} </td>
-      <td>
+      <td>{{ idioma == '2' ? producto.nombre : producto.name }}</td>
+      <td>{{ producto.cantidad }}</td>
+      <td>${{ producto.precio * producto.descuento }}</td>
+      <td class="acciones">
         <a><i class="material-icons" (click)="insertarProducto(producto.idProducto)">add</i></a>
-        <a><i class="material-icons" (click)="insertarProducto(producto.idProducto, -1,producto.cantidad)">remove</i></a>
+        <a><i class="material-icons" (click)="insertarProducto(producto.idProducto, -1, producto.cantidad)">remove</i></a>
         <a><i class="material-icons" (click)="eliminarProducto(producto.idProducto)">delete</i></a>
       </td>
     </tr>
   </table>
-  <div class="row center-align " >
-    <pagination-controls class="my-pagination " (pageChange)="p = ($event)" previousLabel={{Anterior}} nextLabel={{Siguiente}} ></pagination-controls>
+
+  <div class="carrito-controles">
+    
+
+    <a (click)="limpiarCarrito()" class="btn-carrito">
+      <i class="material-icons right">delete</i>{{"Limpiar Carrito" | translate}}
+    </a>
+
+    <button data-target="modal1" class="btn-carrito modal-trigger">
+      {{"Confirmar Compra" | translate}}
+    </button>
   </div>
-  <div class="container" *ngIf="carrito.length > 0">
-    <a  (click)="limpiarCarrito()" class="waves-effect waves-light btn amber darken-3" ><i class="material-icons right">delete</i>{{"Limpiar Carrito"|translate}}</a>
-    <button  data-target="modal1" class="btn modal-trigger amber darken-3" >{{"Confirmar Compra"|translate}}</button>
-  </div>
-  <br>
-</div>
-<div class="container" *ngIf="!carrito" style="text-align: center;">
-  <br>
-  <br>
-  <br>
-  <img src="../../../assets/images/no-product.png" width="100px">
-  <br>
-  {{ "No hay productos en el carrito" | translate }}
-  <br>
-  <br>
-  <br>
 </div>
 
-
-
-<div id="modal1" class="modal">
+<!-- MODAL -->
+<div id="modal1" class="modal-carrito modal">
   <div class="modal-content">
-    <h4>{{"Selecciona una direccion de envio"|translate}}</h4>
-    <div class="row">
-
-        <div *ngFor="let direccion of domicilios" (click)="setDomicilio(direccion.idDomicilio)">
-          <div id ="direccion">
-          <p>{{"Calle"|translate}} {{direccion.calle}}  # {{direccion.numero}}</p>
-          <p>{{"Colonia"|translate}}  {{direccion.colonia}}</p>
-          <p>{{direccion.ciudad}}</p>
-          <p>{{direccion.estado}}</p>
-          </div>
-        </div>
-
+    <h4>{{"Selecciona una direccion de envio" | translate}}</h4>
+    <div class="direcciones">
+      <div *ngFor="let direccion of domicilios" class="direccion" (click)="setDomicilio(direccion.idDomicilio)">
+        <p>{{"Calle" | translate}} {{direccion.calle}}  #{{direccion.numero}}</p>
+        <p>{{"Colonia" | translate}} {{direccion.colonia}}</p>
+        <p>{{direccion.ciudad}}</p>
+        <p>{{direccion.estado}}</p>
+      </div>
+    </div>
   </div>
   <div class="modal-footer">
-    <a  class="modal-close waves-effect waves-green btn-flat" (click)="comprarCarrito()">{{"Confirmar"|translate}}</a>
+    <a class="modal-close btn-flat" (click)="comprarCarrito()">{{"Confirmar" | translate}}</a>
   </div>
 </div>
-
