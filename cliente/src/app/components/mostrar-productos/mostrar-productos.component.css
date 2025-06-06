@@ -1,14 +1,26 @@
+/* src/app/components/mostrar-productos/mostrar-productos.component.css */
 
-.cajita{
-    width: 300px;
-    float: left;
-    margin: 10px;
-    text-align: center;
-    height: 500px;
+/* —————— 1) RESET BÁSICO —————— */
+:host {
+  display: block;
+  font-family: 'Roboto', sans-serif;
+  color: #333;
+}
 
-}   
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-
+/* Estilos para el GRID (modo listado) */
+.cajita {
+  width: 300px;
+  float: left;
+  margin: 10px;
+  text-align: center;
+  height: 500px;
+}
 
 .oferta-etiqueta {
   background-color: rgb(255, 0, 0);
@@ -16,52 +28,439 @@
   border-radius: 50px;
 }
 
-
-.contenedor{
-    width: 80%;
-    margin: 0 auto;
+.contenedor {
+  width: 80%;
+  margin: 0 auto;
 }
+
 .container {
   margin-bottom: 64px; /* Ajusta el valor según la altura de tu navbar */
 }
 
-.nav{
-    background: #96c4c4;
+/* Navbar (si lo tienes) */
+.nav {
+  background: #96c4c4;
 }
 
-.nav2{
+.nav2 {
   background: #ffffff;
 }
 
-.nav-wrapper{
-    padding-left: 50px;
-    padding-top: 6px;
+.nav-wrapper {
+  padding-left: 50px;
+  padding-top: 6px;
 }
 
+/* Input de búsqueda */
 .buscar-texto {
-    position: absolute;
-    top: 50%;
-    left: 16px; /* Ajusta este valor según tu diseño */
-    transform: translateY(-50%);
-    pointer-events: none; /* Evita que el texto "Buscar" sea clickeable */
-    color: rgba(0, 0, 0, 0.5); /* Color tenue */
-    transition: opacity 0.2s; /* Agrega transición suave */
-  }
-  
-  .input-field {
-    position: relative; /* Asegura que el texto "Buscar" se posicione correctamente */
-    width: 400px;
-    height: 50px;
-    background-color: #ffffff;
-    border-radius: 30px;
-  }
-  
-  .input-field input[type=search] {
-    padding-left: 40px; /* Ajusta el espacio para el icono de búsqueda */
-  }
-  
-  .input-field input[type=search]:focus + .buscar-texto,
-  .input-field input[type=search]:focus ~ .buscar-texto {
-    opacity: 0; /* Oculta el texto "Buscar" cuando el campo está enfocado */
-  }
+  position: absolute;
+  top: 50%;
+  left: 16px; /* Ajusta este valor según tu diseño */
+  transform: translateY(-50%);
+  pointer-events: none; /* Evita que el texto "Buscar" sea clickeable */
+  color: rgba(0, 0, 0, 0.5); /* Color tenue */
+  transition: opacity 0.2s; /* Agrega transición suave */
+}
 
+.input-field {
+  position: relative; /* Asegura que el texto "Buscar" se posicione correctamente */
+  width: 400px;
+  height: 50px;
+  background-color: #ffffff;
+  border-radius: 30px;
+}
+
+.input-field input[type=search] {
+  padding-left: 40px; /* Ajusta el espacio para el icono de búsqueda */
+}
+
+.input-field input[type=search]:focus + .buscar-texto,
+.input-field input[type=search]:focus ~ .buscar-texto {
+  opacity: 0; /* Oculta el texto "Buscar" cuando el campo está enfocado */
+}
+
+/* —————— 2) CARRUSEL DE BANNERS FULL-WIDTH MULTI-ITEM —————— */
+/* Este wrapper ocupa toda la ventana */
+.full-width-banner {
+  position: relative;
+  width: 100vw;
+  left: 50%;
+  margin-left: -50vw; /* truco para abarcar todo el ancho del viewport */
+  background-color: #f2f2f2;
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+/* Contenedor interior que fija la altura y permite posicionar flechas */
+.banner-carousel-container {
+  position: relative;
+  width: 100%;
+  height: 700px; /* Ajusta aquí la altura que necesites para los banners */
+  overflow: hidden;
+}
+
+/* Scroll-snap horizontal para banners */
+.banner-scroll {
+  display: flex;
+  gap: 16px; /* Ajusta separación horizontal entre banners */
+  height: 100%;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding: 8px 0; /* Espacio arriba/abajo */
+}
+
+/* Cada banner ocupa (100% / bannerPageSize) */
+.banner-item {
+  scroll-snap-align: start;
+  flex: 0 0 auto;
+  /* Ancho inyectado inline vía [ngStyle]: min-width: calc(100%/bannerPageSize) */
+  height: 100%;
+}
+
+.banner-item .banner-image {
+  width: auto;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+}
+
+.banner-item .banner-image:hover {
+  transform: scale(1.02);
+}
+
+/* Flechas superpuestas para navegar */
+.banner-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.8);
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s ease, background-color 0.2s ease;
+  z-index: 10;
+}
+
+.banner-arrow i {
+  font-size: 20px;
+  color: #333;
+}
+
+/* Pegadas a los bordes interiores del área visible de banners */
+.banner-arrow-left {
+  left: 8px;
+}
+.banner-arrow-right {
+  right: 8px;
+}
+
+/* Mostrar flechas al hacer hover en todo el contenedor de banners */
+.banner-carousel-container:hover .banner-arrow {
+  opacity: 1;
+}
+
+.banner-arrow:hover {
+  background-color: rgba(255, 255, 255, 0.9);
+  transform: translateY(-50%) scale(1.1);
+}
+/* —————— /CARRUSEL DE BANNERS MULTI-ITEM —————— */
+
+
+/* —————— 3) CARRUSEL DE PRODUCTOS FULL-WIDTH MULTI-ITEM —————— */
+.full-width-carousel {
+  position: relative;
+  width: 100vw;
+  left: 50%;
+  margin-left: -50vw;
+  background-color: #fff;
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+
+.carousel-container-modern {
+  position: relative;
+  margin: 0 auto;
+  width: 100%; /* ocupa todo el ancho del padre */
+}
+
+.carousel-scroll {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+}
+
+/* Scrollbar minimalista */
+.carousel-scroll::-webkit-scrollbar {
+  height: 6px;
+}
+.carousel-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.carousel-scroll::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+}
+.carousel-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+}
+
+.card-item-modern {
+  scroll-snap-align: start;
+  flex: 0 0 auto;
+  /* Ancho inyectado inline vía [ngStyle]: min-width: calc(100%/pageSize) */
+}
+
+.card-item-modern .card-image {
+  height: 400px;
+}
+
+/* Flechas para productos */
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.8);
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s ease, background-color 0.2s ease;
+  z-index: 10;
+}
+
+.arrow i {
+  font-size: 20px;
+  color: #333;
+}
+
+.arrow-left {
+  left: 8px;
+}
+.arrow-right {
+  right: 8px;
+}
+
+.carousel-container-modern:hover .arrow {
+  opacity: 1;
+}
+
+.arrow:hover {
+  background-color: rgba(255, 255, 255, 0.9);
+  transform: translateY(-50%) scale(1.1);
+}
+/* —————— /CARRUSEL DE PRODUCTOS MULTI-ITEM —————— */
+
+
+/* —————— 4) MÁRGEN ENTRE BANNER Y PRODUCTOS —————— */
+.container {
+  margin-top: 24px;
+}
+
+/* —————— 5) TARJETAS “MODERNAS” (grid) —————— */
+.modern-card {
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.modern-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.card-image {
+  position: relative;
+  height: 180px;
+  overflow: hidden;
+}
+
+.imagen-producto {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.modern-card:hover .imagen-producto {
+  transform: scale(1.05);
+}
+
+.modern-chip {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background-color: #e53935;
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.modern-content {
+  padding: 12px 16px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.modern-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #222;
+  line-height: 1.2;
+}
+
+.precio-cont {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.modern-price--discounted {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #e53935;
+}
+
+.modern-price--original {
+  font-size: 0.9rem;
+  color: #777;
+  text-decoration: line-through;
+}
+
+.modern-price {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #333;
+}
+
+.modern-action,
+.acciones-grid {
+  padding: 8px 16px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.btn-modern {
+  background-color: #00897b;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  font-size: 0.85rem;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-modern:hover {
+  background-color: #00695c;
+}
+
+.text-agotado {
+  font-size: 0.9rem;
+  color: #b0b0b0;
+  font-style: italic;
+}
+
+.btn-details,
+.btn-flat-modern {
+  background: none;
+  border: none;
+  color: #1565c0;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.btn-details:hover,
+.btn-flat-modern:hover {
+  color: #0d47a1;
+}
+
+.material-icons {
+  font-size: 1rem;
+}
+
+/* —————— 6) REJILLA 5×N (modo listado) —————— */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-auto-rows: auto;
+  gap: 16px;
+  margin-top: 24px;
+  max-height: calc(200px * 5 + 16px * 4);
+  overflow-y: auto;
+  padding-bottom: 16px;
+}
+
+.grid-item {
+  display: flex;
+}
+
+.grid-item .modern-card {
+  flex-grow: 1;
+}
+
+/* —————— 7) MEDIA QUERIES PARA LA REJILLA —————— */
+@media (max-width: 1400px) {
+  .grid-container {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+@media (max-width: 1100px) {
+  .grid-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 768px) {
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 576px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 576px) {
+  .banner-scroll,
+  .carousel-scroll {
+    gap: 12px;
+  }
+}
+
+/* Asegurar que el footer quede abajo */
+footer {
+  margin-top: 40px;
+}

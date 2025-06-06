@@ -1,47 +1,189 @@
+<!-- src/app/components/mostrar-productos/mostrar-productos.component.html -->
 
-<div class="container">
-  <div class="cajita" *ngFor="let producto of productos" >
-    <div class="card" >
-      <div (click)="verProducto(producto.idProducto)">
-      <div class="card-image" >
-        <img *ngIf="producto.foto == 0" src="../../../assets/images/productoDesconocido.jpeg" width="100%">
-        <img *ngIf="producto.foto == 1" src="{{liga}}/{{producto.idProducto}}.jpg" [alt]="liga" width="100%"> 
-        <span *ngIf="producto.descuento<1" class="oferta-etiqueta card-title">{{"Oferta" | translate}}</span>
-      </div>
-      <div class="card-content">  
-        <h5 *ngIf="idioma == 'es'">{{producto.nombre}}</h5>
-        <h5 *ngIf="idioma == 'en'">{{producto.name}}</h5>
-        <!-- <p *ngIf="producto.descuento <1"> {{"Descuento disponible"|translate}} {{producto.descuento*100}}%</p> -->
-        <p *ngIf="producto.descuento <1">{{"Por tan solo" |translate }}  ${{producto.precio *producto.descuento}}</p>
-        <p *ngIf="producto.descuento==1">${{producto.precio}}</p>
-        
-      </div>
-      </div>
+<!-- ——— 1) CARRUSEL DE BANNERS (visible SOLO si isListView = false) ——— -->
+<div *ngIf="bannerImages.length > 0 && !isListView" class="full-width-banner">
+  <div class="banner-carousel-container">
+    <!-- Flecha “Anterior” para banners -->
+    <button class="banner-arrow banner-arrow-left" (click)="prevBanner()">
+      <i class="material-icons">chevron_left</i>
+    </button>
 
-      <div class="card-action">
-        <a *ngIf="producto.stock > 0" href="javascript:void(0)" (click)="agregarProducto(producto.idProducto)">{{"Agregar al carrito"|translate}}</a>
-        <a class="black-text text-darken-2" *ngIf="producto.stock == 0">{{"Agotado"|translate}}</a>
+    <!-- Scroll horizontal para mostrar varios banners a la vez -->
+    <div #bannerScroll class="banner-scroll">
+      <div
+        class="banner-item"
+        *ngFor="let img of bannerImages; let i = index"
+        [ngStyle]="{ 'min-width': (100 / bannerPageSize) + '%' }"
+      >
+        <img
+          [src]="img"
+          [alt]="'Banner ' + (i + 1)"
+          class="banner-image"
+        />
       </div>
     </div>
-  </div>
-  <div class="sin_e" *ngIf="productos.length == 0" style="text-align: center;">
-    <br>
-    <img src="../../../assets/images/no-product.png">
+
+    <!-- Flecha “Siguiente” para banners -->
+    <button class="banner-arrow banner-arrow-right" (click)="nextBanner()">
+      <i class="material-icons">chevron_right</i>
+    </button>
   </div>
 </div>
-<!-- 
-<div class="container">
-  <div class="carousel">
-    <a class="carousel-item"><img src="../../../assets/images/img1.png" width=1000px height=300px></a>
-    <a class="carousel-item"><img src="../../../assets/images/img2.png" width=1000px height=300px></a>
-    <a class="carousel-item"><img src="../../../assets/images/img3.png" width=1000px height=300px></a>
-    <a class="carousel-item"><img src="../../../assets/images/img4.png" width=1000px height=300px></a>
-    <a class="carousel-item"><img src="../../../assets/images/img5.png" width=1000px height=300px></a>
+<!-- /CARRUSEL DE BANNERS -->
+
+
+<!-- ——— 2) CARRUSEL DE PRODUCTOS (visible SOLO si isListView = false) ——— -->
+<div *ngIf="productos.length > 0 && !isListView" class="full-width-carousel">
+  <div class="carousel-container-modern">
+    <!-- Flecha “Anterior” para productos -->
+    <button
+      class="arrow arrow-left"
+      (click)="onArrowPrevProducto()"
+      aria-label="Anterior"
+    >
+      <i class="material-icons">chevron_left</i>
+    </button>
+
+    <!-- Scroll horizontal para mostrar varios productos a la vez -->
+    <div #carouselScroll class="carousel-scroll">
+      <div
+        class="card-item-modern"
+        *ngFor="let producto of productosActuales"
+        [ngStyle]="{ 'min-width': (100 / pageSize) + '%' }"
+      >
+        <div class="card modern-card">
+          <!-- Imagen del producto -->
+          <div class="card-image">
+            <img
+              *ngIf="producto.foto == 0"
+              src="../../../assets/images/productoDesconocido.jpeg"
+              alt="Producto desconocido"
+              class="imagen-producto"
+            />
+            <img
+              *ngIf="producto.foto == 1"
+              [src]="liga + '/' + producto.idProducto + '.jpg'"
+              [alt]="producto.nombre"
+              class="imagen-producto"
+            />
+            <span
+              *ngIf="producto.descuento < 1"
+              class="chip oferta-chip modern-chip"
+            >
+              Oferta
+            </span>
+          </div>
+
+          <!-- Nombre y precio -->
+          <div class="card-content modern-content">
+            <h6 class="card-title modern-title">{{ producto.nombre }}</h6>
+            <div *ngIf="producto.descuento < 1" class="precio-cont">
+              <span class="modern-price--discounted">
+                ${{ (producto.precio * producto.descuento) | number:'1.2-2' }}
+              </span>
+              <span class="modern-price--original">
+                ${{ producto.precio | number:'1.2-2' }}
+              </span>
+            </div>
+            <div *ngIf="producto.descuento == 1" class="precio-cont">
+              <span class="modern-price">
+                ${{ producto.precio | number:'1.2-2' }}
+              </span>
+            </div>
+          </div>
+
+          <!-- Botón “Agregar” o mensaje “Agotado” -->
+          <div class="card-action modern-action">
+            <button
+              *ngIf="producto.stock > 0"
+              (click)="agregarProducto(producto.idProducto)"
+              class="btn-modern btn-add"
+            >
+              Agregar
+              <i class="material-icons">add_shopping_cart</i>
+            </button>
+            <span *ngIf="producto.stock == 0" class="text-agotado">
+              Agotado
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /carousel-scroll -->
+
+    <!-- Flecha “Siguiente” para productos -->
+    <button
+      class="arrow arrow-right"
+      (click)="onArrowNextProducto()"
+      aria-label="Siguiente"
+    >
+      <i class="material-icons">chevron_right</i>
+    </button>
   </div>
-</div> -->
+</div>
+<!-- /CARRUSEL DE PRODUCTOS -->
 
 
+<!-- ——— 3) MODO “LIST VIEW”: sea para búsqueda o categoría (isListView = true) ——— -->
+<div *ngIf="isListView">
+  <!-- ——— 3.1) Si no hay productos, mostrar “NO PRODUCT FOUND” ——— -->
+  <ng-container *ngIf="productos.length === 0; else mostrarGrid">
+    <div class="center-align no-products">
+      <img
+        src="../../../assets/images/no-product.png"
+        alt="No product found"
+        style="max-width: 400px; opacity: 0.5; margin-top: 40px;"
+      />
+     
+    </div>
+  </ng-container>
 
-
-
-
+  <!-- ——— 3.2) Si sí hay productos, mostrar tu grid 5×N ——— -->
+  <ng-template #mostrarGrid>
+    <div class="container">
+      <div class="cajita" *ngFor="let producto of productos">
+        <div class="card" (click)="verProducto(producto.idProducto)">
+          <div class="card-image">
+            <img
+              *ngIf="producto.foto == 0"
+              src="../../../assets/images/productoDesconocido.jpeg"
+              width="100%"
+            />
+            <img
+              *ngIf="producto.foto == 1"
+              src="{{ liga }}/{{ producto.idProducto }}.jpg"
+              [alt]="producto.nombre"
+              width="100%"
+            />
+            <span
+              *ngIf="producto.descuento < 1"
+              class="oferta-etiqueta card-title"
+            >
+              {{"Oferta" | translate}}
+            </span>
+          </div>
+          <div class="card-content">
+            <h5 *ngIf="idioma == 'es'">{{ producto.nombre }}</h5>
+            <h5 *ngIf="idioma == 'en'">{{ producto.name }}</h5>
+            <p *ngIf="producto.descuento < 1">
+              {{"Por tan solo" | translate}} ${{ producto.precio * producto.descuento }}
+            </p>
+            <p *ngIf="producto.descuento == 1">${{ producto.precio }}</p>
+          </div>
+          <div class="card-action">
+            <a
+              *ngIf="producto.stock > 0"
+              href="javascript:void(0)"
+              (click)="agregarProducto(producto.idProducto)"
+              >{{"Agregar al carrito" | translate}}</a
+            >
+            <a class="black-text text-darken-2" *ngIf="producto.stock == 0">
+              {{"Agotado" | translate}}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</div>
+<!-- /MODO “LIST VIEW” -->
