@@ -1,0 +1,31 @@
+.divOlvide
+{
+    color: rgb(0, 0, 0);
+    padding-top: 100px;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.titulo{
+    font-family:'Times New Roman', Times, serif;
+    line-height: 1.2;
+    color:#D19E66;
+}
+
+.recortado{
+    width: 1100px;
+    text-align: justify;
+    font-size: large;
+}
+
+.final{
+    padding-top: 30px;
+    padding-bottom: 30px;
+    font-style: italic;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.parrafos{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: larger;
+}
