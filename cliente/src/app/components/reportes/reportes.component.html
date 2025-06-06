@@ -2,68 +2,64 @@
     <h1>{{"Reporte de ventas"|translate}}</h1>
 </div>
 <div class="container">
-    <div class="calendario">
-        <span clas>{{"Fecha de inicio"|translate}}</span>
-        <input type="text" class="datepicker" id="inicio">
-    </div>
-    <div class="calendario">
-        <span>{{"Fecha de fin"|translate}}</span>
-        <input type="text" class="datepicker" id="fin">
-    </div>
+    <div class="calendarios-horizontal">
+  <div class="calendario">
+      <span>{{"Fecha de inicio"|translate}}</span>
+      <input type="text" class="datepicker" id="inicio">
+  </div>
+  <div class="calendario">
+      <span>{{"Fecha de fin"|translate}}</span>
+      <input type="text" class="datepicker" id="fin">
+  </div>
+</div>
+
 
     <div class="calendario">
         <div class="boton">
-            <a  class="waves-effect waves-light btn" (click)="buscar()"><i class="material-icons left">search</i>{{"Buscar"|translate}}</a>
+            <a class="waves-effect waves-light btn" (click)="buscar()">
+                <i class="material-icons left">search</i>{{"Buscar"|translate}}
+            </a>
+        </div>
     </div>
 </div>
 <div class="container">
-<table class="default" *ngIf="ventas != undefined && estados!=undefined">
-    <tr>
-        <th>{{"ID Compra"|translate}}</th>
-        <th>{{"Fecha de compra"|translate}}</th>
-        <th>{{"Total"|translate}}</th>
-        <th>{{"Estado"|translate}}</th>
+    <table class="default" *ngIf="ventas != undefined && estados != undefined">
+        <tr>
+            <th>{{"ID Compra"|translate}}</th>
+            <th>{{"Fecha de compra"|translate}}</th>
+            <th>{{"Total"|translate}}</th>
+            <th>{{"Estado"|translate}}</th>
+        </tr>
+        <tr *ngFor="let venta of ventas; let i = index">
+            <ng-container *ngIf="estados[i]">
+                <td><a>{{venta.idCompra}}</a></td>
+                <td><a>{{venta.fecha | date:'yyyy-MM-dd'}}</a></td>
+                <td><a>{{venta.monto}}</a></td>
+                <td *ngIf="idioma == 'es'"><a>{{estados[i].nombre}}</a></td>
+                <td *ngIf="idioma == 'en'"><a>{{estados[i].Name}}</a></td>
+                <th>
+                    <a class="waves-effect waves-light btn" (click)="verDetalles(venta.idCompra, venta.idCliente)">
+                        {{"Detalles"|translate}}
+                    </a>
+                </th>
+            </ng-container>
+        </tr>
+    </table>
+</div>
 
-    </tr>
-    <tr *ngFor="let venta of ventas|
-    paginate: {
-    itemsPerPage: pageSize,
-    currentPage: p
-    };let i=index">
-        <ng-container *ngIf="estados[i]">
-        <td><a>{{venta.idCompra}}</a></td>
-        <td><a>{{venta.fecha |date:'yyyy-MM-dd'}}</a> </td>
-        <td><a>{{venta.monto}}</a> </td>
-
-        <td *ngIf="idioma=='es'"><a>{{estados[i].nombre}}</a></td>
-        <td *ngIf="idioma=='en'"><a>{{estados[i].Name}}</a></td>
-        <th>
-            <a class="waves-effect waves-light btn" (click)="verDetalles(venta.idCompra,venta.idCliente)">{{"Detalles"|translate}}</a>
-        </th>
-        </ng-container>
-    </tr>
-</table>
-<div class="row center-align">
-    <pagination-controls class="my-pagination" (pageChange)="p = ($event)"
-    previousLabel={{Anterior}} nextLabel={{Siguiente}}>
-    </pagination-controls>
-    </div>
-
-
-<!-- Modal Trigger -->
 <!-- Modal Structure -->
 <div id="modal1" class="modal">
   <div class="modal-content">
     <h4>{{"Datos de la compra"|translate}}</h4>
-    <table class="default" *ngIf="productos != undefined && pedidos!=undefined">
+    <table class="default" *ngIf="productos != undefined && pedidos != undefined">
         <tr>
             <td>{{"Nombre"|translate}}</td>
-            <td>{{"Cantidad"|translate}} </td>
+            <td>{{"Cantidad"|translate}}</td>
             <td>{{"Subtotal"|translate}}</td>
         </tr>
-        <tr *ngFor="let producto of productos,let i=index">
-            <td *ngIf="idioma=='es'">{{producto.nombre}}</td>
-            <td *ngIf="idioma=='en'">{{producto.name}}</td>
+        <tr *ngFor="let producto of productos; let i = index">
+            <td *ngIf="idioma == 'es'">{{producto.nombre}}</td>
+            <td *ngIf="idioma == 'en'">{{producto.name}}</td>
             <td>{{pedidos[i].cantidadProducto}}</td>
             <td>${{pedidos[i].subtotal}}</td>
         </tr>
@@ -72,10 +68,7 @@
         </tr>
       </table>
   </div>
-  <div>
-
-  </div>
   <div class="modal-footer">
-    <a  class="modal-close waves-effect waves-green btn-flat" >Aceptar </a>
+    <a class="modal-close waves-effect waves-green btn-flat">Aceptar </a>
   </div>
 </div>

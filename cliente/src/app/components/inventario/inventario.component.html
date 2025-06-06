@@ -1,209 +1,138 @@
-<div class="Buscar">
-  <table>
-    <tr>
-      <td>
-        <div class="input-field col s6">
-          <i class="material-icons prefix">search</i>
-          <input id="icon_prefix" type="text" class="active" [(ngModel)]="id_producto" name="busqueda">
-          <label for="icon_prefix">{{"Buscar por nombre"|translate}}</label>
-          <!-- <span *ngIf="producto.idProducto !== 1">{{ producto.idProducto }}</span> -->
-      </div>
-      
-      </td>
-      <td>
-        <a class="waves-effect waves-light btn" (click)="buscarProducto(id_producto)">{{"Buscar"|translate}}</a>
-      </td>
-    </tr>
-    <tr>
-      <div class="crearProducto">
-        <a class="waves-effect waves-light btn modal-trigger" data-target="crearProducto"
-          (click)="openCrearProducto()"><i class="material-icons left">add</i>{{"Nuevo producto"|translate}}</a>
-      </div>
-    </tr>
-  </table>
+<div class="buscar-horizontal">
+  <div class="buscar-field">
+    <i class="material-icons prefix">search</i>
+    <input id="icon_prefix" type="text" class="active" [(ngModel)]="id_producto" name="busqueda">
+    <label for="icon_prefix">{{"Buscar por nombre"|translate}}</label>
+  </div>
+  <a class="waves-effect waves-light btn" (click)="buscarProducto(id_producto)">
+    {{"Buscar"|translate}}
+  </a>
+  <a class="waves-effect waves-light btn modal-trigger" data-target="crearProducto"
+    (click)="openCrearProducto()">
+    <i class="material-icons left">add</i>{{"Nuevo producto"|translate}}
+  </a>
 </div>
-
-
-
-<!-- <div class="contenedor center">
-  <span class="titulo">Modificar productos</span>
-  <table class="default" *ngIf="productos != undefined">
-    <tr>
-      <td class="center">Imagen</td>
-      <td class="center">Código</td>
-      <td class="center">Nombre</td>
-      <td class="center">Cantidad</td>
-      <td class="center">Precio</td>
-      <td class="center">Acciones</td>
-      <td class="center">Eliminar</td>
-      <td class="center">Nueva imagen</td>
-    </tr>
-    <tr *ngFor="let producto of productos | paginate: { itemsPerPage: pageSize, currentPage: p }; let i=index">
-      <td class="center" [width]="150">
-        <img *ngIf="producto.foto == 0" src="../../../assets/images/productoDesconocido.jpeg" style="width: 100px;">
-        <img *ngIf="producto.foto == 1" src="{{liga}}/{{producto.idProducto}}.jpg" [alt]="liga" style="width: 100px;">
-      </td>
-      <td class="center">{{ producto.idProducto }}</td>
-      <td class="center">{{ producto.nombre }}</td>
-      <td class="center">{{ producto.stock }}</td>
-      <td class="center">${{ producto.precio }}</td>
-      <td class="center"> -->
 
 <div class="contenedor">
   <span class="titulo">{{"Modificar productos"|translate}}</span>
-  <table class="default" *ngIf="productos != undefined">
-    <tr>
-      <td class="center">{{"Imagen"|translate}}</td>
-      <td>{{"Codigo"|translate}}</td>
-      <td>{{"Nombre"|translate}}</td>
-      <td>{{"Cantidad"|translate}}</td>
-      <td>{{"Precio"|translate}}</td>
-      <td>{{"Acciones"|translate}}</td>
-      <td class="center">{{"Eliminar"|translate}}</td>
-      <td class="center">{{"Nueva imagen"|translate}}</td>
-    </tr>
-    <tr *ngFor="let producto of productos | paginate: { itemsPerPage: pageSize, currentPage: p }; let i=index">
-      <td class="center" [width]="150">
-        <img *ngIf="producto.foto == 0" src="../../../assets/images/productoDesconocido.jpeg" style="width: 100px;">
-        <img *ngIf="producto.foto == 1" src="{{liga}}/{{producto.idProducto}}.jpg" [alt]="liga" style="width: 100px;">
-      </td>
-      <td>{{ producto.idProducto }}</td>
-      <td *ngIf="idioma=='es'">{{ producto.nombre }}</td>
-      <td *ngIf="idioma=='en'">{{ producto.name }}</td>
-      <td>{{ producto.stock }}</td>
-      <td>{{ producto.precio }}</td>
-      <td>
-        <a class="modal-trigger" data-target="modal1" (click)="modificarProducto(producto.idProducto)">
-          <i class="material-icons">edit</i>
-        </a>
-      </td>
-      <td class="center">
-        <a (click)="eliminarProducto(producto.idProducto)">
-          <i class="material-icons">delete</i>
-        </a>
-      </td>
-      <td>
-        <input type="file" (change)="cargandoImagen($event, producto.idProducto)">
-      </td>
-    </tr>
-  </table>
-  <div class="row center-align">
-    <pagination-controls class="my-pagination" (pageChange)="p = ($event)" previousLabel= {{Anterior}}
-      nextLabel= {{Siguiente}}></pagination-controls>
+  <div class="inventario-tabla-container">
+    <table class="default" *ngIf="productos != undefined">
+      <tr>
+        <th class="center">{{"Imagen"|translate}}</th>
+        <th>{{"Codigo"|translate}}</th>
+        <th>{{"Nombre"|translate}}</th>
+        <th>{{"Cantidad"|translate}}</th>
+        <th>{{"Precio"|translate}}</th>
+        <th>{{"Acciones"|translate}}</th>
+        <th class="center">{{"Eliminar"|translate}}</th>
+        <th class="center">{{"Nueva imagen"|translate}}</th>
+      </tr>
+      <tr *ngFor="let producto of productos; let i=index">
+        <td class="center" width="100">
+          <img *ngIf="producto.foto == 0" src="../../../assets/images/productoDesconocido.jpeg" class="producto-img">
+          <img *ngIf="producto.foto == 1" [src]="liga + '/' + producto.idProducto + '.jpg'" [alt]="liga" class="producto-img">
+        </td>
+        <td>{{ producto.idProducto }}</td>
+        <td *ngIf="idioma=='es'">{{ producto.nombre }}</td>
+        <td *ngIf="idioma=='en'">{{ producto.name }}</td>
+        <td>{{ producto.stock }}</td>
+        <td>${{ producto.precio }}</td>
+        <td>
+          <a class="modal-trigger waves-effect waves-light btn" data-target="modal1" (click)="modificarProducto(producto.idProducto)">
+            <i class="material-icons left">edit</i>{{"Editar"|translate}}
+          </a>
+        </td>
+        <td class="center">
+          <a (click)="eliminarProducto(producto.idProducto)" class="waves-effect waves-light btn red lighten-1">
+            <i class="material-icons left">delete</i>{{"Eliminar"|translate}}
+          </a>
+        </td>
+        <td>
+          <input type="file" (change)="cargandoImagen($event, producto.idProducto)">
+        </td>
+      </tr>
+    </table>
   </div>
 </div>
 
-
+<!-- MODAL EDITAR PRODUCTO -->
 <div id="modal1" class="modal">
   <div class="modal-content">
-    <div class="row">
-      <form class="col s12">
-        <div class="titulo">
-          <span>{{"Modificar datos del producto"|translate}}</span>
-        </div>
-        <div class="row">
-          <div class="input-field col s6">
-            <i class="material-icons prefix">info</i>
-            <input id="code" type="text" class="validate" [(ngModel)]="producto.idProducto" name="idProducto">
-            <label for="code" class="active">{{"Código"|translate}}</label>
-          </div>
-
-        </div>
-        <div class="row">
-          <div class="input-field col s6">
-            <i class="material-icons prefix">info</i>
-            <input id="name" type="text" class="validate" placeholder="producto.nombre" [(ngModel)]="producto.nombre"
-              name="Nombre">
-            <label for="name" class="active"> {{"Nombre del producto"|translate}} (Español)</label>
-          </div>
-          <div class="input-field col s6">
-            <i class="material-icons prefix">info</i>
-            <input id="name" type="text" class="validate" placeholder="producto.name" [(ngModel)]="producto.name"
-              name="Name">
-            <label for="name" class="active"> {{"Nombre del producto"|translate}} (English)</label>
-          </div>
-        </div>
-        <div class="row">
-          <div class="input-field col s6">
-            <i class="material-icons prefix">info</i>
-            <input id="name" type="text" class="validate" [(ngModel)]="producto.precio" name="Precio">
-            <label for="name" class="active"> {{"Precio"|translate}}</label>
-          </div>
-
-          <div class="input-field col s6">
-
-            <input id="Cantidad" type="text" class="validate" [(ngModel)]="producto.stock" name="Cantidad1">
-            <label for="Cantidad" class="active"> {{"Cantidad"|translate}}</label>
-          </div>
-        </div>
-
-        <form action="#">
-
-          <p>
-            <label>
-              <input type="checkbox" class="filled-in" checked="checked" id="descuento" (click)="revisarDescuento()" />
-              <span>{{"Descuento"|translate}}</span>
-            </label>
-          </p>
-
-        </form>
-        <div class="row">
-          <div class="input-field col s6">
-            <input id="name1" type="text" class="validate" [(ngModel)]="producto.descuento" name="Cantidad">
-            <label for="name1" class="active"> {{"Descuento"|translate}}</label>
-
-          </div>
-        </div>
-        <div class="row">
-          <div class="input-field col s6">
-            <i class="material-icons prefix">info</i>
-            <label for="name" class="active"> {{"Inicio descuento"|translate}}</label>
-            <input type="text" class="datepicker" id="inicio_descuento" [(ngModel)]="producto.inicio_descuento"
-              name="inicio_descuento">
-          </div>
-
-          <div class="input-field col s6">
-            <i class="material-icons prefix">info</i>
-            <label for="name" class="active"> {{"Fin descuento"|translate}}</label>
-            <input type="text" class="datepicker" id="fin_descuento" [(ngModel)]="producto.fin_descuento"
-              name="fin_descuento">
-          </div>
-        </div>
-        <div class="row">
-          <div>
-            <select [(ngModel)]='producto.idCategoria' class="browser-default" name="categorias" *ngIf="idioma == 'es'">
-              <option *ngFor="let categoria of categorias" [value]="categoria.idCategoria">
-                {{categoria.nombre}}
-              </option>
-            </select>
-            <select [(ngModel)]='producto.idCategoria' class="browser-default" name="categorias" *ngIf="idioma == 'en'">
-              <option *ngFor="let categoria of categorias" [value]="categoria.idCategoria">
-                {{categoria.name}}
-              </option>
-            </select>
-          </div>
-          <select [(ngModel)]='producto.idMaterial' class="browser-default" name="materiales" *ngIf="idioma == 'es'">
-            <option *ngFor="let material of materiales" [value]="material.idMaterial">
-              {{material.nombre}}
-            </option>
-          </select>
-          <select [(ngModel)]='producto.idMaterial' class="browser-default" name="materiales" *ngIf="idioma == 'en'">
-            <option *ngFor="let material of materiales" [value]="material.idMaterial">
-              {{material.name}}
-            </option>
-          </select>
-          <div>
-            <select [(ngModel)]='producto.idMarca' class="browser-default" name="marcas">
-              <option *ngFor="let marca of marcas" [value]="marca.idMarca">
-                {{marca.nombre}}
-              </option>
-            </select>
-          </div>
-          <div>
-          </div>
-        </div>
-      </form>
+    <div class="titulo-modal">
+      <span>{{"Modificar datos del producto"|translate}}</span>
     </div>
+    <form>
+      <div class="inputs-horizontal">
+        <div class="input-field">
+          <label class="active">{{"Código"|translate}}</label>
+          <input type="text" class="validate" [(ngModel)]="producto.idProducto" name="idProducto">
+        </div>
+        <div class="input-field">
+          <label class="active">{{"Nombre del producto"|translate}} (Español)</label>
+          <input type="text" class="validate" [(ngModel)]="producto.nombre" name="Nombre">
+        </div>
+        <div class="input-field">
+          <label class="active">{{"Nombre del producto"|translate}} (English)</label>
+          <input type="text" class="validate" [(ngModel)]="producto.name" name="Name">
+        </div>
+      </div>
+      <div class="inputs-horizontal">
+        <div class="input-field">
+          <label class="active">{{"Precio"|translate}}</label>
+          <input type="text" class="validate" [(ngModel)]="producto.precio" name="Precio">
+        </div>
+        <div class="input-field">
+          <label class="active">{{"Cantidad"|translate}}</label>
+          <input type="text" class="validate" [(ngModel)]="producto.stock" name="Cantidad">
+        </div>
+        <div class="input-field">
+          <label class="active">{{"Descuento"|translate}}</label>
+          <input type="text" class="validate" [(ngModel)]="producto.descuento" name="descuento">
+        </div>
+      </div>
+      <div class="inputs-horizontal">
+        <div class="input-field">
+          <label class="active">{{"Inicio descuento"|translate}}</label>
+          <input type="text" class="datepicker" [(ngModel)]="producto.inicio_descuento" name="inicio_descuento">
+        </div>
+        <div class="input-field">
+          <label class="active">{{"Fin descuento"|translate}}</label>
+          <input type="text" class="datepicker" [(ngModel)]="producto.fin_descuento" name="fin_descuento">
+        </div>
+      </div>
+      <div class="inputs-horizontal">
+        <div class="input-field">
+          <label class="active">{{"Categoría"|translate}}</label>
+          <select [(ngModel)]="producto.idCategoria" class="browser-default" name="categorias" *ngIf="idioma == 'es'">
+            <option *ngFor="let categoria of categorias" [value]="categoria.idCategoria">{{categoria.nombre}}</option>
+          </select>
+          <select [(ngModel)]="producto.idCategoria" class="browser-default" name="categorias" *ngIf="idioma == 'en'">
+            <option *ngFor="let categoria of categorias" [value]="categoria.idCategoria">{{categoria.name}}</option>
+          </select>
+        </div>
+        <div class="input-field">
+          <label class="active">{{"Material"|translate}}</label>
+          <select [(ngModel)]="producto.idMaterial" class="browser-default" name="materiales" *ngIf="idioma == 'es'">
+            <option *ngFor="let material of materiales" [value]="material.idMaterial">{{material.nombre}}</option>
+          </select>
+          <select [(ngModel)]="producto.idMaterial" class="browser-default" name="materiales" *ngIf="idioma == 'en'">
+            <option *ngFor="let material of materiales" [value]="material.idMaterial">{{material.name}}</option>
+          </select>
+        </div>
+        <div class="input-field">
+          <label class="active">{{"Marca"|translate}}</label>
+          <select [(ngModel)]="producto.idMarca" class="browser-default" name="marcas">
+            <option *ngFor="let marca of marcas" [value]="marca.idMarca">{{marca.nombre}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="input-checkbox">
+        <label>
+          <input type="checkbox" class="filled-in" checked="checked" id="descuento" (click)="revisarDescuento()" />
+          <span>{{"Descuento"|translate}}</span>
+        </label>
+      </div>
+    </form>
   </div>
   <div class="modal-footer">
     <a class="modal-close waves-effect waves-green btn-flat" (click)="guardarProducto()">{{"Guardar Datos"|translate}}</a>
@@ -211,122 +140,87 @@
   </div>
 </div>
 
-
+<!-- MODAL CREAR PRODUCTO -->
 <div id="crearProducto" class="modal">
   <div class="modal-content">
-    <div class="row">
-      <form class="col s12">
-        <div class="titulo">
-          <span>{{"Agregar producto"|translate}}</span>
-        </div>
-        <div class="row">
-          <div class="input-field col s6">
-            <i class="material-icons prefix">info</i>
-            <input id="code" type="text" class="validate" [(ngModel)]="producto.idProducto" name="idProducto">
-            <label for="code" class="active">{{"Código"|translate}}</label>
-          </div>
-
-        </div>
-        <div class="row">
-          <div class="input-field col s6">
-            <i class="material-icons prefix">info</i>
-            <input id="name" type="text" class="validate" placeholder="producto.nombre" [(ngModel)]="producto.nombre"
-              name="Nombre">
-            <label for="name" class="active"> {{"Nombre del producto"|translate}} (Español)</label>
-          </div>
-          <div class="input-field col s6">
-            <i class="material-icons prefix">info</i>
-            <input id="name" type="text" class="validate" placeholder="producto.name" [(ngModel)]="producto.name"
-              name="Nombre">
-            <label for="name" class="active"> {{"Nombre del producto"|translate}} (English)</label>
-          </div>
-        </div>
-        <div class="row">
-          <div class="input-field col s6">
-            <i class="material-icons prefix">info</i>
-            <input id="name" type="text" class="validate" [(ngModel)]="producto.precio" name="Precio">
-            <label for="name" class="active"> {{"Precio"|translate}}</label>
-          </div>
-
-          <div class="input-field col s6">
-
-            <input id="name" type="text" class="validate" [(ngModel)]="producto.stock" name="Cantidad">
-            <label for="name" class="active"> {{"Cantidad"|translate}}</label>
-          </div>
-        </div>
-        <form action="#">
-
-          <p>
-            <label>
-              <input type="checkbox" class="filled-in" checked="checked" id="descuento1" (click)="revisarDescuento()" />
-              <span>{{"Descuento"|translate}}</span>
-            </label>
-          </p>
-        </form>
-
-        <div class="row">
-          <div class="input-field col s6">
-            <input id="name2" type="text" class="validate" [(ngModel)]="producto.descuento" name="Cantidad">
-            <label for="name2" class="active"> {{"Descuento"|translate}}</label>
-
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="input-field col s6">
-            <i class="material-icons prefix">info</i>
-
-            <label for="name" class="active"> {{"Inicio descuento"|translate}}</label>
-            <input type="date" class="datepicker" id="inicio_descuento1" [(ngModel)]="producto.inicio_descuento"
-              name="inicio_descuento">
-          </div>
-
-          <div class="input-field col s6">
-            <i class="material-icons prefix">info</i>
-            <label for="name" class="active"> {{"Fin descuento"|translate}}</label>
-            <input type="date" class="datepicker" id="fin_descuento1" [(ngModel)]="producto.fin_descuento"
-              name="fin_descuento">
-          </div>
-        </div>
-        <div class="row">
-          <div>
-            <select [(ngModel)]='producto.idCategoria' class="browser-default" name="categorias" *ngIf="idioma == 'es'">
-              <option *ngFor="let categoriaItem of categorias" [value]="categoriaItem.idCategoria">
-                {{categoriaItem.nombre}}
-              </option>
-            </select>
-            <select [(ngModel)]='producto.idCategoria' class="browser-default" name="categorias" *ngIf="idioma == 'en'">
-              <option *ngFor="let categoriaItem of categorias" [value]="categoriaItem.idCategoria">
-                {{categoriaItem.name}}
-              </option>
-            </select>
-          </div>
-          <select [(ngModel)]='producto.idMaterial' class="browser-default" name="materiales" *ngIf="idioma == 'es'">
-            <option for="materiales" *ngFor="let material of materiales" [value]="material.idMaterial">
-              {{material.nombre}}
-            </option>
-          </select>
-          <select [(ngModel)]='producto.idMaterial' class="browser-default" name="materiales" *ngIf="idioma == 'en'">
-            <option for="materiales" *ngFor="let material of materiales" [value]="material.idMaterial">
-              {{material.name}}
-            </option>
-          </select>
-          <div>
-            <select [(ngModel)]='producto.idMarca' class="browser-default" name="marcas">
-              <option *ngFor="let marca of marcas" [value]="marca.idMarca">
-                {{marca.nombre}}
-              </option>
-            </select>
-          </div>
-          <div>
-
-          </div>
-        </div>
-      </form>
+    <div class="titulo-modal">
+      <span>{{"Agregar producto"|translate}}</span>
     </div>
+    <form>
+      <div class="inputs-horizontal">
+        <div class="input-field">
+          <label class="active">{{"Código"|translate}}</label>
+          <input type="text" class="validate" [(ngModel)]="producto.idProducto" name="idProducto">
+        </div>
+        <div class="input-field">
+          <label class="active">{{"Nombre del producto"|translate}} (Español)</label>
+          <input type="text" class="validate" [(ngModel)]="producto.nombre" name="Nombre">
+        </div>
+        <div class="input-field">
+          <label class="active">{{"Nombre del producto"|translate}} (English)</label>
+          <input type="text" class="validate" [(ngModel)]="producto.name" name="Name">
+        </div>
+      </div>
+      <div class="inputs-horizontal">
+        <div class="input-field">
+          <label class="active">{{"Precio"|translate}}</label>
+          <input type="text" class="validate" [(ngModel)]="producto.precio" name="Precio">
+        </div>
+        <div class="input-field">
+          <label class="active">{{"Cantidad"|translate}}</label>
+          <input type="text" class="validate" [(ngModel)]="producto.stock" name="Cantidad">
+        </div>
+        <div class="input-field">
+          <label class="active">{{"Descuento"|translate}}</label>
+          <input type="text" class="validate" [(ngModel)]="producto.descuento" name="descuento">
+        </div>
+      </div>
+      <div class="inputs-horizontal">
+        <div class="input-field">
+          <label class="active">{{"Inicio descuento"|translate}}</label>
+          <input type="text" class="datepicker" [(ngModel)]="producto.inicio_descuento" name="inicio_descuento">
+        </div>
+        <div class="input-field">
+          <label class="active">{{"Fin descuento"|translate}}</label>
+          <input type="text" class="datepicker" [(ngModel)]="producto.fin_descuento" name="fin_descuento">
+        </div>
+      </div>
+      <div class="inputs-horizontal">
+        <div class="input-field">
+          <label class="active">{{"Categoría"|translate}}</label>
+          <select [(ngModel)]="producto.idCategoria" class="browser-default" name="categorias" *ngIf="idioma == 'es'">
+            <option *ngFor="let categoriaItem of categorias" [value]="categoriaItem.idCategoria">{{categoriaItem.nombre}}</option>
+          </select>
+          <select [(ngModel)]="producto.idCategoria" class="browser-default" name="categorias" *ngIf="idioma == 'en'">
+            <option *ngFor="let categoriaItem of categorias" [value]="categoriaItem.idCategoria">{{categoriaItem.name}}</option>
+          </select>
+        </div>
+        <div class="input-field">
+          <label class="active">{{"Material"|translate}}</label>
+          <select [(ngModel)]="producto.idMaterial" class="browser-default" name="materiales" *ngIf="idioma == 'es'">
+            <option *ngFor="let material of materiales" [value]="material.idMaterial">{{material.nombre}}</option>
+          </select>
+          <select [(ngModel)]="producto.idMaterial" class="browser-default" name="materiales" *ngIf="idioma == 'en'">
+            <option *ngFor="let material of materiales" [value]="material.idMaterial">{{material.name}}</option>
+          </select>
+        </div>
+        <div class="input-field">
+          <label class="active">{{"Marca"|translate}}</label>
+          <select [(ngModel)]="producto.idMarca" class="browser-default" name="marcas">
+            <option *ngFor="let marca of marcas" [value]="marca.idMarca">{{marca.nombre}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="input-checkbox">
+        <label>
+          <input type="checkbox" class="filled-in" checked="checked" id="descuento1" (click)="revisarDescuento()" />
+          <span>{{"Descuento"|translate}}</span>
+        </label>
+      </div>
+    </form>
   </div>
   <div class="modal-footer">
     <a class="modal-close waves-effect waves-green btn-flat" (click)="crearProducto()">{{"Guardar Datos"|translate}}</a>
-    <a class="modal-close waves-effect waves-green btn-flat">{{"Cancelar"|translate}} </a>
+    <a class="modal-close waves-effect waves-green btn-flat">{{"Cancelar"|translate}}</a>
   </div>
 </div>

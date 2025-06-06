@@ -1,13 +1,168 @@
-.calendario{
-    width: 150px;
-    float: left;
-    margin: 10px;
+/* Contenedor principal */
+.contenedor {
+  margin: 30px 0 10px 0;
+  text-align: center;
 }
-.contenedor{
+.contenedor h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #212121;
+  margin-bottom: 10px;
+}
 
-    margin: 20px;
-    width: 600px;
-    position: relative;
-    left: 40%;
-    top: 10%;
+/* Container general */
+.container {
+  background: #fff;
+  padding: 20px 30px;
+  border-radius: 18px;
+  box-shadow: 0 3px 18px rgba(60,60,60,0.07);
+  margin-bottom: 22px;
 }
+
+/* Calendario */
+.calendario {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.calendario span {
+  min-width: 120px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+}
+
+/* Datepicker */
+.datepicker {
+  border: 1px solid #bdbdbd;
+  border-radius: 6px;
+  padding: 7px 10px;
+  font-size: 1rem;
+  width: 170px;
+  background: #fafafa;
+  transition: border-color .2s;
+}
+.datepicker:focus {
+  border-color: #2196f3;
+  outline: none;
+}
+
+/* Botón buscar y detalles */
+.boton {
+  margin-left: 12px;
+}
+a.waves-effect.btn {
+  background: #1976d2;
+  color: #fff !important;
+  border-radius: 6px;
+  font-weight: 500;
+  padding: 8px 22px;
+  font-size: 1rem;
+  text-transform: none;
+  margin-right: 8px;
+  transition: background .2s;
+}
+a.waves-effect.btn:hover, a.waves-effect.btn:focus {
+  background: #1565c0;
+}
+
+/* Tabla principal */
+table.default {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background: #fafbfc;
+  border-radius: 12px;
+  overflow: hidden;
+}
+table.default th, table.default td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #e3e3e3;
+  text-align: center;
+  font-size: 1rem;
+}
+table.default th {
+  background: #eceff1;
+  font-weight: bold;
+  color: #1976d2;
+}
+table.default tr:last-child td {
+  border-bottom: none;
+}
+table.default tr:hover {
+  background: #e3f2fd;
+  transition: background .2s;
+}
+table.default a {
+  color: #212121;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+/* Paginación */
+.my-pagination {
+  margin: 22px 0 6px 0;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+.pagination-wrapper {
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* Modal */
+.modal {
+  max-width: 520px;
+  border-radius: 14px;
+  padding: 0 !important;
+}
+.modal-content {
+  padding: 22px 25px 10px 25px;
+}
+.modal-content h4 {
+  margin-bottom: 18px;
+  color: #1976d2;
+  font-weight: 600;
+}
+.modal-footer {
+  padding: 10px 20px;
+  border-top: 1px solid #e0e0e0;
+  background: #fafafa;
+  text-align: right;
+  border-radius: 0 0 14px 14px;
+}
+.modal-close {
+  color: #1976d2 !important;
+  font-weight: 500;
+  cursor: pointer;
+}
+@media (max-width: 600px) {
+  .container {
+    padding: 14px 5px;
+  }
+  table.default th, table.default td {
+    font-size: 0.93rem;
+    padding: 6px 5px;
+  }
+  .modal-content {
+    padding: 10px 7px 6px 7px;
+  }
+}
+.calendarios-horizontal {
+  display: flex;
+  flex-direction: row;
+  gap: 22px;      /* Espacio entre los dos */
+  align-items: flex-end; /* Alinea bien con los inputs */
+  margin-bottom: 15px;
+}
+
+.calendario {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
