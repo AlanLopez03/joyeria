@@ -39,6 +39,7 @@ const routes: Routes = [
   {
     path: 'control', component: ControlComponent, children:
       [
+        {path: '', redirectTo: 'inventario', pathMatch: 'full' },
         { path: 'inventario', redirectTo: 'inventario', pathMatch: 'full' }, { path: 'inventario', component: InventarioComponent, },
         { path: 'pedidos', redirectTo: 'pedidos', pathMatch: 'full' }, { path: 'pedidos', component: PedidosComponent, },
         { path: 'reportes', redirectTo: 'reportes', pathMatch: 'full' }, { path: 'reportes', component: ReportesComponent, },
