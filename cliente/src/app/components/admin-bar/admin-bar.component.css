@@ -1,5 +1,158 @@
-.nombre{
-    position: relative;
-    left: 15%;
-    
+/* ======================================= */
+/*  Ajustes definitivos para que el logo   */
+/*  quede centrado en la barra fija de 64px */
+/* ======================================= */
+
+/* 1) FORZAR ALTURA FIJA EN <nav> */
+nav {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 64px !important;               /* Altura exacta */
+  z-index: 999 !important;
+  background-color: #ffffff !important;  /* Color dorado/miel */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+  padding: 0 !important;
+}
+
+/* 2) EL CONTENEDOR .nav-wrapper DEBE OCUPAR EL 100% DE LA ALTURA */
+.nav-wrapper.custom-admin-navbar {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  height: 100% !important;   /* Fuerza que llene los 64px de nav */
+  padding: 0 24px !important; /* Separación horizontal */
+}
+
+/* 3) SECCIÓN IZQUIERDA: LOGO */
+.left-section {
+  flex: 0 0 auto;
+  display: flex !important;
+  align-items: center;
+  height: 100%;
+}
+
+/* 3.1) EL <a class="brand-logo"> DEBE LLENAR EL 100% DE ALTURA Y SIN MÁRGENES */
+.brand-logo {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start;  /* Mantiene el logo pegado a la izquierda */
+  height: 100% !important;      /* Ocupa toda la altura de nav */
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* 3.2) EL <img> DENTRO DE brand-logo SE AJUSTA A ESA ALTURA */
+.brand-logo img {
+  height: 100%;   /* Ocupa los 64px completos */
+  width: auto;
+  object-fit: contain;
+  transition: transform 0.2s ease-in-out;
+}
+
+/* 3.3) OPCIONAL: HOVER SOBRE EL IMG */
+.brand-logo img:hover {
+  transform: scale(1.05);
+}
+
+/* 4) SECCIÓN CENTRAL: “Bienvenido <usuario>” */
+.center-section {
+  flex: 1 1 auto;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #c29458 !important;
+  font-size: 1rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* 5) SECCIÓN DERECHA: ENLACES DE ADMINISTRACIÓN */
+.right-section {
+  flex: 0 0 auto;
+  display: flex !important;
+  align-items: center;
+  height: 100%;
+}
+
+#nav-mobile {
+  display: flex !important;
+  align-items: center;
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+#nav-mobile li {
+  list-style: none;
+  height: 100%;
+}
+
+#nav-mobile li a {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 0 12px !important;
+  color: #c29458 !important;
+  font-weight: 500;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+#nav-mobile li a:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  border-radius: 4px;
+}
+
+/* 6) DROPDOWN DE IDIOMAS */
+#idiomas.dropdown-content {
+  background-color: #c29458 !important;
+  min-width: 160px !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12) !important;
+  padding: 8px 0 !important;
+  margin-top: 4px !important;
+}
+
+#idiomas.dropdown-content li {
+  list-style: none;
+}
+
+#idiomas.dropdown-content li a {
+  display: block !important;
+  padding: 10px 20px !important;
+  color: #333333 !important;
+  font-weight: 500 !important;
+  font-size: 0.95rem !important;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+#idiomas.dropdown-content li a:hover {
+  background-color: #c29458 !important;
+  color: #000000 !important;
+}
+
+/* 7) RESPONSIVE: EN PANTALLAS ≤ 576px */
+@media (max-width: 576px) {
+  .center-section {
+    display: none !important;  /* Esconde “Bienvenido” en móviles */
+  }
+
+  #nav-mobile li a {
+    padding: 0 8px !important;
+    font-size: 0.85rem !important;
+  }
+
+  .brand-logo img {
+    height: 48px; /* Aún visible pero un poco más pequeño */
+  }
+}
+
+/* 8) EVITAR QUE EL BODY QUEDE TAPADO POR EL NAV FIJO */
+body {
+  padding-top: 64px !important;
 }

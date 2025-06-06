@@ -1,21 +1,65 @@
-<nav >
-    <div class="nav-wrapper  teal darken-2"  >
-      <a  class="brand-logo" href="control">Diamond</a>
-      <a   class="nombre">{{ "Bienvenido" |translate}} {{usuario.nombre}}</a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a href="control/modificarUsuario">{{"Usuarios"|translate}}</a></li>
-        <li><a href="control/inventario">{{"Inventario"|translate}}</a></li>
-        <li><a href="control/ofertas">{{"Ofertas"|translate}}</a></li>
-        <li><a href="control/reportes">{{"Reportes"|translate}}</a></li>
+<!-- src/app/components/admin-bar/admin-bar.component.html -->
 
-        <!-- <li><a class="dropdown-trigger"  data-target="idiomas">{{"Idioma" | translate}}<i class="material-icons right">arrow_drop_down</i></a></li> -->
+<!-- Dropdown de idiomas (opcional; solo si lo vas a usar) -->
+<ul id="idiomas" class="dropdown-content">
+  <li><a (click)="cambiarIdioma('es')">{{ "Español" | translate }}</a></li>
+  <li><a (click)="cambiarIdioma('en')">{{ "Inglés" | translate }}</a></li>
+</ul>
 
-        <li><a  (click)="logOut()">{{"Salir"|translate}}</a></li>
-      </ul>
+<!-- Barra de navegación fija -->
+<div class="navbar-fixed">
+  <nav>
+    <div class="nav-wrapper custom-admin-navbar">
+      <!-- 1) Logo de la aplicación (reemplaza ruta con tu imagen real) -->
+      <div class="left-section">
+        <a class="brand-logo" href="control">
+          <img src="../../../assets/images/logoD.png" alt="Logo Diamond" />
+        </a>
+      </div>
+
+      <!-- 2) Texto de bienvenida con el nombre de usuario -->
+      <div class="center-section">
+        <span class="nombre">
+          {{ "Bienvenido" | translate }} {{ usuario.nombre }}
+        </span>
+      </div>
+
+      <!-- 3) Enlaces de administración -->
+      <div class="right-section">
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li>
+            <a href="control/modificarUsuario">
+              {{ "Usuarios" | translate }}
+            </a>
+          </li>
+          <li>
+            <a href="control/inventario">
+              {{ "Inventario" | translate }}
+            </a>
+          </li>
+          <li>
+            <a href="control/ofertas">
+              {{ "Ofertas" | translate }}
+            </a>
+          </li>
+          <li>
+            <a href="control/reportes">
+              {{ "Reportes" | translate }}
+            </a>
+          </li>
+          <!-- Si quisieras el dropdown de idiomas, descomenta este li y ajusta data-target="idiomas"
+          <li>
+            <a class="dropdown-trigger" href="#!" data-target="idiomas">
+              {{ "Idioma" | translate }}
+              <i class="material-icons right">arrow_drop_down</i>
+            </a>
+          </li>
+          -->
+          <li>
+            <a (click)="logOut()">{{ "Salir" | translate }}</a>
+          </li>
+        </ul>
+      </div>
     </div>
   </nav>
-
-  <ul id="idiomas" class="dropdown-content">
-    <li ><a (click)="cambiarIdioma('es')">{{"Español"|translate}}</a></li>
-    <li ><a (click)="cambiarIdioma('en')">{{"Inglés"|translate}}</a></li>
-  </ul>
+</div>
