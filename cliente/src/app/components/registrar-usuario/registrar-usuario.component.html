@@ -1,50 +1,51 @@
-<div class="container">
-    <div class="row">
-      <div class="titulo">
-        <span>Crear una cuenta</span>
-      </div>
-        <form class="col s12">
-          <div class="row">
-            <div class="input-field col s12">
-              <i class="material-icons prefix">account_circle</i>
-              <input  id="first_name" type="text" class="validate" [(ngModel)]="usuario.nombre" name="name">
-              <label for="first_name">Nombre</label>
-            </div>
-           <!-- 
-            <div class="input-field col s6">
-              <input id="last_name" type="text" class="validate">
-              <label for="last_name">Apellidos</label>
-            </div>-->
+<div class="container registro-container">
+  <div class="row">
+    <div class="col s12 center-align">
+      <img src="../../../assets/images/logoD.png" alt="Logo de la página" class="registro-logo">
+    </div>
 
+    <div class="titulo center-align">
+      <span>Crear una cuenta</span>
+    </div>
+
+    <form class="col s12" (submit)="registrarUsuario()">
+      <div class="row">
+        <div class="input-field col s12">
+          <i class="material-icons prefix">account_circle</i>
+          <input id="first_name" type="text" class="validate" [(ngModel)]="usuario.nombre" name="name" required>
+          <label for="first_name">Nombre</label>
         </div>
-        <div class="row">
-            <div class="input-field col s12">
-              <i class="material-icons prefix">mail</i>
-              <input id="correo" type="text" class="validate" [(ngModel)]="usuario.correo" name="correo">
-              <label for="correo">Email</label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="input-field col s12">
-              <i class="material-icons prefix">perm_identity</i>
-              <input id="Nombre de usuario" type="text" class="validate" [(ngModel)]="usuario.username" name="username">
-              <label for="Nombre de Usuario">Nombre de usuario</label>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="input-field col s12">
-              <i class="material-icons prefix">vpn_key</i>
-              <input id="password" type="password" class="validate" [(ngModel)]="usuario.password" name="password">
-              <label for="password">Contraseña</label>
-            </div>
-          </div>
-          <button class="btn waves-effect waves-light" (click)="registrarUsuario()" type="submit" name="action">Enviar
-            <i class="material-icons left">send</i>
-          </button>
-        </form>
       </div>
-            
 
+      <div class="row">
+        <div class="input-field col s12">
+          <i class="material-icons prefix">mail</i>
+          <input id="correo" type="email" class="validate" [(ngModel)]="usuario.correo" name="correo" required>
+          <label for="correo">Email</label>
+        </div>
+      </div>
 
+      <div class="row">
+        <div class="input-field col s12">
+          <i class="material-icons prefix">perm_identity</i>
+          <input id="Nombre de usuario" type="text" class="validate" [(ngModel)]="usuario.username" name="username" required>
+          <label for="Nombre de usuario">Nombre de usuario</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s12">
+          <i class="material-icons prefix">vpn_key</i>
+          <input id="password" type="password" class="validate" [(ngModel)]="usuario.password" name="password" required>
+          <label for="password">Contraseña</label>
+        </div>
+      </div>
+
+      <div class="center-align">
+        <button class="btn custom-btn" type="submit">
+          <i class="material-icons left">send</i>Registrarse
+        </button>
+      </div>
+    </form>
+  </div>
 </div>
