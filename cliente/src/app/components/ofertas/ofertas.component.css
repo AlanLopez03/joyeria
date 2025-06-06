@@ -1,23 +1,294 @@
-.contenedor{
-    width: 900px;
-    height: 800px;
-    padding: 20px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    margin-left: 20px;
-    margin-right: 20px;
-    border: 1px solid #e3e3e3;
-    border-radius: 5px;
-    background-color: #fff;
-    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
-    position: relative;
-    top:10%;
-    left: 20%;
+/* src/app/components/ofertas/ofertas.component.css */
+
+/* —————— 1) WRAPPER GENERAL —————— */
+.offers-wrapper {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 16px;
 }
 
-.titulo{
-    text-align: center;
-    font-size: 30px;
-    font-weight: bold;
-    color: #000;
+.offers-title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+  color: #333;
 }
+
+/* —————— 2) GRID DE OFERTAS —————— */
+.offers-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+/* Tarjeta de oferta */
+.offer-card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.offer-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* —————— 3) IMAGEN + BADGE —————— */
+.offer-image-wrapper {
+  position: relative;
+  height: 260px;
+  background-color: #f9f9f9;
+}
+
+.offer-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.offer-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background-color: #e53935;
+  color: #fff;
+  padding: 4px 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+/* —————— 4) CONTENIDO DE LA TARJETA —————— */
+.offer-content {
+  padding: 16px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.offer-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+
+/* Precios: descuento + precio original */
+.offer-prices {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.price-discounted {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #e53935;
+}
+
+.price-original {
+  font-size: 0.95rem;
+  color: #777;
+  text-decoration: line-through;
+}
+
+/* Fechas de oferta */
+.offer-dates {
+  font-size: 0.85rem;
+  color: #555;
+  line-height: 1.4;
+}
+
+/* —————— 5) BOTÓN “ENVIAR OFERTAS” —————— */
+.send-offers-btn-wrapper {
+  text-align: center;
+  margin: 32px 0 16px;
+}
+
+.btn-send-ofertas {
+  background-color: #00897b;
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.btn-send-ofertas:hover {
+  background-color: #00695c;
+  transform: translateY(-2px);
+}
+
+.btn-send-ofertas i.material-icons {
+  font-size: 1.1rem;
+}
+
+/* —————— 6) CONTROLES DE PAGINACIÓN —————— */
+.pagination-wrapper {
+  margin-top: 24px;
+  display: flex;
+  justify-content: center;
+}
+
+/* Si quieres personalizar los botones de ngx-pagination: */
+.pagination-controls-custom .ngx-pagination {
+  display: inline-block;
+}
+
+.pagination-controls-custom .ngx-pagination .current {
+  background-color: #00897b;
+  color: #fff;
+  border-radius: 4px;
+}
+
+.pagination-controls-custom .ngx-pagination li a {
+  color: #00897b;
+}
+
+.pagination-controls-custom .ngx-pagination li a:hover {
+  background-color: rgba(0, 137, 123, 0.1);
+  border-radius: 4px;
+}
+
+/* —————— 7) MEDIA QUERIES PARA HACERLO RESPONSIVO —————— */
+@media (max-width: 1100px) {
+  .offers-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .offers-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 576px) {
+  .offers-wrapper {
+    padding: 0 8px;
+  }
+
+  .offer-image-wrapper {
+    height: 200px;
+  }
+
+  .offer-prices {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .send-offers-btn-wrapper {
+    margin: 24px 0 8px;
+  }
+}
+/* ============================================= */
+/*      ESTILOS MODERNOS PARA ngx-pagination     */
+/* ============================================= */
+
+/* Contenedor general del paginador */
+.pagination-wrapper,
+.pagination-controls-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+
+/* El ul generado por ngx-pagination */
+.ngx-pagination {
+  display: inline-flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  align-items: center;
+  gap: 8px; /* Espacio horizontal entre botones */
+}
+
+/* Cada li del paginador */
+.ngx-pagination li {
+  margin: 0;
+}
+
+/* El enlace (número de página o flecha) */
+.ngx-pagination li a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  background-color: #ffffff;
+  color: #00897b;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: 50%;
+  border: 1px solid #00897b;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Hover en enlaces */
+.ngx-pagination li a:hover {
+  background-color: #00897b;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 6px rgba(0, 137, 123, 0.3);
+}
+
+/* Botón de página activa (current) */
+.ngx-pagination li.current a,
+.ngx-pagination li.current {
+  background-color: #00897b;
+  color: #ffffff;
+  border-color: #00897b;
+  cursor: default;
+  pointer-events: none; /* Deshabilita click en página actual */
+  box-shadow: 0 2px 6px rgba(0, 137, 123, 0.4);
+}
+
+/* Botones de “Siguiente” / “Anterior” (si los generas con texto en lugar de iconos) */
+.ngx-pagination li.disabled a {
+  opacity: 0.4;
+  cursor: default;
+  pointer-events: none;
+}
+
+/* Si quieres usar íconos (flechas) en lugar de texto, agrega un span dentro
+   o utiliza la propiedad “previousLabel/nextLabel” en el HTML. Ejemplo con Material Icons: */
+.pagination-arrow {
+  font-size: 1.2rem;
+}
+
+/* ============================================= */
+/*    MEDIA QUERIES PARA RESPONSIVIDAD (opcional) */
+/* ============================================= */
+
+/* En pantallas muy pequeñas, reduce el tamaño de los botones */
+@media (max-width: 576px) {
+  .ngx-pagination li a {
+    width: 32px;
+    height: 32px;
+    font-size: 0.8rem;
+  }
+  .pagination-wrapper,
+  .pagination-controls-container {
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+}
+
