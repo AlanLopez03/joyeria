@@ -1,0 +1,75 @@
+<div class="offers-wrapper">
+  <!-- TÍTULO -->
+  <h2 class="offers-title">{{ 'Ofertas' | translate }}</h2>
+
+  <!-- GRID DE TARJETAS -->
+  <div class="offers-grid" >
+    <div
+      class="offer-card"
+      *ngFor="
+        let producto of productos
+          | paginate: { itemsPerPage: pageSize, currentPage: p }
+      "
+    (click)="verProducto(producto.idProducto)" >
+      <!-- IMAGEN CON BADGE “Oferta” -->
+      <div class="offer-image-wrapper">
+        <img
+          *ngIf="producto.foto == 1"
+          [src]="liga + '/' + producto.idProducto + '.jpg'"
+          [alt]="producto.nombre"
+          class="offer-image"
+        />
+        <img
+          *ngIf="producto.foto == 0"
+          src="../../../assets/images/productoDesconocido.jpeg"
+          alt="Producto desconocido"
+          class="offer-image"
+        />
+        <span class="offer-badge">{{ 'Oferta' | translate }}</span>
+      </div>
+
+      <!-- CONTENIDO DE LA TARJETA -->
+      <div class="offer-content">
+        <h3 class="offer-name">
+          <span *ngIf="idioma === 'es'">{{ producto.nombre }}</span>
+          <span *ngIf="idioma !== 'es'">{{ producto.name }}</span>
+        </h3>
+
+        <!-- Precios -->
+        <div class="offer-prices">
+          <span class="price-discounted">
+            ${{ (producto.precio * (1 - producto.descuento)) | number : '1.2-2' }}
+          </span>
+          <span class="price-original">
+            ${{ producto.precio | number : '1.2-2' }}
+          </span>
+        </div>
+
+        <!-- Fechas de la oferta -->
+        <!-- <p class="offer-dates">
+          <strong>{{ 'Inicio' | translate }}:</strong>
+          {{ producto.inicio_descuento | date : 'yyyy-MM-dd' }}
+          <br />
+          <strong>{{ 'Fin' | translate }}:</strong>
+          {{ producto.fin_descuento | date : 'yyyy-MM-dd' }}
+        </p> -->
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTROLES DE PAGINACIÓN -->
+  <div
+    class="pagination-wrapper"
+    *ngIf="productos.length > pageSize"
+  >
+    <pagination-controls
+      class="pagination-controls-container"
+      (pageChange)="p = $event"
+      [maxSize]="5"
+      [directionLinks]="true"
+      previousLabel="{{ 'Anterior' | translate }}"
+      nextLabel="{{ 'Siguiente' | translate }}"
+    >
+    </pagination-controls>
+  </div>
+</div>
