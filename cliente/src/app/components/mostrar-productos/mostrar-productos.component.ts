@@ -49,8 +49,8 @@ export class MostrarProductosComponent implements OnInit, AfterViewInit, OnDestr
     'assets/banners/banner1.jpeg',
     'assets/banners/banner2.jpeg',
     'assets/banners/banner3.jpeg',
-    'assets/banners/banner4.jpeg',
-    'assets/banners/banner5.jpeg'
+    'assets/banners/banner4.jpeg'
+    //'assets/banners/banner5.jpeg'
   ];
   bannerIndex = 0;
   bannerPageSize = 3;
