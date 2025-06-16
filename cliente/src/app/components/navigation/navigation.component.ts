@@ -47,6 +47,9 @@ constructor(private router:Router,private categoriaService:CategoriaService,
     );
     //this.actualizarIdioma();
   }
+  reiniciarCategoria() {
+    localStorage.removeItem('Categoria');
+  }
   //actualizarIdioma(){
   //  const idio = localStorage.getItem('idioma');
   //  if (idio !== null && idio === '1') {
