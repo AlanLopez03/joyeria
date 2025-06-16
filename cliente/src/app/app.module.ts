@@ -28,6 +28,7 @@ import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { VerProductoComponent } from './components/ver-producto/ver-producto.component';
 import { InfoEmpresaComponent } from './components/info-empresa/info-empresa.component';
+import { OfertaUsuarioComponent } from './components/oferta-usuario/oferta-usuario.component';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
 }
@@ -55,7 +56,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     EscogerDomicilioComponent,
     OfertasComponent,
     VerProductoComponent,
-    InfoEmpresaComponent
+    InfoEmpresaComponent,
+    OfertaUsuarioComponent
   ],
   imports: [
     FormsModule,

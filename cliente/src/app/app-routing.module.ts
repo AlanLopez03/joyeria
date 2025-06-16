@@ -18,6 +18,7 @@ import { EscogerDomicilioComponent } from './components/escoger-domicilio/escoge
 import { OfertasComponent } from './components/ofertas/ofertas.component';
 import { VerProductoComponent } from './components/ver-producto/ver-producto.component';
 import { InfoEmpresaComponent } from './components/info-empresa/info-empresa.component';
+import { OfertaUsuarioComponent } from './components/oferta-usuario/oferta-usuario.component';
 const routes: Routes = [
   { path: "", redirectTo: "login", pathMatch: "full" }, { path: 'login', component: LoginComponent, },
 
@@ -32,7 +33,8 @@ const routes: Routes = [
         { path: 'perfil', component: PerfilComponent },
         { path: 'escogerDomicilio', component: EscogerDomicilioComponent },
         { path: 'verProducto/:id', component: VerProductoComponent },
-        { path: 'sobre-nosotros', component: InfoEmpresaComponent }
+        { path: 'sobre-nosotros', component: InfoEmpresaComponent },
+        { path: 'ofertas', redirectTo: 'ofertas', pathMatch: 'full' }, { path: 'ofertas', component: OfertaUsuarioComponent },
 
       ]
   },
