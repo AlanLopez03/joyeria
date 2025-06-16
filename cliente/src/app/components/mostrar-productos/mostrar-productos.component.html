@@ -51,7 +51,7 @@
         *ngFor="let producto of productosActuales"
         [ngStyle]="{ 'min-width': (100 / pageSize) + '%' }"
       >
-        <div class="card modern-card">
+        <div class="card modern-card" (click)="verProducto(producto.idProducto)">
           <!-- Imagen del producto -->
           <div class="card-image">
             <img
