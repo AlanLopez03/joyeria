@@ -71,6 +71,8 @@ constructor(private router:Router,private categoriaService:CategoriaService,
     console.log(localStorage.getItem('idUsuario'));
     localStorage.removeItem('idUsuario');
     localStorage.removeItem('idioma');
+    localStorage.removeItem('Categoria');
+    localStorage.removeItem('Arreglo');
     this.router.navigateByUrl('/login');
     this.idiomaService.resetLanguage();
 
